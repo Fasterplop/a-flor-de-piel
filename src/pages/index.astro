@@ -1,0 +1,186 @@
+---
+
+import Layout from '../layouts/Layout.astro';
+import InteractiveMap from '../components/InteractiveMap.jsx';
+import Quiz from '../components/Quiz.jsx';
+
+// Links de tus activos (Reemplaza con las rutas reales de tus imágenes en /public)
+const coverImage = "/images/portada.jpg"; // Tu imagen: image_a18146.jpg
+const authorImage = "/images/paulina.png"; // Tu imagen: Gemini_Generated_Image...jpg
+const moodboardImage = "/images/moodboard.jpg"; // Tu imagen: image_a16f37.jpg
+const amazonLink = "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/";
+const pdfLink = "/downloads/primer-capitulo.pdf"; 
+---
+
+<Layout title="A Flor de Piel | Paulina López">
+	
+	<nav class="fixed w-full z-50 bg-midnight/90 backdrop-blur-sm border-b border-white/10 py-4">
+		<div class="container mx-auto px-6 flex justify-between items-center">
+			<span class="font-gothic text-xl text-blood font-bold tracking-widest">P. LÓPEZ</span>
+			<a href={amazonLink} target="_blank" class="bg-blood text-white px-6 py-2 font-bold hover:bg-red-700 transition duration-300 rounded-sm clip-path-斜me">
+				COMPRAR LIBRO
+			</a>
+		</div>
+	</nav>
+
+	<header class="relative min-h-screen flex items-center justify-center overflow-hidden">
+		<div class="absolute inset-0 bg-[url('/images/forest-bg.jpg')] bg-cover bg-center opacity-40"></div>
+		<div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/80 to-transparent"></div>
+		
+		<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent animate-pulse"></div>
+
+		<div class="relative z-10 container mx-auto px-6 text-center pt-20">
+			<h2 class="text-gold tracking-[0.3em] text-sm md:text-lg mb-4 opacity-0 intro-anim">EL CASTILLO HAYASHI BUSCA RECLUTAS</h2>
+			<h1 class="font-gothic text-6xl md:text-8xl lg:text-9xl text-white mb-2 text-shadow-lg opacity-0 intro-anim translate-y-10">
+				A FLOR <span class="text-blood">DE PIEL</span>
+			</h1>
+			<p class="font-body text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-10 opacity-0 intro-anim">
+				¿Sobrevivirás al entrenamiento?
+			</p>
+			
+			<div class="flex flex-col md:flex-row gap-6 justify-center items-center opacity-0 intro-anim">
+				<a href={pdfLink} target="_blank" class="group relative px-8 py-4 bg-transparent border border-gold text-gold font-bold tracking-wider hover:bg-gold hover:text-midnight transition-all duration-300">
+					<span class="absolute inset-0 w-full h-full bg-gold/10 group-hover:bg-transparent"></span>
+					LEER CAPÍTULO 1
+				</a>
+				<a href={amazonLink} target="_blank" class="px-8 py-4 bg-blood text-white font-bold tracking-wider hover:bg-red-700 shadow-[0_0_20px_rgba(168,0,0,0.5)] transition-all duration-300">
+					ADQUIRIR EN AMAZON
+				</a>
+			</div>
+		</div>
+	</header>
+
+	<section class="py-24 relative">
+		<div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+			<div class="relative group perspective-1000">
+				<div class="absolute inset-0 bg-blood/20 blur-3xl transform -rotate-6 rounded-full opacity-0 group-hover:opacity-40 transition duration-700"></div>
+				<img src={coverImage} alt="Portada A Flor de Piel" class="relative z-10 w-3/4 mx-auto shadow-2xl transform transition duration-500 hover:scale-105 hover:-rotate-2 border-r-4 border-b-4 border-white/5" />
+			</div>
+
+			<div class="space-y-6 gsap-fade-up">
+				<h2 class="font-gothic text-4xl text-white border-l-4 border-blood pl-4">
+					No es solo un castillo. <br>Es un campo de batalla.
+				</h2>
+				<p class="text-lg leading-relaxed text-gray-300">
+					Nina Cole buscaba libertad, pero encontró un portal entre árboles y una luz azulosa que la escupió en una guerra que no comprende.
+				</p>
+				<p class="text-lg leading-relaxed text-gray-300">
+					Bienvenido al <strong>Castillo Hayashi</strong>, donde cientos de jóvenes son forjados en disciplina y combate. Con la guía de <strong>Eric Hudson</strong>, un telépata letal, Nina deberá decidir: ¿Seguir las reglas o buscar el poder en la oscuridad?
+				</p>
+				<div class="flex items-center gap-4 pt-4 text-gold">
+					<span>⚔️ Armas</span>
+					<span>✨ Magia</span>
+					<span>🩸 Sangre</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-24 bg-gradient-to-b from-black to-midnight border-t border-white/5 relative overflow-hidden">
+		<div class="absolute top-0 right-0 w-1/3 h-full bg-[url('/images/moodboard.jpg')] bg-cover opacity-10 blur-sm mix-blend-overlay"></div>
+		<div class="container mx-auto px-6 text-center relative z-10">
+			<h2 class="font-gothic text-4xl mb-6">Explora el Mundo</h2>
+			<p class="text-gray-400 mb-10 max-w-xl mx-auto">El Castillo. El Bosque. La Ciudad. Toca los puntos estratégicos para descubrir secretos ocultos.</p>
+			<section class="py-24 bg-gradient-to-b from-black to-midnight border-t border-white/5 relative">
+    <div class="container mx-auto px-6 text-center relative z-10">
+        <h2 class="font-gothic text-4xl mb-6 text-white">Explora el Territorio</h2>
+        <p class="text-gray-400 mb-10 max-w-xl mx-auto">
+            Adéntrate en los dominios del Castillo Hayashi. Ten cuidado donde pisas.
+        </p>
+
+        <div class="max-w-5xl mx-auto">
+            <InteractiveMap client:visible />
+        </div>
+    </div>
+</section>
+
+		</div>
+	</section>
+
+	<section class="py-24 relative">
+		<div class="container mx-auto px-6">
+			<div class="bg-white/5 border border-white/10 p-8 md:p-12 rounded-sm grid md:grid-cols-[1fr_2fr] gap-12 items-center">
+				<div class="relative">
+					<div class="absolute inset-0 border-2 border-gold transform translate-x-4 translate-y-4"></div>
+					<img src={authorImage} alt="Paulina López" class="relative z-10 grayscale hover:grayscale-0 transition duration-500 w-full object-cover shadow-xl" />
+				</div>
+				
+				<div>
+					<h3 class="font-gothic text-3xl mb-2 text-white">Paulina López</h3>
+					<p class="text-blood font-bold mb-6 text-sm tracking-wider">AUTORA & INGENIERA CIVIL</p>
+					<p class="text-gray-300 mb-4 leading-relaxed">
+						De calcular estructuras como Ingeniera Civil a construir mundos de fantasía urbana. Paulina cambió los planos por la pluma tras descubrir en el castellano su terapia contra el caos.
+					</p>
+					<p class="text-gray-300 mb-6 italic border-l-2 border-gold pl-4">
+						"Dicen que nuestras venas se parecen a las raíces de las plantas... solo de este modo podré ser trasplantada de este lugar."
+					</p>
+					<div class="flex gap-4">
+						<a href="#" class="text-gray-400 hover:text-gold transition">Instagram</a>
+						<a href="#" class="text-gray-400 hover:text-gold transition">TikTok</a>
+						<a href="#" class="text-gray-400 hover:text-gold transition">Goodreads</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<section class="py-24 bg-midnight relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blood/10 via-midnight to-midnight pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-12">
+            <h2 class="font-gothic text-4xl text-white mb-4">¿Perteneces al Castillo?</h2>
+            <p class="text-gray-400 max-w-xl mx-auto">
+                No todos sobreviven al entrenamiento de Eric Hudson. Descubre cuál es tu talento innato antes de cruzar el portal.
+            </p>
+        </div>
+
+        <Quiz client:visible />
+    </div>
+</section>
+
+	<footer class="bg-black py-12 text-center border-t border-white/10">
+		<p class="font-gothic text-2xl text-white mb-4">A FLOR DE PIEL</p>
+		<p class="text-gray-500 text-sm">© 2024 Paulina López. Todos los derechos reservados.</p>
+	</footer>
+
+</Layout>
+
+<script>
+	// Scripts de Animación GSAP (Solo se ejecutan en el cliente)
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	
+	gsap.registerPlugin(ScrollTrigger);
+
+	// Animación de Entrada (Hero)
+	const tl = gsap.timeline();
+	tl.to(".intro-anim", {
+		y: 0,
+		opacity: 1,
+		duration: 1,
+		stagger: 0.2,
+		ease: "power3.out"
+	});
+
+	// Animación al hacer Scroll (Fade Up)
+	gsap.utils.toArray('.gsap-fade-up').forEach((elem: any) => {
+		gsap.from(elem, {
+			scrollTrigger: {
+				trigger: elem,
+				start: "top 80%",
+			},
+			y: 50,
+			opacity: 0,
+			duration: 1,
+			ease: "power3.out"
+		});
+	});
+</script>
+
+<style>
+	/* Efecto de sombra para texto */
+	.text-shadow-lg {
+		text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+	}
+</style>
