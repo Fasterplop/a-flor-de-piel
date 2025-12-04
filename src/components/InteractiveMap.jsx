@@ -30,7 +30,7 @@ const locations = [
   {
     id: 11, // NUEVO
     name: "La Casa del Árbol",
-    x: 42,  // Centro Norte (La estructura de madera en el árbol)
+    x: 48,  // Centro Norte (La estructura de madera en el árbol)
     y: 8,
     desc: "Un puesto de vigilancia elevado oculto en el follaje. Ideal para observar sin ser visto.",
     type: "base"
@@ -38,7 +38,7 @@ const locations = [
   {
     id: 4,
     name: "Edificio Desmantelado",
-    x: 45,  // Centro exacto (El edificio verde en ruinas)
+    x: 50,  // Centro exacto (El edificio verde en ruinas)
     y: 38,
     desc: "Las ruinas del antiguo centro administrativo, ahora cubierto de vegetación en la isla central.",
     type: "ruin"
@@ -46,7 +46,7 @@ const locations = [
   {
     id: 5,
     name: "Torre Hayashi",
-    x: 50,  // Centro Abajo (La torre redonda solitaria)
+    x: 54,  // Centro Abajo (La torre redonda solitaria)
     y: 85,
     desc: "Una torre medieval solitaria que vigila el acceso sur. Su arquitectura contrasta con la tecnología militar.",
     type: "base"
@@ -62,8 +62,8 @@ const locations = [
   {
     id: 7,
     name: "División Maria Johnson",
-    x: 88,  // Arriba derecha (El edificio grande complejo)
-    y: 12,
+    x: 85,  // Arriba derecha (El edificio grande complejo)
+    y: 15,
     desc: "El complejo fortificado del norte. Sede de la facción rival que disputa el control del territorio.",
     type: "enemy"
   },
@@ -71,7 +71,7 @@ const locations = [
     id: 8,
     name: "Reformatorio Hayashi",
     x: 90,  // Derecha media (El edificio amurallado cuadrado)
-    y: 42,
+    y: 45,
     desc: "Ubicado al sur de la División. Un lugar de contención con muros altos y seguridad estricta.",
     type: "enemy"
   },
@@ -86,8 +86,8 @@ const locations = [
   {
     id: 10,
     name: "Campo de Minas",
-    x: 85,  // Abajo derecha (Zona boscosa oscura)
-    y: 85,
+    x: 90,  // Abajo derecha (Zona boscosa oscura)
+    y: 80,
     desc: "¡PELIGRO! Zona boscosa al sureste sembrada de explosivos ocultos. No hay señalización visible.",
     type: "danger"
   }

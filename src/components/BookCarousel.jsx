@@ -5,16 +5,16 @@ const books = [
   {
     id: 1,
     title: "A Flor de Piel",
-    subtitle: "Libro 1 - La Iniciación",
+    subtitle: "",
     cover: "/images/portada.jpg", // Usamos la misma portada por ahora
     status: "DISPONIBLE",
     link: "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/"
   },
   {
     id: 2,
-    title: "Ecos de Sangre",
-    subtitle: "Libro 2 - La Guerra",
-    cover: "/images/portada.jpg", // Placeholder (usamos la misma con un filtro CSS)
+    title: "En proceso",
+    subtitle: "Escribiendo",
+    cover: "/images/portada2.avif", // Placeholder (usamos la misma con un filtro CSS)
     status: "EN ESCRITURA",
     link: "#"
   },
@@ -22,7 +22,7 @@ const books = [
     id: 3,
     title: "El Último Hayasher",
     subtitle: "Libro 3 - El Desenlace",
-    cover: "/images/portada.jpg", // Placeholder
+    cover: "/images/portada3.png", // Placeholder
     status: "PRÓXIMAMENTE",
     link: "#"
   },
@@ -30,7 +30,7 @@ const books = [
     id: 4,
     title: "Crónicas de Eric",
     subtitle: "Spin-off",
-    cover: "/images/portada.jpg", // Placeholder
+    cover: "/images/portada4.png", // Placeholder
     status: "PLANIFICADO",
     link: "#"
   }
@@ -88,8 +88,8 @@ export default function BookCarousel() {
               </div>
 
               {/* Textos */}
-              <h3 className="font-gothic text-xl text-white mb-1">{book.title}</h3>
-              <p className="text-sm text-gray-400 mb-6">{book.subtitle}</p>
+              <h3 className="font-gothic text-xl text-white mb-6">{book.title}</h3>
+              {/* <p className="text-sm text-gray-400 mb-6">{book.subtitle}</p> */}
 
               {/* Botón Acción */}
               <a 
