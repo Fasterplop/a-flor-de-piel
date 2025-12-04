@@ -12,7 +12,12 @@ export default {
 			fontFamily: {
 				'gothic': ['"Cinzel Decorative"', 'serif'], // Títulos mágicos
 				'body': ['"Lato"', 'sans-serif'],           // Lectura limpia
-			}
+			},
+            keyframes: {
+        shimmer: {
+          '100%': { transform: 'translateX(100%)' },
+        }
+      },
 		},
 	},
 	plugins: [],
