@@ -1,100 +1,22 @@
 import { useRef } from 'react';
 
-// Datos de ejemplo (Puedes cambiarlos cuando tengas los libros reales)
-
-
-// src/components/BookCarousel.jsx
-
-const books = [
-  {
-    id: 1,
-    title: "A Flor de Piel",
-    subtitle: "Libro 1",
-    cover: "/images/portada.jpg",
-    status: "DISPONIBLE",
-    // ENLACE INTERNO A LA NUEVA SUBPÁGINA
-    link: "/libros/a-flor-de-piel" 
-  },
-  {
-    id: 2,
-    title: "A Pulso Lento",
-    subtitle: "Libro 2",
-    cover: "/images/portada3.png",
-    status: "PRÓXIMAMENTE",
-    // ENLACE INTERNO
-    link: "/libros/a-pulso-lento"
-  },
-  {
-    id: 3,
-    title: "A Corazón Abierto",
-    subtitle: "Libro 3",
-    cover: "/images/portada4.png",
-    status: "PLANIFICADO",
-    // ENLACE INTERNO
-    link: "/libros/a-corazon-abierto"
-  },
-  {
-    id: 4,
-    title: "A Corazón Abierto",
-    subtitle: "Libro 4",
-    cover: "/images/portada4.png",
-    status: "PLANIFICADO",
-    // ENLACE INTERNO
-    link: "/libros/a-corazon-abiertoo"
-  }
-  // ... etc
-];
-
-
-
-// const books = [
-//   {
-//     id: 1,
-//     title: "A Flor de Piel",
-//     subtitle: "",
-//     cover: "/images/portada.jpg", // Usamos la misma portada por ahora
-//     status: "DISPONIBLE",
-//     link: "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/"
-//   },
-//   {
-//     id: 2,
-//     title: "En proceso",
-//     subtitle: "Escribiendo",
-//     cover: "/images/portada2.avif", // Placeholder (usamos la misma con un filtro CSS)
-//     status: "EN ESCRITURA",
-//     link: "#"
-//   },
-//   {
-//     id: 3,
-//     title: "El Último Hayasher",
-//     subtitle: "Libro 3 - El Desenlace",
-//     cover: "/images/portada3.png", // Placeholder
-//     status: "PRÓXIMAMENTE",
-//     link: "#"
-//   },
-//   {
-//     id: 4,
-//     title: "Crónicas de Eric",
-//     subtitle: "Spin-off",
-//     cover: "/images/portada4.png", // Placeholder
-//     status: "PLANIFICADO",
-//     link: "#"
-//   }
-// ];
-
-export default function BookCarousel() {
+// AHORA RECIBE LA LISTA DE LIBROS COMO "PROPS" (books={...})
+export default function BookCarousel({ books = [] }) {
   const scrollRef = useRef(null);
 
   const scroll = (direction) => {
     const { current } = scrollRef;
     if (current) {
-      const scrollAmount = 300; // Cuánto se mueve al hacer clic
+      const scrollAmount = 300;
       current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
       });
     }
   };
+
+  // Si no hay libros en esta categoría, no mostramos el carrusel
+  if (books.length === 0) return null;
 
   return (
     <div className="relative max-w-6xl mx-auto px-6 group">
@@ -119,34 +41,30 @@ export default function BookCarousel() {
             {/* Tarjeta del Libro */}
             <div className="bg-white/5 border border-white/10 rounded-xl p-6 h-full flex flex-col items-center text-center transition duration-500 hover:border-gold/50 hover:bg-white/10 hover:-translate-y-2">
               
-              {/* Portada con Efecto */}
+              {/* Portada */}
               <div className="relative w-40 h-60 mb-6 shadow-2xl rounded">
                 <img 
                   src={book.cover} 
                   alt={book.title} 
-                  className={`w-full h-full object-cover rounded ${book.id !== 1 ? 'grayscale opacity-60 group-hover/card:grayscale-0 group-hover/card:opacity-100' : ''} transition duration-500`} 
+                  className={`w-full h-full object-cover rounded ${book.status !== 'DISPONIBLE' ? 'grayscale opacity-60 group-hover/card:grayscale-0 group-hover/card:opacity-100' : ''} transition duration-500`} 
                 />
                 
-                {/* Badge de Estado */}
                 <div className="absolute -top-3 -right-3 bg-black border border-gold/50 text-gold text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase shadow-lg">
                   {book.status}
                 </div>
               </div>
 
-              {/* Textos */}
-              <h3 className="font-gothic text-xl text-white mb-6">{book.title}</h3>
-              {/* <p className="text-sm text-gray-400 mb-6">{book.subtitle}</p> */}
+              <h3 className="font-gothic text-xl text-white mb-1">{book.title}</h3>
+              <p className="text-sm text-gray-400 mb-6">{book.subtitle}</p>
 
-              {/* Botón Acción */}
               <a 
-                href={book.link} 
-                target={book.link === '#' ? '_self' : '_blank'}
+                href={`/libros/${book.slug}`} 
                 className={`mt-auto w-full py-2 text-sm font-bold tracking-widest border rounded transition duration-300 
                   ${book.status === 'DISPONIBLE' 
                     ? 'bg-blood border-transparent text-white hover:bg-red-700' 
-                    : 'border-white/20 text-gray-500 cursor-not-allowed hover:border-white/40'}`}
+                    : 'border-white/20 text-gray-500 hover:border-white/40 hover:text-white'}`}
               >
-                {book.status === 'DISPONIBLE' ? 'COMPRAR' : 'ESPERAR'}
+                {book.status === 'DISPONIBLE' ? 'VER DETALLES' : 'VER FICHA'}
               </a>
 
             </div>
