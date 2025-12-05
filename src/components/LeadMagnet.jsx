@@ -23,7 +23,7 @@ export default function LeadMagnet({ pdfUrl }) {
         // Si usas MailerLite, ConvertKit, ActiveCampaign, etc., te darán una URL o "Webhook"
         // También puedes usar servicios como Formspree.io si no tienes backend.
         
-        const response = await fetch('https://TU_PROVEEDOR_DE_EMAIL/api/subscribe', {
+        const response = await fetch('https://api.paulinalopezescritora.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,11 +39,7 @@ export default function LeadMagnet({ pdfUrl }) {
         // NOTA: Como ahora no tienes la URL real, simularemos que funcionó para que descargue el PDF
         // Cuando tengas la URL, descomenta la validación de abajo:
         
-        /* if (!response.ok) throw new Error('Error al suscribir');
-        */
-
-        // Simulamos espera de red (Borrar esto cuando tengas la URL real)
-        await new Promise(resolve => setTimeout(resolve, 1000)); 
+         if (!response.ok) throw new Error('Error al suscribir');
 
         setSubmitStatus('success');
         
