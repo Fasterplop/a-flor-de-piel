@@ -1,50 +1,49 @@
 const axios = require('axios');
 
-// Cargamos configuración
-const MAUTIC_URL = process.env.MAUTIC_URL;
+// Configuraciones desde el archivo .env
+const MAUTIC_URL = process.env.MAUTIC_URL; // ej: https://marketing.paulinalopezescritora.com
 const MAUTIC_USER = process.env.MAUTIC_USER;
 const MAUTIC_PW = process.env.MAUTIC_PW;
 
-// ID del segmento "Nuevos Registros" (Cámbialo por el tuyo real)
-const SEGMENTO_NUEVOS_ID = 1; 
+// 👇👇👇 AQUÍ VA EL ID QUE ANOTASTE 👇👇👇
+const SEGMENT_ID = 1; // Cambia este "1" por el número real de tu segmento
+// 👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆
 
-async function syncContact(name, email) {
+async function addContactToMautic(email, name) {
     try {
-        // 1. Crear la "llave" para entrar (Basic Auth)
-        // Convierte usuario:contraseña a un formato que Mautic entiende (Base64)
+        // 1. Crear credenciales de acceso (Basic Auth)
         const auth = Buffer.from(`${MAUTIC_USER}:${MAUTIC_PW}`).toString('base64');
         const headers = {
             'Authorization': `Basic ${auth}`,
             'Content-Type': 'application/json'
         };
 
-        console.log(`📡 Conectando con Mautic para: ${email}...`);
-
-        // 2. Crear o Actualizar el Contacto
-        // Mautic es inteligente: si el email ya existe, lo actualiza. Si no, lo crea.
-        const contactBody = {
-            firstname: name,
+        // 2. Datos del contacto
+        const contactData = {
             email: email,
-            tags: ['origen-web'], // Etiqueta útil para filtrar luego
-            overwriteWithBlank: false // No borres datos si ya existen
+            firstname: name,
+            tags: ['lead-magnet-cap1'], // Etiqueta para identificarlo
+            overwriteWithBlank: false
         };
 
-        const response = await axios.post(`${MAUTIC_URL}/api/contacts/new`, contactBody, { headers });
+        console.log(`📡 Enviando a Mautic: ${email}...`);
+
+        // 3. Crear o Actualizar contacto en Mautic
+        const createRes = await axios.post(`${MAUTIC_URL}/api/contacts/new`, contactData, { headers });
+        const contactId = createRes.data.contact.id;
         
-        // Obtenemos el ID que Mautic le asignó a este usuario
-        const contactId = response.data.contact.id;
-        console.log(`✅ Contacto sincronizado en Mautic. ID: ${contactId}`);
+        console.log(`✅ Contacto creado/actualizado. ID: ${contactId}`);
 
-        // 3. Meterlo en el Segmento (Esto dispara la campaña/correo)
-        await axios.post(`${MAUTIC_URL}/api/segments/${SEGMENTO_NUEVOS_ID}/contact/add/${contactId}`, {}, { headers });
-        console.log(`✅ Contacto añadido al segmento ${SEGMENTO_NUEVOS_ID}`);
-
+        // 4. Añadir al Segmento (Esto dispara el correo automático)
+        await axios.post(`${MAUTIC_URL}/api/segments/${SEGMENT_ID}/contact/add/${contactId}`, {}, { headers });
+        
+        console.log(`✅ Añadido al Segmento ${SEGMENT_ID}`);
         return true;
 
     } catch (error) {
         console.error('❌ Error en Mautic:', error.response?.data || error.message);
-        throw new Error('Fallo la sincronización con Mautic');
+        throw error;
     }
 }
 
-module.exports = { syncContact };
+module.exports = { addContactToMautic };

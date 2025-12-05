@@ -2,39 +2,40 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-// Importamos nuestra nueva función
-const { syncContact } = require('./mautic'); 
+// Importamos tu nuevo conector
+const { addContactToMautic } = require('./mautic');
 
 const app = express();
 const PORT = 3000;
 
-app.use(cors()); // Configura tus dominios permitidos como vimos antes
+app.use(cors({
+    origin: ['https://paulinalopezescritora.com', 'https://www.paulinalopezescritora.com'],
+    methods: ['POST', 'GET'],
+    allowedHeaders: ['Content-Type']
+}));
+
 app.use(bodyParser.json());
 
-// NOTA: Ya no necesitamos 'nodemailer' ni 'transporter' aquí, porque Mautic envía el correo.
-
+// Ruta principal (La misma que usa tu botón)
 app.post('/api/subscribe', async (req, res) => {
     const { name, email } = req.body;
-    
-    if (!email) {
-        return res.status(400).json({ message: 'Email requerido' });
-    }
+    console.log(`📝 Solicitud recibida: ${name} (${email})`);
 
     try {
-        // En lugar de enviar el mail nosotros, le decimos a Mautic que se encargue
-        await syncContact(name, email);
+        // En lugar de enviar email, lo mandamos a Mautic
+        // Mautic se encargará de enviar el correo gracias al Segmento
+        await addContactToMautic(email, name);
 
-        // Respondemos al frontend que todo salió bien
         res.status(200).json({ message: 'Suscripción exitosa' });
 
     } catch (error) {
-        console.error('Error procesando suscripción:', error);
-        // Aunque falle Mautic, quizás no quieras asustar al usuario, 
-        // pero por ahora devolvemos error 500 para que lo sepas.
+        console.error('Error al procesar:', error);
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 });
 
+app.get('/', (req, res) => res.send('API Mautic Connector Activo 🚀'));
+
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor backend corriendo en puerto ${PORT}`);
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
