@@ -1,36 +1,19 @@
 import { useState } from 'react';
 
-export default function Quiz() {
+// Ahora recibe "questions" como propiedad (Props)
+export default function Quiz({ questions = [] }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState({ telepath: 0, fighter: 0, survivor: 0 });
 
-  const questions = [
-    {
-      text: "Estás perdido en el bosque y sientes una presencia oscura. ¿Qué haces?",
-      options: [
-        { text: "Me escondo y analizo sus movimientos mentalmente.", type: "telepath" },
-        { text: "Busco un objeto contundente y me preparo para atacar.", type: "fighter" },
-        { text: "Corro buscando una salida, confiando en mi instinto.", type: "survivor" },
-      ],
-    },
-    {
-      text: "En el Castillo Hayashi, debes elegir un arma. ¿Cuál tomas?",
-      options: [
-        { text: "Un látigo o espada. Algo que corte.", type: "fighter" },
-        { text: "No necesito armas, mi mente es suficiente.", type: "telepath" },
-        { text: "Una daga pequeña y fácil de ocultar.", type: "survivor" },
-      ],
-    },
-    {
-      text: "Te enfrentas a un enemigo superior. ¿Cuál es tu estrategia?",
-      options: [
-        { text: "Busco su debilidad psicológica y lo manipulo.", type: "telepath" },
-        { text: "Ataco con todo lo que tengo hasta que uno caiga.", type: "fighter" },
-        { text: "Uso el entorno para tenderle una trampa y escapar.", type: "survivor" },
-      ],
-    },
-  ];
+  // Si no hay preguntas configuradas, mostramos un mensaje de error elegante
+  if (!questions || questions.length === 0) {
+    return (
+      <div className="text-center py-10">
+        <p className="text-gray-500 font-gothic tracking-widest">PRUEBA DE APTITUD EN MANTENIMIENTO</p>
+      </div>
+    );
+  }
 
   const handleAnswer = (type) => {
     setScore({ ...score, [type]: score[type] + 1 });
@@ -96,12 +79,7 @@ export default function Quiz() {
           <h2 className={`font-gothic text-4xl mt-4 mb-4 ${getResult().color}`}>{getResult().title}</h2>
           <p className="text-gray-300 text-lg mb-8 leading-relaxed">{getResult().desc}</p>
           
-          <div className="p-4 bg-white/5 border border-white/10 rounded mb-6">
-            <p className="text-sm text-gray-400 mb-2">Comparte tu resultado y reclama tu insignia:</p>
-            <div className="flex justify-center gap-4">
-               <button className="text-white hover:text-gold underline decoration-gold underline-offset-4">Compartir en Instagram</button>
-            </div>
-          </div>
+         
 
           <button 
             onClick={() => window.open('https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/', '_blank')}

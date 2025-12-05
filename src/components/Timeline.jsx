@@ -1,50 +1,11 @@
 import React from 'react';
 
-// Datos extraídos de tu imagen de Línea de Tiempo
-const events = [
-  {
-    title: "El Desmantelamiento",
-    desc: "Desmantelamiento del edificio Hayashi.",
-    time: "Inicio"
-  },
-  {
-    title: "El Surgimiento",
-    desc: "Surgimiento de 3 establecimientos.",
-    time: "6 meses después"
-  },
-  {
-    title: "La Paz Frágil",
-    desc: "Firma y primer convenio de paz.",
-    time: "7 meses después"
-  },
-  {
-    title: "Primer Ataque",
-    desc: "Primer ataque al castillo.",
-    time: "1 año después"
-  },
-  {
-    title: "Segundo Asedio",
-    desc: "Segundo ataque al castillo.",
-    time: "2 meses después"
-  },
-  {
-    title: "La Solicitud",
-    desc: "Solicitud de territorio por parte de Moe.",
-    time: "3 meses después"
-  },
-  {
-    title: "Tercer Asalto",
-    desc: "Tercer ataque al castillo.",
-    time: "5 meses después"
-  },
-  {
-    title: "La División",
-    desc: "División del reformatorio.",
-    time: "2 meses después"
-  }
-];
+// Ahora recibe "events" como propiedad (Props)
+export default function Timeline({ events = [] }) {
+  
+  // Si no hay eventos, mostramos un mensaje discreto o nada
+  if (events.length === 0) return <p className="text-center text-gray-500 text-xs tracking-widest">ARCHIVOS CLASIFICADOS - NO DISPONIBLES</p>;
 
-export default function Timeline() {
   return (
     <div className="relative max-w-4xl mx-auto px-6">
       {/* LÍNEA CENTRAL (La Vena) */}
@@ -81,7 +42,7 @@ export default function Timeline() {
       
       {/* FINAL DE LÍNEA */}
       <div className="text-center mt-12">
-        <p className="text-blood font-gothic tracking-widest text-lg animate-pulse">LLEGADA DE NINA AL CASTILLO</p>
+        <p className="text-blood font-gothic tracking-widest text-lg animate-pulse">FIN DEL REGISTRO ACTUAL</p>
       </div>
     </div>
   );

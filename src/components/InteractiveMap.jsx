@@ -1,102 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Coordenadas calibradas con precisión sobre tu mapa "image_59ab58.jpg"
-const locations = [
-  {
-    id: 1,
-    name: "Castillo Hayashi",
-    x: 18,  // Izquierda superior (El gran castillo)
-    y: 20, 
-    desc: "La fortaleza principal y base de operaciones. Aquí entrenan los reclutas bajo la supervisión de Eric Hudson.",
-    type: "base"
-  },
-  {
-    id: 2,
-    name: "Cementerio",
-    x: 6,   // Esquina superior izquierda (Las tumbas)
-    y: 10,
-    desc: "Un recordatorio silencioso de los que cayeron en los primeros asedios. Pocos se atreven a entrar de noche.",
-    type: "danger"
-  },
-  {
-    id: 3,
-    name: "Campo de Tiro",
-    x: 6,   // Izquierda media (Las dianas de paja)
-    y: 40,
-    desc: "Zona de prácticas con blancos de paja. El lugar favorito de Megan para descargar su ira.",
-    type: "training"
-  },
-  {
-    id: 11, // NUEVO
-    name: "La Casa del Árbol",
-    x: 48,  // Centro Norte (La estructura de madera en el árbol)
-    y: 8,
-    desc: "Un puesto de vigilancia elevado oculto en el follaje. Ideal para observar sin ser visto.",
-    type: "base"
-  },
-  {
-    id: 4,
-    name: "Edificio Desmantelado",
-    x: 50,  // Centro exacto (El edificio verde en ruinas)
-    y: 38,
-    desc: "Las ruinas del antiguo centro administrativo, ahora cubierto de vegetación en la isla central.",
-    type: "ruin"
-  },
-  {
-    id: 5,
-    name: "Torre Hayashi",
-    x: 54,  // Centro Abajo (La torre redonda solitaria)
-    y: 85,
-    desc: "Una torre medieval solitaria que vigila el acceso sur. Su arquitectura contrasta con la tecnología militar.",
-    type: "base"
-  },
-  {
-    id: 6,
-    name: "Tronco (El Puente)",
-    x: 65,  // Arriba derecha (El tronco gigante caído sobre el río)
-    y: 15,
-    desc: "Un árbol gigantesco caído que sirve como único cruce natural sobre la parte alta del río.",
-    type: "path"
-  },
-  {
-    id: 7,
-    name: "División Maria Johnson",
-    x: 85,  // Arriba derecha (El edificio grande complejo)
-    y: 15,
-    desc: "El complejo fortificado del norte. Sede de la facción rival que disputa el control del territorio.",
-    type: "enemy"
-  },
-  {
-    id: 8,
-    name: "Reformatorio Hayashi",
-    x: 90,  // Derecha media (El edificio amurallado cuadrado)
-    y: 45,
-    desc: "Ubicado al sur de la División. Un lugar de contención con muros altos y seguridad estricta.",
-    type: "enemy"
-  },
-  {
-    id: 9,
-    name: "Río San Carlos",
-    x: 68,  // Cruza por la derecha (Punto en el agua)
-    y: 55,
-    desc: "La arteria fluvial que divide el territorio. Sus corrientes son traicioneras y el agua es gélida.",
-    type: "nature"
-  },
-  {
-    id: 10,
-    name: "Campo de Minas",
-    x: 90,  // Abajo derecha (Zona boscosa oscura)
-    y: 80,
-    desc: "¡PELIGRO! Zona boscosa al sureste sembrada de explosivos ocultos. No hay señalización visible.",
-    type: "danger"
-  }
-];
-
-export default function InteractiveMap() {
+// Ahora recibe "locations" y "mapImage" como propiedades (Props)
+export default function InteractiveMap({ locations = [], mapImage = "/images/mapa-bosque.jpg" }) {
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  // Función para asignar color según el tipo de lugar
+  // Función para asignar color según el tipo de lugar (recibido en la data)
   const getPinColor = (type) => {
     switch(type) {
       case 'danger': return 'bg-red-600 shadow-red-500'; // Peligro (Rojo)
@@ -110,20 +19,20 @@ export default function InteractiveMap() {
   return (
     <div className="relative w-full aspect-video bg-midnight rounded-xl overflow-hidden border border-white/10 shadow-2xl group cursor-crosshair">
       
-      {/* 1. EL FONDO (MAPA REAL) */}
+      {/* 1. EL FONDO DINÁMICO (Usa la imagen que le pases o la default) */}
       <img 
-        src="/images/mapa-bosque.jpg" 
-        alt="Mapa del Territorio Hayashi" 
+        src={mapImage} 
+        alt="Mapa del Territorio" 
         className="absolute inset-0 w-full h-full object-cover opacity-90 hover:opacity-100 transition duration-700" 
       />
       
-      {/* Título flotante
-      <div className="absolute top-4 left-6 pointer-events-none bg-black/50 p-2 rounded backdrop-blur-sm border border-white/10 z-10">
+      {/* Título flotante */}
+      <div className="absolute bottom-4 left-6 pointer-events-none bg-black/50 p-2 rounded backdrop-blur-sm border border-white/10 z-10">
         <h3 className="font-gothic text-gold text-lg tracking-widest">ZONA DE GUERRA</h3>
         <p className="text-xs text-gray-300">Inteligencia Satelital</p>
-      </div> */}
+      </div>
 
-      {/* 2. LOS PUNTOS INTERACTIVOS (PINS) */}
+      {/* 2. LOS PUNTOS INTERACTIVOS (Iteramos sobre la prop 'locations') */}
       {locations.map((loc) => (
         <button
           key={loc.id}

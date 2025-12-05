@@ -1,40 +1,86 @@
 import { useRef } from 'react';
 
 // Datos de ejemplo (Puedes cambiarlos cuando tengas los libros reales)
+
+
+// src/components/BookCarousel.jsx
+
 const books = [
   {
     id: 1,
     title: "A Flor de Piel",
-    subtitle: "",
-    cover: "/images/portada.jpg", // Usamos la misma portada por ahora
+    subtitle: "Libro 1",
+    cover: "/images/portada.jpg",
     status: "DISPONIBLE",
-    link: "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/"
+    // ENLACE INTERNO A LA NUEVA SUBPÁGINA
+    link: "/libros/a-flor-de-piel" 
   },
   {
     id: 2,
-    title: "En proceso",
-    subtitle: "Escribiendo",
-    cover: "/images/portada2.avif", // Placeholder (usamos la misma con un filtro CSS)
-    status: "EN ESCRITURA",
-    link: "#"
+    title: "A Pulso Lento",
+    subtitle: "Libro 2",
+    cover: "/images/portada3.png",
+    status: "PRÓXIMAMENTE",
+    // ENLACE INTERNO
+    link: "/libros/a-pulso-lento"
   },
   {
     id: 3,
-    title: "El Último Hayasher",
-    subtitle: "Libro 3 - El Desenlace",
-    cover: "/images/portada3.png", // Placeholder
-    status: "PRÓXIMAMENTE",
-    link: "#"
+    title: "A Corazón Abierto",
+    subtitle: "Libro 3",
+    cover: "/images/portada4.png",
+    status: "PLANIFICADO",
+    // ENLACE INTERNO
+    link: "/libros/a-corazon-abierto"
   },
   {
     id: 4,
-    title: "Crónicas de Eric",
-    subtitle: "Spin-off",
-    cover: "/images/portada4.png", // Placeholder
+    title: "A Corazón Abierto",
+    subtitle: "Libro 4",
+    cover: "/images/portada4.png",
     status: "PLANIFICADO",
-    link: "#"
+    // ENLACE INTERNO
+    link: "/libros/a-corazon-abiertoo"
   }
+  // ... etc
 ];
+
+
+
+// const books = [
+//   {
+//     id: 1,
+//     title: "A Flor de Piel",
+//     subtitle: "",
+//     cover: "/images/portada.jpg", // Usamos la misma portada por ahora
+//     status: "DISPONIBLE",
+//     link: "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/"
+//   },
+//   {
+//     id: 2,
+//     title: "En proceso",
+//     subtitle: "Escribiendo",
+//     cover: "/images/portada2.avif", // Placeholder (usamos la misma con un filtro CSS)
+//     status: "EN ESCRITURA",
+//     link: "#"
+//   },
+//   {
+//     id: 3,
+//     title: "El Último Hayasher",
+//     subtitle: "Libro 3 - El Desenlace",
+//     cover: "/images/portada3.png", // Placeholder
+//     status: "PRÓXIMAMENTE",
+//     link: "#"
+//   },
+//   {
+//     id: 4,
+//     title: "Crónicas de Eric",
+//     subtitle: "Spin-off",
+//     cover: "/images/portada4.png", // Placeholder
+//     status: "PLANIFICADO",
+//     link: "#"
+//   }
+// ];
 
 export default function BookCarousel() {
   const scrollRef = useRef(null);
