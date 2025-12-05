@@ -10,7 +10,7 @@ export const books = [
     amazonLink: "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/",
     status: "DISPONIBLE",
     category: "saga", // Categoría importante
-    leadMagnet: "/downloads/primer-capitulo.pdf",
+    leadMagnet: "/downloads/primer-capitulo-afp",
     themeColor: "blood",
     isSagaMain: true,
 

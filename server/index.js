@@ -44,7 +44,8 @@ app.post('/subscribe', async (req, res) => {
                 <p>Espero que disfrutes la lectura.</p>
                 <p><em>- Paulina</em></p>
                 <hr>
-                <a href="https://paulinalopez.com/downloads/primer-capitulo.pdf" style="background-color: #A80000; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Descargar PDF Ahora</a>
+                <br/>
+                <a href="https://paulinalopezescritora.com/downloads/primer-capitulo-afp" style="background-color: #A80000; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Descargar PDF Ahora</a>
             `
         });
 
