@@ -13,7 +13,7 @@ export default function LeadMagnet({ pdfUrl }) {
     setSubmitStatus(null);
 
     try {
-        const response = await fetch('https://api.paulinalopezescritora.com/subscribe', {
+        const response = await fetch('https://api.paulinalopezescritora.com/api/subscribe', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
