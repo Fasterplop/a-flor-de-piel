@@ -2,55 +2,41 @@ import { useState } from 'react';
 
 export default function LeadMagnet({ pdfUrl }) {
   const [isOpen, setIsOpen] = useState(false);
-  
-  // 1. AÑADIMOS EL ESTADO PARA EL NOMBRE
   const [name, setName] = useState(''); 
   const [email, setEmail] = useState('');
-  
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error'
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // 2. AQUÍ ENVIAMOS LOS DATOS A TU SERVICIO DE EMAIL
-    // Ejemplo genérico (Debes cambiar la URL por la de tu proveedor)
-    
     try {
-        // --- CONFIGURACIÓN PARA TU PROVEEDOR ---
-        // Si usas MailerLite, ConvertKit, ActiveCampaign, etc., te darán una URL o "Webhook"
-        // También puedes usar servicios como Formspree.io si no tienes backend.
-        
         const response = await fetch('https://api.paulinalopezescritora.com/subscribe', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer TU_API_KEY' // Algunos lo requieren
             },
             body: JSON.stringify({
                 name: name,
                 email: email,
-                source: 'Landing Page A Flor de Piel' // Etiqueta útil
+                source: 'Landing Page A Flor de Piel'
             }),
         });
 
-        // NOTA: Como ahora no tienes la URL real, simularemos que funcionó para que descargue el 
-        // Cuando tengas la URL, descomenta la validación de abajo:
-        
-         if (!response.ok) throw new Error('Error al suscribir');
+        if (!response.ok) throw new Error('Error al suscribir');
 
         setSubmitStatus('success');
         
-        // 3. DESCARGAR PDF Y CERRAR
+        // CERRAR EL MODAL DESPUÉS DE 3 SEGUNDOS (SIN DESCARGAR)
         setTimeout(() => {
             setIsOpen(false);
             setSubmitStatus(null);
             setName('');
             setEmail('');
-            window.open(pdfUrl, '_blank');
-        }, 1500);
+            // window.open(pdfUrl, '_blank'); // <--- LÍNEA ELIMINADA
+        }, 10000);
 
     } catch (error) {
         console.error(error);
@@ -62,7 +48,6 @@ export default function LeadMagnet({ pdfUrl }) {
 
   return (
     <>
-      {/* BOTÓN (Visible) */}
       <button 
         onClick={() => setIsOpen(true)}
         className="w-full md:w-auto text-center px-8 py-4 border border-gold/50 text-gold font-bold tracking-widest rounded-full hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase"
@@ -70,7 +55,6 @@ export default function LeadMagnet({ pdfUrl }) {
         Leer Capítulo 1
       </button>
 
-      {/* MODAL (Oculto) */}
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div 
@@ -83,9 +67,7 @@ export default function LeadMagnet({ pdfUrl }) {
             <button 
               onClick={() => setIsOpen(false)}
               className="absolute top-4 right-4 text-gray-500 hover:text-white"
-            >
-              ✕
-            </button>
+            >✕</button>
 
             <div className="text-center mb-6">
               <span className="text-blood text-xs font-bold tracking-widest uppercase">ACCESO EXCLUSIVO</span>
@@ -93,14 +75,17 @@ export default function LeadMagnet({ pdfUrl }) {
                 DESBLOQUEA EL <br /> PRIMER CAPÍTULO
               </h3>
               <p className="text-gray-400 text-sm mt-2">
-                Ingresa tu correo para recibir el PDF y unirte a la lista de reclutas del Castillo Hayashi.
+                Ingresa tu correo para recibir el PDF y unirte a la lista de reclutas.
               </p>
             </div>
 
             {submitStatus === 'success' ? (
-                <div className="text-center py-8 text-green-400">
-                    <p className="text-xl mb-2">¡Suscripción Exitosa!</p>
-                    <p className="text-sm text-gray-400">Tu descarga comenzará en breve...</p>
+                <div className="text-center py-8 text-green-400 animate-pulse">
+                    <p className="text-xl mb-2 font-bold font-gothic">¡Enviado con Éxito!</p>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                        Tu invitación al castillo ha sido enviada tu bandeja de entrada. 🐦‍⬛<br/>
+                        <span className="text-xs text-gray-500">(Revisa Spam si no llega en 1 minuto)</span>
+                    </p>
                 </div>
             ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -109,8 +94,8 @@ export default function LeadMagnet({ pdfUrl }) {
                     type="text" 
                     placeholder="Tu Nombre" 
                     required
-                    value={name} // 4. VINCULAMOS EL VALOR
-                    onChange={(e) => setName(e.target.value)} // 5. CAPTURAMOS EL CAMBIO
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="w-full bg-white/5 border border-white/10 rounded p-3 text-white placeholder-gray-500 focus:border-gold focus:outline-none transition"
                     />
                 </div>
@@ -143,14 +128,14 @@ export default function LeadMagnet({ pdfUrl }) {
                         ENVIANDO...
                     </>
                     ) : (
-                    "OBTENER CAPÍTULO GRATIS"
+                    "RECIBIR EN MI CORREO"
                     )}
                 </button>
                 </form>
             )}
 
             <p className="text-center text-xs text-gray-600 mt-4">
-              Odiamos el spam tanto como a los demonios del bosque. Tu correo está seguro.
+              Tu correo está protegido por el sello del castillo.
             </p>
           </div>
         </div>
