@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { books } from '../../data/books.js';
 import InteractiveMap from '../../components/InteractiveMap.jsx';
-import Quiz from '../../components/Quiz.jsx'; // <--- AQUÍ ESTÁ LA IMPORTACIÓN
+import Quiz from '../../components/Quiz.jsx';
 import Timeline from '../../components/Timeline.jsx';
 import LeadMagnet from '../../components/LeadMagnet.jsx';
 
@@ -15,8 +15,12 @@ export function getStaticPaths() {
 
 const { book } = Astro.props;
 
-// Filtrar otros libros para la sección de "Más de la Saga"
-const otherBooks = books.filter(b => b.id !== book.id);
+// --- LÓGICA DE SEPARACIÓN ---
+// 1. Libros de la SAGA (excluyendo el que estamos viendo)
+const relatedSagaBooks = books.filter(b => b.category === 'saga' && b.id !== book.id);
+
+// 2. Libros INDEPENDIENTES (excluyendo el que estamos viendo)
+const independentBooks = books.filter(b => b.category === 'independiente' && b.id !== book.id);
 ---
 
 <Layout title={`${book.title} | Paulina López`}>
@@ -75,29 +79,59 @@ const otherBooks = books.filter(b => b.id !== book.id);
         </div>
     </header>
 
-    <section class="py-24 bg-black border-t border-white/10">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="font-gothic text-3xl text-white mb-2">Más Libros de la Saga</h2>
-                <p class="text-gray-500 text-sm tracking-widest uppercase">Completa tu colección</p>
-            </div>
+    {relatedSagaBooks.length > 0 && (
+        <section class="py-24 bg-black border-t border-white/10">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-gothic text-3xl text-white mb-2">Más de la Saga "A Flor de Piel"</h2>
+                    <p class="text-gray-500 text-sm tracking-widest uppercase">Continúa la historia en el Castillo Hayashi</p>
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
-                {otherBooks.map((other) => (
-                    <a href={`/libros/${other.slug}`} class="group block bg-white/5 border border-white/10 p-6 rounded-xl hover:bg-white/10 transition duration-300">
-                        <div class="flex items-center gap-6">
-                            <img src={other.cover} alt={other.title} class="w-24 rounded shadow-lg group-hover:scale-105 transition duration-300" />
-                            <div>
-                                <h3 class="font-gothic text-xl text-white group-hover:text-gold transition">{other.title}</h3>
-                                <p class="text-xs text-gray-400 mt-2 mb-3">{other.status}</p>
-                                <span class="text-sm text-gold underline decoration-gold/30 underline-offset-4 group-hover:text-white transition">Ver Detalles →</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                    {relatedSagaBooks.map((other) => (
+                        <a href={`/libros/${other.slug}`} class="group block bg-white/5 border border-white/10 p-6 rounded-xl hover:bg-white/10 transition duration-300">
+                            <div class="flex items-center gap-6">
+                                <img src={other.cover} alt={other.title} class="w-24 rounded shadow-lg group-hover:scale-105 transition duration-300" />
+                                <div>
+                                    <h3 class="font-gothic text-xl text-white group-hover:text-gold transition">{other.title}</h3>
+                                    <p class="text-xs text-gray-400 mt-2 mb-3">{other.status}</p>
+                                    <span class="text-sm text-gold underline decoration-gold/30 underline-offset-4 group-hover:text-white transition">Ver Detalles →</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                ))}
+                        </a>
+                    ))}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    )}
+
+    {independentBooks.length > 0 && (
+        <section class="py-24 bg-midnight border-t border-white/5 relative">
+            <div class="absolute inset-0 bg-[url('/images/forest-bg.jpg')] opacity-5 mix-blend-overlay"></div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="font-gothic text-3xl text-gold mb-2">Otras Historias Independientes</h2>
+                    <p class="text-gray-500 text-sm tracking-widest uppercase">Nuevos mundos, misma autora</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                    {independentBooks.map((other) => (
+                        <a href={`/libros/${other.slug}`} class="group block bg-blue-900/10 border border-blue-500/20 p-6 rounded-xl hover:bg-blue-900/20 transition duration-300">
+                            <div class="flex items-center gap-6">
+                                <img src={other.cover} alt={other.title} class="w-24 rounded shadow-lg group-hover:scale-105 transition duration-300" />
+                                <div>
+                                    <h3 class="font-gothic text-xl text-white group-hover:text-blue-400 transition">{other.title}</h3>
+                                    <p class="text-xs text-gray-400 mt-2 mb-3">{other.status}</p>
+                                    <span class="text-sm text-blue-400 underline decoration-blue-500/30 underline-offset-4 group-hover:text-white transition">Leer Sinopsis →</span>
+                                </div>
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )}
 
     {book.hasMap && (
         <section class="py-24 bg-gradient-to-b from-midnight to-black border-t border-white/5 relative">
@@ -123,9 +157,11 @@ const otherBooks = books.filter(b => b.id !== book.id);
 
     {book.hasQuiz && (
         <section class="py-24 bg-midnight relative overflow-hidden border-t border-white/5">
+            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blood/10 via-midnight to-midnight pointer-events-none"></div>
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-12">
                     <h2 class="font-gothic text-3xl text-white mb-4">Prueba de Aptitud</h2>
+                    <p class="text-gray-400 max-w-xl mx-auto">¿Tienes lo necesario para sobrevivir en este mundo?</p>
                 </div>
                 <Quiz client:visible questions={book.quizQuestions} />
             </div>
