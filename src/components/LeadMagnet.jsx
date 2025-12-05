@@ -36,7 +36,7 @@ export default function LeadMagnet({ pdfUrl }) {
             }),
         });
 
-        // NOTA: Como ahora no tienes la URL real, simularemos que funcionó para que descargue el PDF
+        // NOTA: Como ahora no tienes la URL real, simularemos que funcionó para que descargue el 
         // Cuando tengas la URL, descomenta la validación de abajo:
         
          if (!response.ok) throw new Error('Error al suscribir');
