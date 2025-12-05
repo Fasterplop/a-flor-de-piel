@@ -23,7 +23,7 @@ export default function LeadMagnet({ pdfUrl }) {
         // Si usas MailerLite, ConvertKit, ActiveCampaign, etc., te darán una URL o "Webhook"
         // También puedes usar servicios como Formspree.io si no tienes backend.
         
-        const response = await fetch('https://api.paulinalopezescritora.com', {
+        const response = await fetch('https://api.paulinalopezescritora.com/subscribe', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
