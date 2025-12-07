@@ -215,54 +215,93 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
 
     <section id="newsletter" class="relative py-20 bg-[#08090B] overflow-hidden border-t border-[#D4AF37]/20">
     
-    <div class="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#D4AF37]/10 via-transparent to-transparent"></div>
-    
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div class="absolute top-[20%] left-[10%] w-1 h-1 bg-[#D4AF37] rounded-full opacity-50 blur-[1px]"></div>
-        <div class="absolute bottom-[30%] right-[20%] w-2 h-2 bg-[#D4AF37] rounded-full opacity-30 blur-[2px]"></div>
-    </div>
-
-    <div class="container mx-auto px-6 text-center relative z-10 max-w-3xl">
+        <div class="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#D4AF37]/10 via-transparent to-transparent"></div>
         
-        <h2 class="font-cinzel text-4xl md:text-5xl mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#b38728] drop-shadow-md">
-            Te doy acceso VIP a mis pensamientos más locos. 
-        </h2>
-        
-        <p class="text-gray-400 mb-10 font-sans text-lg font-light leading-relaxed">
-            Desde los secretos de <span class="text-[#D4AF37] italic">A Flor de Piel</span> hasta mis nuevos universos independientes.
-            <br class="hidden md:block" />
-            Suscríbete para recibir cartas personales, adelantos exclusivos y noticias de todos mis lanzamientos.
-        </p>
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute top-[20%] left-[10%] w-1 h-1 bg-[#D4AF37] rounded-full opacity-50 blur-[1px]"></div>
+            <div class="absolute bottom-[30%] right-[20%] w-2 h-2 bg-[#D4AF37] rounded-full opacity-30 blur-[2px]"></div>
+        </div>
 
-        <form action="https://marketing.paulinalopezescritora.com/form/submit?formId=1" method="post" class="flex flex-col md:flex-row gap-5 justify-center items-stretch">
+        <div class="container mx-auto px-6 text-center relative z-10 max-w-3xl min-h-[300px] flex flex-col justify-center">
             
-            <input type="hidden" name="mauticform[formId]" value="1" />
-            <input type="hidden" name="mauticform[return]" value="" />
+            <div id="newsletter-form-container" class="transition-opacity duration-500">
+                <h2 class="font-cinzel text-4xl md:text-5xl mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#b38728] drop-shadow-md">
+                    Te doy acceso VIP a mis pensamientos más locos. 
+                </h2>
+                
+                <p class="text-gray-400 mb-10 font-sans text-lg font-light leading-relaxed">
+                    Desde los secretos de <span class="text-[#D4AF37] italic">A Flor de Piel</span> hasta mis nuevos universos independientes.
+                    <br class="hidden md:block" />
+                    Suscríbete para recibir cartas personales, adelantos exclusivos y noticias de todos mis lanzamientos.
+                </p>
 
-            <div class="w-full md:w-2/3 relative group">
-                <input 
-                    type="email" 
-                    name="mauticform[email]" 
-                    placeholder="Tu correo electrónico..." 
-                    required
-                    class="w-full h-full bg-white/5 border border-[#D4AF37]/30 text-[#D4AF37] px-6 py-4 rounded-sm focus:outline-none focus:border-[#D4AF37] focus:bg-white/10 focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all duration-300 placeholder-gray-600 font-serif italic text-lg"
-                />
+                <form id="mautic-form" action="https://marketing.paulinalopezescritora.com/form/submit?formId=1" method="post" class="flex flex-col md:flex-row gap-5 justify-center items-stretch relative">
+                    
+                    <input type="hidden" name="mauticform[formId]" value="1" />
+                    <input type="hidden" name="mauticform[return]" value="" />
+
+                    <div class="absolute opacity-0 -z-10 w-0 h-0 overflow-hidden">
+                        <input type="text" name="bot_check" id="bot_check" autocomplete="off" tabindex="-1">
+                    </div>
+
+                    <div class="w-full md:w-2/3 relative group">
+                        <input 
+                            type="email" 
+                            name="mauticform[email]" 
+                            placeholder="Tu correo electrónico..." 
+                            required
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                            class="w-full h-full bg-white/5 border border-[#D4AF37]/30 text-[#D4AF37] px-6 py-4 rounded-sm focus:outline-none focus:border-[#D4AF37] focus:bg-white/10 focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all duration-300 placeholder-gray-600 font-serif italic text-lg"
+                        />
+                    </div>
+                    
+                    <button id="submit-btn" type="submit" class="group relative px-8 py-4 bg-transparent overflow-hidden rounded-sm transition-all duration-300 min-w-[200px]">
+                        <div class="absolute inset-0 w-full h-full bg-[#D4AF37]/10 group-hover:bg-[#D4AF37] transition-all duration-500 ease-out"></div>
+                        <div class="absolute inset-0 border border-[#D4AF37] group-hover:border-[#D4AF37] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-500"></div>
+                        
+                        <span id="btn-text" class="relative font-cinzel font-bold tracking-[0.2em] text-[#D4AF37] group-hover:text-[#08090B] transition-colors duration-300 uppercase text-sm">
+                            Suscribirse
+                        </span>
+
+                        <span id="btn-loader" class="hidden absolute inset-0 flex items-center justify-center">
+                            <svg class="animate-spin h-5 w-5 text-[#D4AF37] group-hover:text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </span>
+                    </button>
+                </form>
+                
+                <p class="text-[10px] text-gray-600 mt-6 tracking-widest uppercase opacity-60">
+                    Respeto tu bandeja de entrada. Solo magia, cero spam.
+                </p>
             </div>
-            
-            <button type="submit" class="group relative px-8 py-4 bg-transparent overflow-hidden rounded-sm transition-all duration-300 min-w-[180px]">
-                <div class="absolute inset-0 w-full h-full bg-[#D4AF37]/10 group-hover:bg-[#D4AF37] transition-all duration-500 ease-out"></div>
-                <div class="absolute inset-0 border border-[#D4AF37] group-hover:border-[#D4AF37] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-500"></div>
-                <span class="relative font-cinzel font-bold tracking-[0.2em] text-[#D4AF37] group-hover:text-[#08090B] transition-colors duration-300 uppercase text-sm">
-                    Suscribirse
-                </span>
-            </button>
-        </form>
-        
-        <p class="text-[10px] text-gray-600 mt-6 tracking-widest uppercase opacity-60">
-            Respeto tu bandeja de entrada. Solo magia, cero spam.
-        </p>
-    </div>
-</section>
+
+            <div id="newsletter-success" class="hidden opacity-0 transform translate-y-4 transition-all duration-700 ease-out">
+                <div class="mb-6 flex justify-center">
+                    <div class="p-4 rounded-full border border-[#D4AF37] bg-[#D4AF37]/10 shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <h2 class="font-cinzel text-3xl md:text-5xl mb-4 text-[#D4AF37] drop-shadow-md">
+                    ¡Suscripción Confirmada!
+                </h2>
+                
+                <p class="text-gray-300 font-serif italic text-xl">
+                    Pronto recibirás noticias mías.
+                </p>
+                
+                <p class="text-gray-500 font-sans text-sm mt-4 max-w-lg mx-auto">
+                    He enviado un correo de confirmación a tu bandeja de entrada. <br>
+                    (Si no lo ves, revisa la carpeta de spam o promociones).
+                </p>
+            </div>
+
+        </div>
+    </section>
 
     <footer class="bg-midnight py-8 border-t border-white/5">
         <div class="container mx-auto px-6 pt-2 flex flex-col md:flex-row justify-between items-center text-gray-600 text-xs gap-4">
@@ -347,7 +386,7 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
     });
   });
 
-  // Scroll Logic Navbar (MODIFICADO)
+  // Scroll Logic Navbar
   window.addEventListener('scroll', () => {
     if (!nav) return;
     
@@ -395,39 +434,97 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
   
   gsap.registerPlugin(ScrollTrigger);
 
-  // A. Efecto Parallax de Fondo (Sección Otras Historias)
-  // Mueve el fondo a distinta velocidad que el scroll
+  // A. Efecto Parallax de Fondo
   gsap.to(".parallax-bg", {
-    yPercent: 20, // Se mueve 20% verticalmente
+    yPercent: 20, 
     ease: "none",
     scrollTrigger: {
       trigger: ".parallax-section",
-      start: "top bottom", // Empieza cuando la sección entra por abajo
-      end: "bottom top",   // Termina cuando sale por arriba
-      scrub: true          // El movimiento se pega al scroll
+      start: "top bottom", 
+      end: "bottom top",  
+      scrub: true         
     }
   });
 
-  // B. Efecto Story Reveal (Aparición secuencial)
-  // Busca todas las secciones y anima sus elementos internos 'story-reveal'
+  // B. Efecto Story Reveal
   const sections = document.querySelectorAll("section");
   sections.forEach(section => {
-    // Seleccionamos los elementos marcados con 'story-reveal' dentro de esta sección
     const elems = section.querySelectorAll(".story-reveal");
     
     if (elems.length > 0) {
       gsap.from(elems, {
-        y: 50,        // Vienen desde 50px abajo
-        opacity: 0,   // Empiezan invisibles
+        y: 50,        
+        opacity: 0,   
         duration: 1,
-        stagger: 0.2, // Retraso de 0.2s entre cada elemento (efecto cascada)
+        stagger: 0.2, 
         ease: "power3.out",
         scrollTrigger: {
           trigger: section,
-          start: "top 75%", // La animación inicia cuando la sección está al 75% de la pantalla
-          toggleActions: "play none none reverse" // Si subes, se esconden de nuevo (opcional)
+          start: "top 75%", 
+          toggleActions: "play none none reverse"
         }
       });
     }
   });
+
+  // 3. LOGICA FORMULARIO AJAX + SEGURIDAD
+  const form = document.getElementById('mautic-form');
+  const formContainer = document.getElementById('newsletter-form-container');
+  const successContainer = document.getElementById('newsletter-success');
+  const submitBtn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  const btnLoader = document.getElementById('btn-loader');
+  const botCheck = document.getElementById('bot_check');
+
+  if (form && formContainer && successContainer && submitBtn && btnText && btnLoader) {
+      form.addEventListener('submit', async function(e) {
+          e.preventDefault(); 
+
+          // --- SEGURIDAD ANTIBOTS ---
+          // Si el campo invisible tiene algo escrito, es un bot.
+          if (botCheck && (botCheck as HTMLInputElement).value) {
+              console.log("Bot detectado. Envío cancelado.");
+              return; 
+          }
+
+          // UI de Carga
+          submitBtn.classList.add('cursor-not-allowed', 'opacity-80');
+          btnText.classList.add('opacity-0');
+          btnLoader.classList.remove('hidden');
+
+          const formData = new FormData(form as HTMLFormElement);
+          const action = form.getAttribute('action');
+
+          if (!action) return;
+
+          try {
+              // Enviar a Mautic
+              await fetch(action, {
+                  method: 'POST',
+                  body: formData,
+                  mode: 'no-cors' 
+              });
+
+              // Éxito: Animación
+              formContainer.style.opacity = '0';
+              
+              setTimeout(() => {
+                  formContainer.classList.add('hidden');
+                  successContainer.classList.remove('hidden');
+                  
+                  setTimeout(() => {
+                      successContainer.classList.remove('opacity-0', 'translate-y-4');
+                  }, 50);
+              }, 500); 
+
+          } catch (error) {
+              console.error('Error:', error);
+              // Restaurar estado si falla
+              submitBtn.classList.remove('cursor-not-allowed', 'opacity-80');
+              btnText.classList.remove('opacity-0');
+              btnLoader.classList.add('hidden');
+              alert('Hubo un error al conectar con el servidor. Por favor intenta de nuevo.');
+          }
+      });
+  }
 </script>
