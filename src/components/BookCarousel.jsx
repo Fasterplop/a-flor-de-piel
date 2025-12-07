@@ -41,7 +41,8 @@ export default function BookCarousel({ books = [] }) {
       {/* Contenedor Scroll */}
       <div 
         ref={scrollRef}
-        className={`flex gap-8 overflow-x-auto pb-12 pt-4 snap-x snap-mandatory scrollbar-hide ${alignmentClass}`}
+        // CAMBIO AQUÍ: pb-12 cambiado a pb-4 para reducir el espacio inferior
+        className={`flex gap-8 overflow-x-auto pb-4 pt-4 snap-x snap-mandatory scrollbar-hide ${alignmentClass}`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {books.map((book) => (
@@ -65,9 +66,6 @@ export default function BookCarousel({ books = [] }) {
 
               <h3 className="font-gothic text-xl text-white mb-4">{book.title}</h3>
               
-              {/* ELIMINADO: Subtítulo del libro */}
-              {/* <p className="text-sm text-gray-400 mb-6">{book.subtitle}</p> */}
-
               <a 
                 href={`/libros/${book.slug}`} 
                 className={`mt-auto w-full py-2 text-sm font-bold tracking-widest border rounded transition duration-300 

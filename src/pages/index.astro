@@ -17,7 +17,7 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
 ---
 
 <Layout title="A Flor de Piel | Paulina López">
-	
+
     <div class="relative min-h-screen overflow-hidden bg-[#08090B] text-white font-sans selection:bg-[#D4AF37] selection:text-black">
       
       <div class="absolute inset-0 z-0 pointer-events-none">
@@ -33,7 +33,7 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
         <div class="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-overlay" 
              style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%221%22/%3E%3C/svg%3E');">
         </div>
-         
+          
         <div class="absolute top-[-20%] right-[-10%] w-[1000px] h-[1000px] bg-gradient-to-b from-[#D4AF37]/20 to-transparent rounded-full blur-[120px]"></div>
     
         <div id="particle-container"></div>
@@ -81,9 +81,9 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
             </div>
     
             <h1 class="text-4xl md:text-7xl font-cinzel leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 drop-shadow-2xl">
-              <span class="whitespace-nowrap">Tu lugar seguro.</span><br/>
-              <span class="font-serif italic text-4xl md:text-6xl text-[#D4AF37] opacity-90 block my-2">Tu escape.</span>
-              <span class="font-serif font-bold text-white tracking-widest text-4xl md:text-6xl block mt-2 uppercase">Tus libros.</span>
+              <span class="whitespace-nowrap">Tu mundo.</span><br/>
+              <span class="font-serif italic text-4xl md:text-6xl text-[#D4AF37] opacity-90 block my-0">Tu escape.</span>
+              <span class="font-serif font-bold text-white tracking-widest text-4xl md:text-6xl block mt-2 uppercase whitespace-nowrap">Tus libros.</span>
             </h1>
           </div>
     
@@ -123,13 +123,13 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
             <div class="absolute -inset-4 bg-red-900/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
           </a>
     
-          <a href="/libros/a-pulso-lento" class="parallax-layer absolute z-30 bottom-[5%] left-[-5%] md:left-[-12%] w-28 md:w-52 filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)] cursor-pointer group animate-orbit-float-reverse-delayed">
-            <img src="/images/portada2.avif" alt="A Pulso Lento" class="w-full rounded-lg transform group-hover:scale-105 transition-transform duration-500 border border-white/5" />
+          <a href="/libros/el-secreto-del-relojero" class="parallax-layer absolute z-30 bottom-[5%] left-[-5%] md:left-[-12%] w-28 md:w-52 filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)] cursor-pointer group animate-orbit-float-reverse-delayed">
+            <img src="/images/portada2.avif" alt="El Secreto del Relojero" class="w-full rounded-lg transform group-hover:scale-105 transition-transform duration-500 border border-white/5" />
             <div class="absolute -inset-4 bg-pink-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
           </a>
     
-          <a href="/libros/a-corazon-abierto" class="absolute z-0 top-[0%] left-[0%] md:left-[-5%] w-24 md:w-36 opacity-70 blur-[3px] grayscale-[0.3] hover:blur-0 hover:grayscale-0 transition-all duration-700 animate-orbit-slow cursor-pointer">
-            <img src="/images/portada3.png" alt="A Corazón Abierto" class="w-full rounded shadow-2xl" />
+          <a href="/libros/a-pulso-lento" class="absolute z-0 top-[0%] left-[0%] md:left-[-5%] w-28 md:w-36 opacity-70 blur-[3px] grayscale-[0.3] hover:blur-0 hover:grayscale-0 transition-all duration-700 animate-orbit-slow cursor-pointer">
+            <img src="/images/portada3.png" alt="A Pulso Lento" class="w-full rounded shadow-2xl" />
           </a>
     
           <a href="/libros/a-corazon-abierto" class="absolute z-0 bottom-[20%] right-[-15%] md:right-[-20%] w-24 md:w-36 opacity-70 blur-[2px] grayscale-[0.3] hover:blur-0 hover:grayscale-0 transition-all duration-700 animate-orbit-slow-reverse cursor-pointer">
@@ -141,7 +141,7 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
       </main>
     </div>
 
-	<section id="libros" class="py-16 bg-gradient-to-b from-black to-midnight relative border-t border-white/5">
+    <section id="libros" class="py-12 bg-gradient-to-b from-black to-midnight relative border-t border-white/5">
         <div class="text-center mb-12">
             <h2 class="font-gothic text-4xl text-white mb-2 story-reveal">El Universo A Flor de Piel</h2>
             <p class="text-gray-500 story-reveal">La saga completa. La historia de los Hayashi.</p>
@@ -149,10 +149,10 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
         <div class="story-reveal">
             <BookCarousel client:visible books={sagaBooks} />
         </div>
-	</section>
+    </section>
 
     {otherBooks.length > 0 && (
-        <section class="py-16 bg-midnight relative border-t border-white/5 overflow-hidden parallax-section">
+        <section class="py-12 bg-midnight relative border-t border-white/5 overflow-hidden parallax-section">
             <div class="absolute inset-0 bg-[url('/images/forest-bg.jpg')] bg-cover bg-center opacity-10 mix-blend-overlay parallax-bg scale-125"></div>
             
             <div class="container mx-auto px-6 relative z-10">
@@ -167,75 +167,125 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
         </section>
     )}
 
-    <section id="autora" class="py-16 relative bg-black/80">
-		<div class="container mx-auto px-6">
-			<div class="bg-white/5 border border-white/10 p-8 md:p-12 rounded-sm grid md:grid-cols-[1fr_2fr] gap-12 items-center story-reveal">
-				<div class="relative">
-					<div class="absolute inset-0 border-2 border-gold transform translate-x-4 translate-y-4"></div>
-					<img src="/images/paulina.png" alt="Paulina López" class="relative z-10 transition duration-500 w-full object-cover shadow-xl" />
-				</div>
-				
-				<div>
-					<h3 class="font-gothic text-3xl mb-2 text-white">Paulina López</h3>
-					<p class="text-blood font-bold mb-6 text-sm tracking-wider">AUTORA</p>
-					<p class="text-gray-300 mb-4 leading-relaxed">
-						A los diecisiete años, Paulina descubrió en la escritura su terapia contra el caos, aventurándose a crear su primera novela.
-						Hoy, continúa forjando los siguientes libros de la saga A Flor de Piel.
-					</p>
-					<p class="text-gray-300 mb-6 italic border-l-2 border-gold pl-4">
-						"Un arma debe ser capaz de inspirarnos seguridad en los momentos más desesperantes..."
-					</p>
-					
+    <section id="autora" class="py-12 relative bg-black/80">
+        <div class="container mx-auto px-6">
+            <div class="bg-white/5 border border-white/10 p-8 md:p-12 rounded-sm grid md:grid-cols-[1fr_2fr] gap-12 items-center story-reveal">
+                <div class="relative">
+                    <div class="absolute inset-0 border-2 border-gold transform translate-x-4 translate-y-4"></div>
+                    <img src="/images/paulina2.jpg" alt="Paulina López" class="relative z-10 transition duration-500 w-full object-cover shadow-xl" />
+                </div>
+                
+                <div>
+                    <h3 class="font-gothic text-3xl mb-2 text-white">Paulina López</h3>
+                    <p class="text-blood font-bold mb-6 text-sm tracking-wider">AUTORA</p>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        Paulina encontró en la escritura una vía de escape y terapia tras el caos de la adolescencia. Aunque estudió Ingeniería Civil, su pasión por las letras la llevó a mantenerse firme en su pasión y escribir su primera novela a los diecisiete años. Actualmente, continúa desarrollando esta saga mientras trabaja como creadora de contenido en redes sociales.
+                    </p>
+                    <p class="text-gray-300 mb-6 italic border-l-2 border-gold pl-4">
+                        "Yo no creo personajes perfectos; solo creo almas preparadas para luchar y amar sin medida."
+                    </p>
+                    
                     <div class="flex gap-4 flex-wrap">
                         <a href="https://www.instagram.com/paulinalexandraa/" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-gradient-to-br hover:from-purple-600 hover:to-orange-500 hover:text-white transition duration-300 transform hover:-translate-y-1 hover:border-transparent">
-							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-						</a>
-						
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        
                         <a href="https://www.facebook.com/profile.php?id=61570426830815" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white transition duration-300 transform hover:-translate-y-1 hover:border-transparent">
-							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-						</a>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
 
                         <a href="https://www.tiktok.com/@paulinalexandraa" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-[#000000] hover:text-white hover:border-white/20 transition duration-300 transform hover:-translate-y-1">
-							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002.001a2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-5.394 10.692 6.33 6.33 0 0 0 10.857-4.424V8.687a8.182 8.182 0 0 0 4.773 1.526V6.79a4.831 4.831 0 0 1-1.003-.104z"/></svg>
-						</a>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002.001a2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-5.394 10.692 6.33 6.33 0 0 0 10.857-4.424V8.687a8.182 8.182 0 0 0 4.773 1.526V6.79a4.831 4.831 0 0 1-1.003-.104z"/></svg>
+                        </a>
 
                         <a href="https://www.wattpad.com/user/paulinalexandra" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-[#FF6122] hover:text-white transition duration-300 transform hover:-translate-y-1 hover:border-transparent">
-							<svg class="w-6 h-6" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M6.8779,13.2081c-3.0774,5.7217-3.0943,14.3235-.476,19.45s7.51,12.66,16.4038-7.3294c-.1159,8.79,7.2908,14.1328,11,4.9654s6.3153-11.8076,8.1392-14.1787C46.6031,10.06,40.1837,6.7544,30.8013,18.57,30.6023,10.087,26.8037,2.82,14.937,20.2836,17.0594,12.562,11.1511,6.3939,6.8779,13.2081Z"></path>
-							</svg>
-						</a>
+                            <svg class="w-6 h-6" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6.8779,13.2081c-3.0774,5.7217-3.0943,14.3235-.476,19.45s7.51,12.66,16.4038-7.3294c-.1159,8.79,7.2908,14.1328,11,4.9654s6.3153-11.8076,8.1392-14.1787C46.6031,10.06,40.1837,6.7544,30.8013,18.57,30.6023,10.087,26.8037,2.82,14.937,20.2836,17.0594,12.562,11.1511,6.3939,6.8779,13.2081Z"></path>
+                            </svg>
+                        </a>
 
                         <a href="mailto:paulinalexandra020@gmail.com" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-[#EA4335] hover:text-white transition duration-300 transform hover:-translate-y-1 hover:border-transparent">
-							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-	<footer class="bg-midnight py-8 mt-12">
-	<div class="container mx-auto px-6 mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-gray-600 text-xs gap-4">
-			
-			<p>
-				&copy; {new Date().getFullYear()} Paulina López.
-				Todos los derechos reservados.
-			</p>
+    <section id="newsletter" class="relative py-20 bg-[#08090B] overflow-hidden border-t border-[#D4AF37]/20">
+    
+    <div class="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#D4AF37]/10 via-transparent to-transparent"></div>
+    
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div class="absolute top-[20%] left-[10%] w-1 h-1 bg-[#D4AF37] rounded-full opacity-50 blur-[1px]"></div>
+        <div class="absolute bottom-[30%] right-[20%] w-2 h-2 bg-[#D4AF37] rounded-full opacity-30 blur-[2px]"></div>
+    </div>
 
-			<p class="flex items-center gap-1">
-				Developed by 
-				<a 
-					href="https://www.hikevodesign.com" 
-					target="_blank" 
-					rel="noopener noreferrer"
-					class="text-gray-400 hover:text-gold font-bold transition-colors duration-300 tracking-wide"
-				>
-					Hikevo Design
-				</a>
-			</p>
-			
-		</div>
-	</footer>
+    <div class="container mx-auto px-6 text-center relative z-10 max-w-3xl">
+        
+        <h2 class="font-cinzel text-4xl md:text-5xl mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#b38728] drop-shadow-md">
+            Te doy acceso VIP a mis pensamientos más locos. 
+        </h2>
+        
+        <p class="text-gray-400 mb-10 font-sans text-lg font-light leading-relaxed">
+            Desde los secretos de <span class="text-[#D4AF37] italic">A Flor de Piel</span> hasta mis nuevos universos independientes.
+            <br class="hidden md:block" />
+            Suscríbete para recibir cartas personales, adelantos exclusivos y noticias de todos mis lanzamientos.
+        </p>
+
+        <form action="https://TU_URL_MAUTIC/form/submit?formId=NUMERO_ID" method="post" class="flex flex-col md:flex-row gap-5 justify-center items-stretch">
+            
+            <input type="hidden" name="mauticform[formId]" value="NUMERO_ID" />
+            <input type="hidden" name="mauticform[return]" value="" />
+
+            <div class="w-full md:w-2/3 relative group">
+                <input 
+                    type="email" 
+                    name="mauticform[email]" 
+                    placeholder="Tu correo electrónico..." 
+                    required
+                    class="w-full h-full bg-white/5 border border-[#D4AF37]/30 text-[#D4AF37] px-6 py-4 rounded-sm focus:outline-none focus:border-[#D4AF37] focus:bg-white/10 focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all duration-300 placeholder-gray-600 font-serif italic text-lg"
+                />
+            </div>
+            
+            <button type="submit" class="group relative px-8 py-4 bg-transparent overflow-hidden rounded-sm transition-all duration-300 min-w-[180px]">
+                <div class="absolute inset-0 w-full h-full bg-[#D4AF37]/10 group-hover:bg-[#D4AF37] transition-all duration-500 ease-out"></div>
+                <div class="absolute inset-0 border border-[#D4AF37] group-hover:border-[#D4AF37] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-500"></div>
+                <span class="relative font-cinzel font-bold tracking-[0.2em] text-[#D4AF37] group-hover:text-[#08090B] transition-colors duration-300 uppercase text-sm">
+                    Suscribirse
+                </span>
+            </button>
+        </form>
+        
+        <p class="text-[10px] text-gray-600 mt-6 tracking-widest uppercase opacity-60">
+            Respeto tu bandeja de entrada. Solo magia, cero spam.
+        </p>
+    </div>
+</section>
+
+    <footer class="bg-midnight py-8 border-t border-white/5">
+        <div class="container mx-auto px-6 pt-2 flex flex-col md:flex-row justify-between items-center text-gray-600 text-xs gap-4">
+            
+            <p>
+                &copy; {new Date().getFullYear()} Paulina López.
+                Todos los derechos reservados.
+            </p>
+
+            <p class="flex items-center gap-1">
+                Developed by 
+                <a 
+                    href="https://www.hikevodesign.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-gold font-bold transition-colors duration-300 tracking-wide"
+                >
+                    Hikevo Design
+                </a>
+            </p>
+            
+        </div>
+    </footer>
 
 </Layout>
 
