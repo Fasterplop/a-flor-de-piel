@@ -1,6 +1,10 @@
 import { useRef } from 'react';
 
-// AHORA RECIBE LA LISTA DE LIBROS COMO "PROPS" (books={...})
+/**
+ * Componente Carrusel de Libros
+ * @param {object} props
+ * @param {any[]} props.books - Lista de libros a mostrar
+ */
 export default function BookCarousel({ books = [] }) {
   const scrollRef = useRef(null);
 
@@ -15,24 +19,29 @@ export default function BookCarousel({ books = [] }) {
     }
   };
 
-  // Si no hay libros en esta categoría, no mostramos el carrusel
-  if (books.length === 0) return null;
+  // Si no hay libros, no mostramos nada
+  if (!books || books.length === 0) return null;
+
+  // Lógica de Alineación: Si es solo 1 libro, centramos. Si son más, inicio normal (izquierda).
+  const alignmentClass = books.length === 1 ? 'justify-center' : 'justify-start';
 
   return (
     <div className="relative max-w-6xl mx-auto px-6 group">
       
-      {/* Botón Izquierda */}
-      <button 
-        onClick={() => scroll('left')}
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 border border-gold/30 text-gold p-3 rounded-full backdrop-blur-sm hover:bg-gold hover:text-black transition hidden md:block opacity-0 group-hover:opacity-100"
-      >
-        ←
-      </button>
+      {/* Botón Izquierda (Solo visible si hay varios libros) */}
+      {books.length > 1 && (
+        <button 
+            onClick={() => scroll('left')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 border border-gold/30 text-gold p-3 rounded-full backdrop-blur-sm hover:bg-gold hover:text-black transition hidden md:block opacity-0 group-hover:opacity-100"
+        >
+            ←
+        </button>
+      )}
 
       {/* Contenedor Scroll */}
       <div 
         ref={scrollRef}
-        className="flex gap-8 overflow-x-auto pb-12 pt-4 snap-x snap-mandatory scrollbar-hide"
+        className={`flex gap-8 overflow-x-auto pb-12 pt-4 snap-x snap-mandatory scrollbar-hide ${alignmentClass}`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {books.map((book) => (
@@ -54,8 +63,10 @@ export default function BookCarousel({ books = [] }) {
                 </div>
               </div>
 
-              <h3 className="font-gothic text-xl text-white mb-1">{book.title}</h3>
-              <p className="text-sm text-gray-400 mb-6">{book.subtitle}</p>
+              <h3 className="font-gothic text-xl text-white mb-4">{book.title}</h3>
+              
+              {/* ELIMINADO: Subtítulo del libro */}
+              {/* <p className="text-sm text-gray-400 mb-6">{book.subtitle}</p> */}
 
               <a 
                 href={`/libros/${book.slug}`} 
@@ -72,13 +83,15 @@ export default function BookCarousel({ books = [] }) {
         ))}
       </div>
 
-      {/* Botón Derecha */}
-      <button 
-        onClick={() => scroll('right')}
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 border border-gold/30 text-gold p-3 rounded-full backdrop-blur-sm hover:bg-gold hover:text-black transition hidden md:block opacity-0 group-hover:opacity-100"
-      >
-        →
-      </button>
+      {/* Botón Derecha (Solo visible si hay varios libros) */}
+      {books.length > 1 && (
+        <button 
+            onClick={() => scroll('right')}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 border border-gold/30 text-gold p-3 rounded-full backdrop-blur-sm hover:bg-gold hover:text-black transition hidden md:block opacity-0 group-hover:opacity-100"
+        >
+            →
+        </button>
+      )}
     </div>
   );
 }
