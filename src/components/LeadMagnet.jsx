@@ -7,6 +7,7 @@ export default function LeadMagnet({ pdfUrl }) {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(''); // Estado para guardar el mensaje de error
   const [mounted, setMounted] = useState(false); // 2. Estado para saber si la web cargó
 
   // 3. Activamos el portal solo cuando la web ya cargó en el cliente
@@ -18,6 +19,7 @@ export default function LeadMagnet({ pdfUrl }) {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
+    setErrorMessage('');
 
     try {
         // Asegúrate que esta URL coincida con la de tu servidor (con o sin /api)
@@ -33,7 +35,18 @@ export default function LeadMagnet({ pdfUrl }) {
             }),
         });
 
-        if (!response.ok) throw new Error('Error al suscribir');
+        // Intentamos parsear la respuesta JSON incluso si falló
+        let data;
+        try {
+            data = await response.json();
+        } catch (e) {
+            data = null;
+        }
+
+        if (!response.ok) {
+            // Usamos el mensaje del backend si existe, sino uno genérico
+            throw new Error(data?.message || `Error del servidor: ${response.status}`);
+        }
 
         setSubmitStatus('success');
         
@@ -46,8 +59,9 @@ export default function LeadMagnet({ pdfUrl }) {
         }, 10000);
 
     } catch (error) {
-        console.error(error);
+        console.error('Error en suscripción:', error);
         setSubmitStatus('error');
+        setErrorMessage(error.message || 'Hubo un error. Inténtalo de nuevo.');
     } finally {
         setIsSubmitting(false);
     }
@@ -110,7 +124,9 @@ export default function LeadMagnet({ pdfUrl }) {
             </div>
             
             {submitStatus === 'error' && (
-                <p className="text-red-500 text-xs text-center">Hubo un error. Inténtalo de nuevo.</p>
+                <div className="bg-red-900/20 border border-red-500/50 p-3 rounded">
+                    <p className="text-red-400 text-xs text-center">{errorMessage}</p>
+                </div>
             )}
 
             <button 
