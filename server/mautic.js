@@ -15,7 +15,8 @@ async function addContactToMautic(email, name) {
         const auth = Buffer.from(`${MAUTIC_USER}:${MAUTIC_PW}`).toString('base64');
         const headers = {
             'Authorization': `Basic ${auth}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'User-Agent': 'Mozilla/5.0'
         };
 
         // 2. Datos del contacto
