@@ -29,7 +29,7 @@ async function addContactToMautic(email, name) {
         console.log(`📡 Enviando a Mautic: ${email}...`);
 
         // 3. Crear o Actualizar contacto en Mautic
-        const createRes = await axios.post(`${MAUTIC_URL}/api/contacts/new`, contactData, { headers });
+        const createRes = await axios.post(`${MAUTIC_URL}/api/contacts`, contactData, { headers });
         const contactId = createRes.data.contact.id;
         
         console.log(`✅ Contacto creado/actualizado. ID: ${contactId}`);
