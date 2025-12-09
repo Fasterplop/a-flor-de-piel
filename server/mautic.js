@@ -1,50 +1,60 @@
 // server/mautic.js
-const axios = require('axios'); // Asegúrate de tener axios instalado: npm install axios
+const axios = require('axios');
 
-// Función auxiliar para codificar credenciales en Base64
 const getAuthHeader = () => {
     const token = Buffer.from(`${process.env.MAUTIC_USER}:${process.env.MAUTIC_PW}`).toString('base64');
     return `Basic ${token}`;
 };
 
 async function addContact(data) {
-    const mauticUrl = process.env.MAUTIC_URL; // Asegúrate que en Coolify sea: https://tu-mautic.com (sin /api al final)
-    
-    // 1. Crear o Actualizar Contacto
+    const mauticUrl = process.env.MAUTIC_URL;
+    const headers = {
+        'Authorization': getAuthHeader(),
+        'Content-Type': 'application/json'
+    };
+
+    let contactId = null;
+
     try {
-        console.log('Intentando crear contacto en Mautic:', data.email);
-        
-        const contactResponse = await axios.post(
-            `${mauticUrl}/api/contacts/new`, // Endpoint para crear/editar
-            {
-                firstname: data.name,
-                email: data.email,
-                tags: 'landing-page-a-flor-de-piel' // Opcional: añade una etiqueta para rastreo
-            },
-            {
-                headers: {
-                    'Authorization': getAuthHeader(),
-                    'Content-Type': 'application/json'
-                }
-            }
+        // 1. BUSCAR: Verificamos si el contacto ya existe por su email
+        console.log(`Buscando contacto existente: ${data.email}`);
+        const searchResponse = await axios.get(
+            `${mauticUrl}/api/contacts?search=email:${data.email}`,
+            { headers }
         );
 
-        const contactId = contactResponse.data.contact.id;
-        console.log(`Contacto creado/encontrado. ID: ${contactId}`);
+        const contacts = searchResponse.data.contacts;
+        
+        // Mautic devuelve un objeto con IDs como claves, o un array vacío si no hay resultados
+        if (searchResponse.data.total > 0 && contacts) {
+            // Obtenemos el primer ID encontrado
+            contactId = Object.keys(contacts)[0];
+            console.log(`Contacto encontrado. ID existente: ${contactId}`);
+            
+            // Opcional: Podríamos actualizar el nombre aquí si quisiéramos con PATCH
+        } else {
+            // 2. CREAR: Si no existe, lo creamos
+            console.log('Contacto no encontrado. Creando uno nuevo...');
+            const createResponse = await axios.post(
+                `${mauticUrl}/api/contacts/new`,
+                {
+                    firstname: data.name,
+                    email: data.email,
+                    tags: ['landing-page-a-flor-de-piel'] // Enviamos tags como array por seguridad
+                },
+                { headers }
+            );
+            contactId = createResponse.data.contact.id;
+            console.log(`Nuevo contacto creado. ID: ${contactId}`);
+        }
 
-        // 2. Agregar al Segmento 1 (Para disparar la campaña)
-        // Solo lo hacemos si tenemos un ID válido
+        // 3. SEGMENTAR: Agregar al Segmento 1
         if (contactId) {
             console.log(`Agregando contacto ${contactId} al segmento 1...`);
             await axios.post(
                 `${mauticUrl}/api/segments/1/contact/${contactId}/add`,
                 {},
-                {
-                    headers: {
-                        'Authorization': getAuthHeader(),
-                        'Content-Type': 'application/json'
-                    }
-                }
+                { headers }
             );
             console.log('Contacto agregado al segmento exitosamente.');
         }
@@ -52,16 +62,15 @@ async function addContact(data) {
         return { success: true, id: contactId };
 
     } catch (error) {
-        // Mejor manejo de errores para ver qué pasa en los logs de Coolify
         console.error('Error en Mautic API:');
         if (error.response) {
-            // El servidor respondió con un código de estado fuera del rango 2xx
             console.error('Status:', error.response.status);
-            console.error('Data:', JSON.stringify(error.response.data));
+            // Imprimimos el error completo para debug
+            console.error('Data:', JSON.stringify(error.response.data, null, 2));
         } else {
-            console.error('Error Message:', error.message);
+            console.error('Mensaje:', error.message);
         }
-        throw error; // Lanzamos el error para que index.js lo capture
+        throw error;
     }
 }
 
