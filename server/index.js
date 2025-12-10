@@ -38,21 +38,20 @@ app.get('/', (req, res) => {
 
 // Ruta principal de suscripción
 app.post('/api/subscribe', async (req, res) => {
-    try {
-        const { name, email, honey } = req.body; // Recibir honeypot también por seguridad extra
+   try {
+        // 👇 DESESTRUCTURAMOS segmentId DEL BODY
+        const { name, email, honey, segmentId, tag } = req.body;
 
-        // 1. Doble chequeo de Honeypot en servidor
         if (honey) return res.status(200).json({ message: 'Suscripción recibida' });
 
-        // 2. Validación de formato de email real
         if (!email || !validator.validate(email)) {
             return res.status(400).json({ error: 'Formato de email inválido' });
         }
 
-        console.log(`Recibida petición de suscripción para: ${email}`);
+        console.log(`Recibida petición de suscripción para: ${email} (Segmento: ${segmentId})`);
 
-        // Llamada a la lógica de Mautic
-        const result = await addContact({ name, email });
+        // 👇 PASAMOS EL segmentId A LA FUNCIÓN DE MAUTIC
+        const result = await addContact({ name, email, segmentId, tag });
 
         res.status(200).json({ message: 'Suscripción exitosa', mauticId: result.id });
 

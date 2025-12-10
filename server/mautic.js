@@ -13,10 +13,13 @@ async function addContact(data) {
         'Content-Type': 'application/json'
     };
 
+    // Usamos el ID que llega o el 1 por defecto
+    const targetSegmentId = data.segmentId || 1;
+    const targetTag = data.tag || 'landing-page-web';
     let contactId = null;
 
     try {
-        // 1. BUSCAR: Verificamos si el contacto ya existe por su email
+        // 1. BUSCAR
         console.log(`Buscando contacto existente: ${data.email}`);
         const searchResponse = await axios.get(
             `${mauticUrl}/api/contacts?search=email:${data.email}`,
@@ -25,22 +28,18 @@ async function addContact(data) {
 
         const contacts = searchResponse.data.contacts;
         
-        // Mautic devuelve un objeto con IDs como claves, o un array vacío si no hay resultados
         if (searchResponse.data.total > 0 && contacts) {
-            // Obtenemos el primer ID encontrado
             contactId = Object.keys(contacts)[0];
             console.log(`Contacto encontrado. ID existente: ${contactId}`);
-            
-            // Opcional: Podríamos actualizar el nombre aquí si quisiéramos con PATCH
         } else {
-            // 2. CREAR: Si no existe, lo creamos
+            // 2. CREAR
             console.log('Contacto no encontrado. Creando uno nuevo...');
             const createResponse = await axios.post(
                 `${mauticUrl}/api/contacts/new`,
                 {
                     firstname: data.name,
                     email: data.email,
-                    tags: ['landing-page-a-flor-de-piel'] // Enviamos tags como array por seguridad
+                    tags: [targetTag]
                 },
                 { headers }
             );
@@ -48,24 +47,48 @@ async function addContact(data) {
             console.log(`Nuevo contacto creado. ID: ${contactId}`);
         }
 
-        // 3. SEGMENTAR: Agregar al Segmento 1
-        if (contactId) {
-            console.log(`Agregando contacto ${contactId} al segmento 1...`);
-            await axios.post(
-                `${mauticUrl}/api/segments/1/contact/${contactId}/add`,
-                {},
-                { headers }
-            );
-            console.log('Contacto agregado al segmento exitosamente.');
-        }
+        // --- 👇 AQUÍ ESTÁ LA CORRECCIÓN IMPORTANTÍSIMA 👇 ---
 
+        // 3. SEGMENTAR (Con protección anti-errores)
+        if (contactId) {
+            try {
+                console.log(`Intentando agregar al segmento ${targetSegmentId}...`);
+                await axios.post(
+                    `${mauticUrl}/api/segments/${targetSegmentId}/contact/${contactId}/add`,
+                    {},
+                    { headers }
+                );
+                console.log('✅ Contacto segmentado exitosamente.');
+                
+            } catch (segmentError) {
+                // Si falla (ej: el segmento no existe), NO detenemos todo.
+                console.error(`⚠️ ALERTA: El contacto se creó, pero falló la segmentación al ID ${targetSegmentId}.`);
+                
+                // OPCIONAL: INTENTO DE RESCATE -> Mandarlo al segmento 1 (General)
+                if (targetSegmentId !== 1) {
+                    try {
+                        console.log('🔄 Intentando guardar en segmento por defecto (1)...');
+                        await axios.post(
+                            `${mauticUrl}/api/segments/1/contact/${contactId}/add`,
+                            {},
+                            { headers }
+                        );
+                        console.log('✅ Guardado en segmento por defecto.');
+                    } catch (e) {
+                        console.error('❌ Falló también el segmento de respaldo.');
+                    }
+                }
+            }
+        }
+        
+        // Devolvemos SUCCESS siempre, porque el contacto YA existe en la base de datos
         return { success: true, id: contactId };
+        // ------------------------------------------------
 
     } catch (error) {
-        console.error('Error en Mautic API:');
+        console.error('Error CRÍTICO en Mautic API:');
         if (error.response) {
             console.error('Status:', error.response.status);
-            // Imprimimos el error completo para debug
             console.error('Data:', JSON.stringify(error.response.data, null, 2));
         } else {
             console.error('Mensaje:', error.message);

@@ -67,8 +67,13 @@ const independentBooks = books.filter(b => b.category === 'independiente' && b.i
 
                 <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start items-center">
                     {book.leadMagnet && (
-                        <LeadMagnet client:load pdfUrl={book.leadMagnet} />
-                    )}
+    <LeadMagnet 
+        client:load 
+        pdfUrl={book.leadMagnet}
+        segmentId={book.mauticSegmentId} 
+        tag={book.mauticTag}             
+    />
+)}
                     
                     {book.status === 'DISPONIBLE' ? (
                         <a href={book.amazonLink} target="_blank" class="px-8 py-4 bg-blood text-white font-bold rounded-full hover:bg-red-700 transition shadow-[0_0_20px_rgba(168,0,0,0.4)]">

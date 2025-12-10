@@ -19,6 +19,8 @@ export const books = [
     leadMagnet: "/downloads/primer-capitulo-afp.pdf",
     themeColor: "blood",
     isSagaMain: true,
+    mauticSegmentId: 1,
+    mauticTag: "origen-a-flor-de-piel",
 
     // ACTIVADORES DE SECCIONES
     hasMap: true,
@@ -97,7 +99,9 @@ export const books = [
     hasQuiz: false,
     hasTimeline: false,
     leadMagnet: null,
-    themeColor: "green-600"
+    themeColor: "green-600",
+    mauticSegmentId: 998,
+    mauticTag: "origen-a-pulso-lento",
   },
 
   // --- LIBRO 3 (SAGA) ---
@@ -115,7 +119,9 @@ export const books = [
     hasQuiz: false,
     hasTimeline: false,
     leadMagnet: null,
-    themeColor: "orange-600"
+    themeColor: "orange-600",
+    mauticSegmentId: 999,
+    mauticTag: "origen-a-corazon-abierto"
   },
 
   // --- LIBRO INDEPENDIENTE (Ejemplo) ---
@@ -133,6 +139,8 @@ export const books = [
     hasQuiz: false,
     hasTimeline: false,
     leadMagnet: "/downloads/primer-capitulo-afp.pdf",
-    themeColor: "blue-500"
+    themeColor: "blue-500",
+    mauticSegmentId: 3,
+    mauticTag: "origen-primero-yo-segundo-yo-tercero-yo",
   }
 ];

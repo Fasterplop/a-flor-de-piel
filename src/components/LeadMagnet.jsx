@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom'; // 1. Importamos el "Teletransportador"
 
-export default function LeadMagnet({ pdfUrl }) {
+export default function LeadMagnet({ pdfUrl, segmentId, tag }) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(''); 
   const [email, setEmail] = useState('');
@@ -17,15 +17,7 @@ export default function LeadMagnet({ pdfUrl }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // --- NUEVO: GUARDIA DE SEGURIDAD (HONEYPOT) ---
-    // Si el campo invisible 'honey' tiene algo escrito, es un bot.
-    // Detenemos la función aquí mismo y simulamos que todo salió bien para engañarlo.
-    if (honey) {
-        setIsOpen(false);
-        return; 
-    }
-
+    if (honey) { setIsOpen(false); return; }
     setIsSubmitting(true);
     setSubmitStatus(null);
 
@@ -40,8 +32,10 @@ export default function LeadMagnet({ pdfUrl }) {
                 name: name,
                 email: email,
                 source: 'Landing Page A Flor de Piel',
-                honey: honey // Opcional: Enviarlo si tu backend también lo verifica
-            }),
+                honey: honey, // Opcional: Enviarlo si tu backend también lo verifica
+                segmentId: segmentId || 1, // Fallback al 1 por si acaso
+                tag: tag || 'landing-general' // <--- 2. Lo enviamos aquí
+              }),
         });
 
         if (!response.ok) throw new Error('Error al suscribir');

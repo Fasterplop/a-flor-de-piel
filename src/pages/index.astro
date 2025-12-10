@@ -19,6 +19,9 @@ import { books } from '../data/books.js';
 const sagaBooks = books.filter(book => book.category === 'saga');
 const otherBooks = books.filter(book => book.category === 'independiente');
 
+// 👇 AGREGA ESTO: Buscamos el libro "A Flor de Piel" (ID 1) para obtener su dato de Mautic
+const mainBook = books.find(b => b.id === 1);
+
 // Variables estáticas
 const amazonLink = "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/";
 const pdfLink = "/downloads/primer-capitulo-afp.pdf";
@@ -93,7 +96,7 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
           </div>
     
           <div class="flex flex-col gap-5 w-full max-w-sm">
-            <LeadMagnet client:load pdfUrl={pdfLink} />
+            <LeadMagnet client:load pdfUrl={pdfLink} segmentId={mainBook?.mauticSegmentId} tag={mainBook?.mauticTag}/>
             <a href={amazonLink} target="_blank" class="group w-full py-5 border border-white/20 text-white font-bold tracking-widest uppercase text-xs hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
