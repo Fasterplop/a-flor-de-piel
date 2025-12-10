@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom'; // 1. Importamos el "Teletransportador"
+import { createPortal } from 'react-dom'; 
 
-export default function LeadMagnet({ pdfUrl, segmentId, tag }) {
+export default function LeadMagnet({ pdfUrl, segmentId, tag, btnText }) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(''); 
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-  const [mounted, setMounted] = useState(false); // 2. Estado para saber si la web cargó
-  const [honey, setHoney] = useState(''); //  Campo trampa
+  const [mounted, setMounted] = useState(false); 
+  const [honey, setHoney] = useState(''); 
 
-  // 3. Activamos el portal solo cuando la web ya cargó en el cliente
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -22,7 +21,6 @@ export default function LeadMagnet({ pdfUrl, segmentId, tag }) {
     setSubmitStatus(null);
 
     try {
-        // Asegúrate que esta URL coincida con la de tu servidor (con o sin /api)
         const response = await fetch('https://api.paulinalopezescritora.com/api/subscribe', {
             method: 'POST',
             headers: {
@@ -32,17 +30,16 @@ export default function LeadMagnet({ pdfUrl, segmentId, tag }) {
                 name: name,
                 email: email,
                 source: 'Landing Page A Flor de Piel',
-                honey: honey, // Opcional: Enviarlo si tu backend también lo verifica
-                segmentId: segmentId || 1, // Fallback al 1 por si acaso
-                tag: tag || 'landing-general' // <--- 2. Lo enviamos aquí
-              }),
+                honey: honey, 
+                segmentId: segmentId || 1, 
+                tag: tag || 'landing-general' 
+            }),
         });
 
         if (!response.ok) throw new Error('Error al suscribir');
 
         setSubmitStatus('success');
         
-        // CERRAR EL MODAL DESPUÉS DE 10 SEGUNDOS
         setTimeout(() => {
             setIsOpen(false);
             setSubmitStatus(null);
@@ -58,7 +55,6 @@ export default function LeadMagnet({ pdfUrl, segmentId, tag }) {
     }
   };
 
-  // 4. Guardamos todo el diseño del Modal en una variable
   const modalContent = (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 font-sans">
       <div 
@@ -68,18 +64,20 @@ export default function LeadMagnet({ pdfUrl, segmentId, tag }) {
 
       <div className="relative bg-black border border-gold rounded-xl p-8 max-w-md w-full shadow-[0_0_50px_rgba(197,160,89,0.2)] animate-in fade-in zoom-in duration-300">
         
+        {/* CORRECCIÓN 1: El botón de cerrar debe ser una X, no el texto del libro */}
         <button 
           onClick={() => setIsOpen(false)}
-          className="absolute top-4 right-4 text-gray-500 hover:text-white"
+          className="absolute top-4 right-4 text-gray-500 hover:text-white font-bold"
         >✕</button>
 
         <div className="text-center mb-6">
           <span className="text-blood text-xs font-bold tracking-widest uppercase">ACCESO EXCLUSIVO</span>
           <h3 className="font-gothic text-2xl md:text-3xl text-white leading-loose tracking-widest">
-            DESBLOQUEA EL <br /> PRIMER CAPÍTULO
+            {/* Opcional: Podrías hacer este título dinámico también si quisieras */}
+            DESBLOQUEA EL <br /> CONTENIDO
           </h3>
           <p className="text-gray-400 text-sm mt-2">
-            Ingresa tu correo para recibir el PDF y unirte a la lista de reclutas.
+            Ingresa tu correo para recibir el material y unirte a la lista.
           </p>
         </div>
 
@@ -87,27 +85,23 @@ export default function LeadMagnet({ pdfUrl, segmentId, tag }) {
             <div className="text-center py-8 text-green-400 animate-pulse">
                 <p className="text-xl mb-2 font-bold font-gothic">¡Enviado con Éxito!</p>
                 <p className="text-sm text-gray-300 leading-relaxed">
-                    Tu invitación al castillo ha sido enviada tu bandeja de entrada. 🐦‍⬛<br/>
+                    Tu invitación ha sido enviada a tu bandeja de entrada. 🐦‍⬛<br/>
                     <span className="text-xs text-gray-500">(Revisa Spam si no llega en 1 minuto)</span>
                 </p>
             </div>
         ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
 
-              {/* --- NUEVO: CAMPO TRAMPA (HONEYPOT) --- */}
-            {/* Usamos opacity-0, absolute y z-index negativo para ocultarlo visualmente */}
-            {/* pero mantenerlo en el DOM para los bots. */}
             <div className="absolute opacity-0 -z-10 w-0 h-0 overflow-hidden">
                 <input 
                     type="text" 
-                    name="website_url_check" // Nombres que atraen bots
+                    name="website_url_check" 
                     tabIndex="-1" 
                     value={honey} 
                     onChange={(e) => setHoney(e.target.value)} 
                     autoComplete="off"
                 />
             </div>
-            {/* --------------------------------------- */}
 
             <div>
                 <input 
@@ -167,10 +161,10 @@ export default function LeadMagnet({ pdfUrl, segmentId, tag }) {
         onClick={() => setIsOpen(true)}
         className="w-full md:w-auto text-center px-8 py-4 border border-gold/50 text-gold font-bold tracking-widest rounded-full hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase"
       >
-        Leer Capítulo 1 AFP
+        {/* CORRECCIÓN 2: Aquí es donde va el texto dinámico */}
+        {btnText || "Leer Fragmento"}
       </button>
 
-      {/* 5. Aquí ocurre la magia: Si está abierto, lo teletransportamos al body */}
       {isOpen && mounted && createPortal(modalContent, document.body)}
     </>
   );

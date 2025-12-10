@@ -71,7 +71,8 @@ const independentBooks = books.filter(b => b.category === 'independiente' && b.i
         client:load 
         pdfUrl={book.leadMagnet}
         segmentId={book.mauticSegmentId} 
-        tag={book.mauticTag}             
+        tag={book.mauticTag}     
+        btnText={book.leadMagnetText}        
     />
 )}
                     

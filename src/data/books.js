@@ -21,6 +21,7 @@ export const books = [
     isSagaMain: true,
     mauticSegmentId: 1,
     mauticTag: "origen-a-flor-de-piel",
+    leadMagnetText: "Leer Capítulo 1 AFP",
 
     // ACTIVADORES DE SECCIONES
     hasMap: true,
@@ -102,6 +103,7 @@ export const books = [
     themeColor: "green-600",
     mauticSegmentId: 998,
     mauticTag: "origen-a-pulso-lento",
+    leadMagnetText: "Leer Capítulo 1 APL",
   },
 
   // --- LIBRO 3 (SAGA) ---
@@ -121,7 +123,8 @@ export const books = [
     leadMagnet: null,
     themeColor: "orange-600",
     mauticSegmentId: 999,
-    mauticTag: "origen-a-corazon-abierto"
+    mauticTag: "origen-a-corazon-abierto",
+    leadMagnetText: "Leer Capítulo 1 ACB",
   },
 
   // --- LIBRO INDEPENDIENTE (Ejemplo) ---
@@ -142,5 +145,6 @@ export const books = [
     themeColor: "blue-500",
     mauticSegmentId: 3,
     mauticTag: "origen-primero-yo-segundo-yo-tercero-yo",
+    leadMagnetText: "Obtén un regalo",
   }
 ];
