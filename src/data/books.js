@@ -3,10 +3,10 @@ export const books = [
   {
     id: 1,
     slug: "a-flor-de-piel",
-    title: "Saga A Flor de Piel",
+    title: "A Flor de Piel",
     subtitle: "Libro 1 - El Inicio de Todo",
     cover: "/images/portada.jpg",
-    description: "Nina Cole buscaba libertad, pero encontró un portal entre árboles y una luz azulosa que la escupió en una guerra que no comprende. Bienvenido al Castillo Hayashi. Esta es la puerta de entrada a una historia épica.",
+    description: "Nina Cole buscaba libertad, pero encontró un portal entre árboles y una luz azulosa que la escupió en una guerra que no comprende. Bienvenido al Castillo Hayashi. ¿Listo para usar tu kunai?",
     amazonLink: "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/",
     status: "DISPONIBLE",
     category: "saga", // Categoría importante
@@ -44,7 +44,7 @@ export const books = [
       { title: "Segundo Asedio", desc: "Segundo ataque al castillo.", time: "2 meses después" },
       { title: "La Solicitud", desc: "Solicitud de territorio por parte de Moe.", time: "3 meses después" },
       { title: "Tercer Asalto", desc: "Tercer ataque al castillo.", time: "5 meses después" },
-      { title: "La División", desc: "División del reformatorio.", time: "2 meses después" }
+      { title: "La División del reformatorio", desc: "Dando inicio a un nuevo establecimiento llamado Maria Johnson", time: "2 meses después" }
     ],
 
     // --- DATOS DEL QUIZ ---
@@ -81,9 +81,9 @@ export const books = [
     id: 2,
     slug: "a-pulso-lento",
     title: "A Pulso Lento",
-    subtitle: "Libro 2 - La Resistencia",
+    subtitle: "Libro 2 - Comienzan los DAMA´S",
     cover: "/images/portada3.png", 
-    description: "Las consecuencias del primer libro se sienten. La calma antes de la tormenta se rompe.",
+    description: "Las consecuencias del primer libro se sienten. La calma antes de la tormenta se rompe. ¿Tienes lo que se necesita para sobrevivir en el bosque Sin Fin?.",
     amazonLink: "#",
     status: "PRÓXIMAMENTE",
     category: "saga",
@@ -99,9 +99,9 @@ export const books = [
     id: 3,
     slug: "a-corazon-abierto",
     title: "A Corazón Abierto",
-    subtitle: "Libro 3 - El Desenlace",
+    subtitle: "Libro 3 - Nuevos personajes. Mismo infierno.",
     cover: "/images/portada4.png",
-    description: "El final épico de la trilogía.",
+    description: "Nina, Dario, Akami y Eric tomarán caminos diferentes, explorando la torre, el reformatorio y algo más al norte.",
     amazonLink: "#",
     status: "PLANIFICADO",
     category: "saga",
@@ -115,11 +115,11 @@ export const books = [
   // --- LIBRO INDEPENDIENTE (Ejemplo) ---
   {
     id: 101,
-    slug: "el-secreto-del-relojero",
-    title: "El Secreto del Relojero",
-    subtitle: "Novela de Misterio",
-    cover: "/images/portada.jpg", // Usa una portada temporal si no tienes
-    description: "Una historia independiente llena de misterio.",
+    slug: "primero-yo-segundo-yo-tercero-yo",
+    title: "Primero Yo, Segundo Yo, Tercero Yo",
+    subtitle: "Desarrollo personal",
+    cover: "/images/portada2.png", // Usa una portada temporal si no tienes
+    description: "Construye la Mujer de Alto Valor de tus sueños.",
     amazonLink: "#",
     status: "DISPONIBLE",
     category: "independiente",

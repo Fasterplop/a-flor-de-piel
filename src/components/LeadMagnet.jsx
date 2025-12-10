@@ -146,7 +146,7 @@ export default function LeadMagnet({ pdfUrl }) {
         onClick={() => setIsOpen(true)}
         className="w-full md:w-auto text-center px-8 py-4 border border-gold/50 text-gold font-bold tracking-widest rounded-full hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase"
       >
-        Leer Capítulo 1
+        Leer Capítulo 1 AFP
       </button>
 
       {/* 5. Aquí ocurre la magia: Si está abierto, lo teletransportamos al body */}
