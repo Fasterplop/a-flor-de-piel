@@ -3,10 +3,10 @@ export const books = [
   {
     id: 1,
     slug: "a-flor-de-piel",
-    title: "A FLOR DE PIEL",
+    title: "Saga A Flor de Piel",
     subtitle: "Libro 1 - El Inicio de Todo",
     cover: "/images/portada.jpg",
-    description: "Nina Cole buscaba libertad, pero encontró un portal entre árboles y una luz azulosa que la escupió en una guerra que no comprende. Bienvenido al Castillo Hayashi. ¿Listo para usar tu kunai?",
+    description: "Nina Cole buscaba libertad, pero encontró un portal entre árboles y una luz azulosa que la escupió en una guerra que no comprende. Bienvenido al Castillo Hayashi. Esta es la puerta de entrada a una historia épica.",
     amazonLink: "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/",
     status: "DISPONIBLE",
     category: "saga", // Categoría importante
@@ -44,7 +44,7 @@ export const books = [
       { title: "Segundo Asedio", desc: "Segundo ataque al castillo.", time: "2 meses después" },
       { title: "La Solicitud", desc: "Solicitud de territorio por parte de Moe.", time: "3 meses después" },
       { title: "Tercer Asalto", desc: "Tercer ataque al castillo.", time: "5 meses después" },
-      { title: "La División del reformatorio", desc: "dando inicio a un nuevo establecimiento llamado Maria Johnson.", time: "2 meses después" }
+      { title: "La División", desc: "División del reformatorio.", time: "2 meses después" }
     ],
 
     // --- DATOS DEL QUIZ ---
@@ -81,9 +81,9 @@ export const books = [
     id: 2,
     slug: "a-pulso-lento",
     title: "A Pulso Lento",
-    subtitle: "Libro 2 - Comienzan los DAMA'S",
+    subtitle: "Libro 2 - La Resistencia",
     cover: "/images/portada3.png", 
-    description: "Las consecuencias del primer libro se sienten. La calma antes de la tormenta se rompe. ¿Tienes lo que se necesita para sobrevivir en el bosque Sin Fin?",
+    description: "Las consecuencias del primer libro se sienten. La calma antes de la tormenta se rompe.",
     amazonLink: "#",
     status: "PRÓXIMAMENTE",
     category: "saga",

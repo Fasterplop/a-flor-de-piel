@@ -52,7 +52,7 @@ export default function BookCarousel({ books = [] }) {
             <div className="bg-white/5 border border-white/10 rounded-xl p-6 h-full flex flex-col items-center text-center transition duration-500 hover:border-gold/50 hover:bg-white/10 hover:-translate-y-2">
               
               {/* Portada */}
-              <a href={`/libros/${book.slug}`} className="relative w-40 h-60 mb-6 shadow-2xl rounded block">
+              <div className="relative w-40 h-60 mb-6 shadow-2xl rounded">
                 <img 
                   src={book.cover} 
                   alt={book.title} 
@@ -62,7 +62,7 @@ export default function BookCarousel({ books = [] }) {
                 <div className="absolute -top-3 -right-3 bg-black border border-gold/50 text-gold text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase shadow-lg">
                   {book.status}
                 </div>
-              </a>
+              </div>
 
               <h3 className="font-gothic text-xl text-white mb-4">{book.title}</h3>
               

@@ -42,7 +42,7 @@ export default function Timeline({ events = [] }) {
       
       {/* FINAL DE LÍNEA */}
       <div className="text-center mt-12">
-        <p className="text-blood font-gothic tracking-widest text-lg animate-pulse">LLEGADA DE NINA AL CASTILLO</p>
+        <p className="text-blood font-gothic tracking-widest text-lg animate-pulse">FIN DEL REGISTRO ACTUAL</p>
       </div>
     </div>
   );
