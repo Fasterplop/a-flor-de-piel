@@ -7,6 +7,8 @@ const { addContact } = require('./mautic');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const validator = require('email-validator'); // Instala esto: npm install email-validator
+
 // Configuración CORS vital para que acepte peticiones de tu frontend
 const allowedOrigins = [
   'https://www.paulinalopezescritora.com',
@@ -37,11 +39,14 @@ app.get('/', (req, res) => {
 // Ruta principal de suscripción
 app.post('/api/subscribe', async (req, res) => {
     try {
-        const { name, email } = req.body;
+        const { name, email, honey } = req.body; // Recibir honeypot también por seguridad extra
 
-        // Validación básica
-        if (!email) {
-            return res.status(400).json({ error: 'El email es requerido' });
+        // 1. Doble chequeo de Honeypot en servidor
+        if (honey) return res.status(200).json({ message: 'Suscripción recibida' });
+
+        // 2. Validación de formato de email real
+        if (!email || !validator.validate(email)) {
+            return res.status(400).json({ error: 'Formato de email inválido' });
         }
 
         console.log(`Recibida petición de suscripción para: ${email}`);

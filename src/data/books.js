@@ -132,7 +132,7 @@ export const books = [
     hasMap: false,
     hasQuiz: false,
     hasTimeline: false,
-    leadMagnet: null,
+    leadMagnet: "/downloads/primer-capitulo-afp.pdf",
     themeColor: "blue-500"
   }
 ];

@@ -8,6 +8,7 @@ export default function LeadMagnet({ pdfUrl }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [mounted, setMounted] = useState(false); // 2. Estado para saber si la web cargó
+  const [honey, setHoney] = useState(''); //  Campo trampa
 
   // 3. Activamos el portal solo cuando la web ya cargó en el cliente
   useEffect(() => {
@@ -16,6 +17,15 @@ export default function LeadMagnet({ pdfUrl }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // --- NUEVO: GUARDIA DE SEGURIDAD (HONEYPOT) ---
+    // Si el campo invisible 'honey' tiene algo escrito, es un bot.
+    // Detenemos la función aquí mismo y simulamos que todo salió bien para engañarlo.
+    if (honey) {
+        setIsOpen(false);
+        return; 
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
 
@@ -29,7 +39,8 @@ export default function LeadMagnet({ pdfUrl }) {
             body: JSON.stringify({
                 name: name,
                 email: email,
-                source: 'Landing Page A Flor de Piel'
+                source: 'Landing Page A Flor de Piel',
+                honey: honey // Opcional: Enviarlo si tu backend también lo verifica
             }),
         });
 
@@ -88,6 +99,22 @@ export default function LeadMagnet({ pdfUrl }) {
             </div>
         ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+
+              {/* --- NUEVO: CAMPO TRAMPA (HONEYPOT) --- */}
+            {/* Usamos opacity-0, absolute y z-index negativo para ocultarlo visualmente */}
+            {/* pero mantenerlo en el DOM para los bots. */}
+            <div className="absolute opacity-0 -z-10 w-0 h-0 overflow-hidden">
+                <input 
+                    type="text" 
+                    name="website_url_check" // Nombres que atraen bots
+                    tabIndex="-1" 
+                    value={honey} 
+                    onChange={(e) => setHoney(e.target.value)} 
+                    autoComplete="off"
+                />
+            </div>
+            {/* --------------------------------------- */}
+
             <div>
                 <input 
                 type="text" 
