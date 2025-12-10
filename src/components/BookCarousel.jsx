@@ -54,7 +54,7 @@ export default function BookCarousel({ books = [] }) {
               {/* Portada */}
             <a href={`/libros/${book.slug}`} className="relative w-40 h-60 mb-6 shadow-2xl rounded block">
                 <img 
-                  src={book.cover} 
+                  src={book.cover.src} 
                   alt={book.title} 
                   className={`w-full h-full object-cover rounded ${book.status !== 'DISPONIBLE' ? 'grayscale opacity-60 group-hover/card:grayscale-0 group-hover/card:opacity-100' : ''} transition duration-500`} 
                 />

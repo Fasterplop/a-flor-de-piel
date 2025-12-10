@@ -1,3 +1,9 @@
+import portada1 from '../assets/images/portada.jpg';
+import portada2 from '../assets/images/portada2.png';
+import portada3 from '../assets/images/portada3.png';
+import portada4 from '../assets/images/portada4.png';
+import mapaBosque from '../assets/images/mapa-bosque.jpg';
+
 export const books = [
   // --- LIBRO 1: A FLOR DE PIEL (SAGA) ---
   {
@@ -5,7 +11,7 @@ export const books = [
     slug: "a-flor-de-piel",
     title: "A Flor de Piel",
     subtitle: "Libro 1 - El Inicio de Todo",
-    cover: "/images/portada.jpg",
+    cover: portada1,
     description: "Nina Cole buscaba libertad, pero encontró un portal entre árboles y una luz azulosa que la escupió en una guerra que no comprende. Bienvenido al Castillo Hayashi. ¿Listo para usar tu kunai?",
     amazonLink: "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/",
     status: "DISPONIBLE",
@@ -20,7 +26,7 @@ export const books = [
     hasTimeline: true,
 
     // --- DATOS DEL MAPA ---
-    mapImage: "/images/mapa-bosque.jpg",
+    mapImage: mapaBosque,
     mapLocations: [
       { id: 1, name: "Castillo Hayashi", x: 18, y: 20, desc: "La fortaleza principal y base de operaciones.", type: "base" },
       { id: 2, name: "Cementerio", x: 6, y: 10, desc: "Recordatorio silencioso de los caídos.", type: "danger" },
@@ -82,7 +88,7 @@ export const books = [
     slug: "a-pulso-lento",
     title: "A Pulso Lento",
     subtitle: "Libro 2 - Comienzan los DAMA´S",
-    cover: "/images/portada3.png", 
+    cover: portada3, 
     description: "Las consecuencias del primer libro se sienten. La calma antes de la tormenta se rompe. ¿Tienes lo que se necesita para sobrevivir en el bosque Sin Fin?.",
     amazonLink: "#",
     status: "PRÓXIMAMENTE",
@@ -100,7 +106,7 @@ export const books = [
     slug: "a-corazon-abierto",
     title: "A Corazón Abierto",
     subtitle: "Libro 3 - Nuevos personajes. Mismo infierno.",
-    cover: "/images/portada4.png",
+    cover: portada4,
     description: "Nina, Dario, Akami y Eric tomarán caminos diferentes, explorando la torre, el reformatorio y algo más al norte.",
     amazonLink: "#",
     status: "PLANIFICADO",
@@ -118,7 +124,7 @@ export const books = [
     slug: "primero-yo-segundo-yo-tercero-yo",
     title: "Primero Yo, Segundo Yo, Tercero Yo",
     subtitle: "Desarrollo personal",
-    cover: "/images/portada2.png", // Usa una portada temporal si no tienes
+    cover: portada2, // Usa una portada temporal si no tienes
     description: "Construye la Mujer de Alto Valor de tus sueños.",
     amazonLink: "#",
     status: "DISPONIBLE",

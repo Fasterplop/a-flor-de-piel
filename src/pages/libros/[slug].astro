@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets'; // <--- Importar esto arriba
 import Layout from '../../layouts/Layout.astro';
 import { books } from '../../data/books.js';
 import InteractiveMap from '../../components/InteractiveMap.jsx';
@@ -48,12 +49,13 @@ const independentBooks = books.filter(b => b.category === 'independiente' && b.i
 
         <div class="relative z-10 container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
             <div class="flex justify-center md:justify-end order-2 md:order-1">
-                <img 
-                    src={book.cover} 
-                    alt={`Portada de ${book.title}`} 
-                    class="w-64 md:w-80 shadow-[0_0_50px_rgba(255,255,255,0.1)] rounded-sm transform hover:scale-105 transition duration-500"
-                    transition:name={`cover-${book.slug}`} 
-                />
+                <Image 
+    src={book.cover}  alt={`Portada de ${book.title}`} 
+    class="w-64 md:w-80 shadow-[0_0_50px_rgba(255,255,255,0.1)] rounded-sm transform hover:scale-105 transition duration-500"
+    transition:name={`cover-${book.slug}`}
+    format="webp"
+    quality={"mid"}
+/>
             </div>
 
             <div class="text-center md:text-left order-1 md:order-2">
@@ -94,7 +96,11 @@ const independentBooks = books.filter(b => b.category === 'independiente' && b.i
                     {relatedSagaBooks.map((other) => (
                         <a href={`/libros/${other.slug}`} class="group block bg-white/5 border border-white/10 p-6 rounded-xl hover:bg-white/10 transition duration-300">
                             <div class="flex items-center gap-6">
-                                <img src={other.cover} alt={other.title} class="w-24 rounded shadow-lg group-hover:scale-105 transition duration-300" />
+                                <Image 
+    src={other.cover} 
+    alt={other.title} 
+    class="w-24 rounded shadow-lg group-hover:scale-105 transition duration-300"
+    width={200} />
                                 <div>
                                     <h3 class="font-gothic text-xl text-white group-hover:text-gold transition">{other.title}</h3>
                                     <p class="text-xs text-gray-400 mt-2 mb-3">{other.status}</p>
@@ -122,7 +128,11 @@ const independentBooks = books.filter(b => b.category === 'independiente' && b.i
                     {independentBooks.map((other) => (
                         <a href={`/libros/${other.slug}`} class="group block bg-blue-900/10 border border-blue-500/20 p-6 rounded-xl hover:bg-blue-900/20 transition duration-300">
                             <div class="flex items-center gap-6">
-                                <img src={other.cover} alt={other.title} class="w-24 rounded shadow-lg group-hover:scale-105 transition duration-300" />
+                                <Image 
+    src={other.cover} 
+    alt={other.title} 
+    class="w-24 rounded shadow-lg group-hover:scale-105 transition duration-300"
+    width={200} />
                                 <div>
                                     <h3 class="font-gothic text-xl text-white group-hover:text-blue-400 transition">{other.title}</h3>
                                     <p class="text-xs text-gray-400 mt-2 mb-3">{other.status}</p>
@@ -144,7 +154,7 @@ const independentBooks = books.filter(b => b.category === 'independiente' && b.i
                 <InteractiveMap 
                     client:visible 
                     locations={(book.mapLocations || []) as any} 
-                    mapImage={book.mapImage} 
+                    mapImage={book.mapImage?.src} 
                 />
             </div>
         </div>

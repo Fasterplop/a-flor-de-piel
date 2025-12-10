@@ -21,8 +21,8 @@ export default function InteractiveMap({ locations = [], mapImage = "/images/map
       
       {/* 1. EL FONDO DINÁMICO (Usa la imagen que le pases o la default) */}
       <img 
-        src={mapImage} 
-        alt="Mapa del Territorio" 
+        src={typeof mapImage === 'string' ? mapImage : mapImage.src} 
+  alt="Mapa del Territorio"
         className="absolute inset-0 w-full h-full object-cover opacity-90 hover:opacity-100 transition duration-700" 
       />
       
