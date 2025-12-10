@@ -22,6 +22,9 @@ export const books = [
     mauticSegmentId: 1,
     mauticTag: "origen-a-flor-de-piel",
     leadMagnetText: "Leer Capítulo 1 AFP",
+    quizTitle: "Prueba de Aptitud",
+    quizDescription: "¿Tienes lo necesario para sobrevivir en este mundo? Descubre tu rol en el Castillo Hayashi.",
+    quizCtaText: "DESCUBRIR LA HISTORIA COMPLETA", 
 
     // ACTIVADORES DE SECCIONES
     hasMap: true,
@@ -104,6 +107,10 @@ export const books = [
     mauticSegmentId: 998,
     mauticTag: "origen-a-pulso-lento",
     leadMagnetText: "Leer Capítulo 1 APL",
+    quizTitle: "",
+    quizDescription: "",
+    quizCtaText: "",
+    quizQuestions: [ /* ... tus preguntas ... */ ],
   },
 
   // --- LIBRO 3 (SAGA) ---
@@ -125,6 +132,10 @@ export const books = [
     mauticSegmentId: 999,
     mauticTag: "origen-a-corazon-abierto",
     leadMagnetText: "Leer Capítulo 1 ACB",
+    quizTitle: "",
+    quizDescription: "",
+    quizCtaText: "",
+    quizQuestions: [ /* ... tus preguntas ... */ ],
   },
 
   // --- LIBRO INDEPENDIENTE (Ejemplo) ---
@@ -133,18 +144,73 @@ export const books = [
     slug: "primero-yo-segundo-yo-tercero-yo",
     title: "Primero Yo, Segundo Yo, Tercero Yo",
     subtitle: "Desarrollo personal",
-    cover: portada2, // Usa una portada temporal si no tienes
+    cover: portada2,
     description: "Construye la Mujer de Alto Valor de tus sueños.",
-    amazonLink: "#",
+    amazonLink: "#", // Recuerda poner el link real si lo tienes
     status: "DISPONIBLE",
     category: "independiente",
+    
+    // CAMBIOS AQUÍ: Activamos el quiz
     hasMap: false,
-    hasQuiz: false,
+    hasQuiz: true, 
     hasTimeline: false,
+    
     leadMagnet: "/downloads/primer-capitulo-afp.pdf",
     themeColor: "blue-500",
     mauticSegmentId: 3,
     mauticTag: "origen-primero-yo-segundo-yo-tercero-yo",
     leadMagnetText: "Obtén un regalo",
+    quizTitle: "NIVEL DE MAGNETISMO DE ALTO VALOR",
+    quizDescription: "¿Estás lista para cambiar tu vida?",
+    quizCtaText: "Adquirir en Amazon",
+
+    // NUEVO: Preguntas del Test de Magnetismo
+    quizQuestions: [
+      {
+        text: "Pregunta 1: Comunicación y Asertividad. Cuando alguien te hace sentir incómoda, tú...",
+        options: [
+          { text: "Te quedas callada para evitar el conflicto y luego te lamentas.", points: 1 },
+          { text: "Expresas tu molestia de forma pasiva-agresiva, esperando que la otra persona adivine.", points: 2 },
+          { text: "Esperas a calmarte, y luego comunicas tu límite de forma clara y respetuosa.", points: 3 },
+          { text: "Detienes inmediatamente la interacción con una frase directa y firme.", points: 4 },
+        ],
+      },
+      {
+        text: "Pregunta 2: Inversión en Ti Misma. Respecto a invertir dinero y tiempo en tu desarrollo personal...",
+        options: [
+          { text: "Rara vez lo haces, priorizando siempre las necesidades de los demás.", points: 1 },
+          { text: "Lo haces solo cuando te lo regalan o es muy económico.", points: 2 },
+          { text: "Inviertes de forma estratégica en áreas clave que te impulsan profesional o personalmente.", points: 3 },
+          { text: "Tienes un presupuesto fijo para tu crecimiento y lo consideras una prioridad no negociable.", points: 4 },
+        ],
+      },
+      {
+        text: "Pregunta 3: Validación Externa. Para tomar una decisión importante, tú...",
+        options: [
+          { text: "Preguntas a todos tus amigos y familiares, basando tu decisión en lo que te aconsejan.", points: 1 },
+          { text: "Buscas la aprobación de una persona clave (pareja, jefe, etc.) antes de actuar.", points: 2 },
+          { text: "Consultas a otros para obtener perspectiva, pero la decisión final es siempre tuya.", points: 3 },
+          { text: "Confías plenamente en tu intuición y criterio interno, actuando con convicción.", points: 4 },
+        ],
+      },
+      {
+        text: "Pregunta 4: Manejo del Error. Cuando cometes un error grande, tu reacción inmediata es...",
+        options: [
+          { text: "Castigarte mentalmente, cayendo en la culpa y la vergüenza por días.", points: 1 },
+          { text: "Culpar a factores externos o a otras personas para proteger tu ego.", points: 2 },
+          { text: "Reconocerlo, disculparte si es necesario, y analizar qué lección aprendiste.", points: 3 },
+          { text: "Celebrar el error como una valiosa pieza de información que te acerca al éxito.", points: 4 },
+        ],
+      },
+      {
+        text: "Pregunta 5: Tiempo a Solas. ¿Con qué frecuencia proteges y utilizas tu tiempo a solas?",
+        options: [
+          { text: "Casi nunca. Me siento incómoda sola y prefiero estar siempre acompañada.", points: 1 },
+          { text: "Ocasionalmente, pero solo si no tengo planes con otras personas.", points: 2 },
+          { text: "Regularmente, lo uso para recargar energía, leer o hacer cosas que disfruto.", points: 3 },
+          { text: "Es una cita obligatoria en mi agenda. Es mi momento sagrado de planeación y descanso.", points: 4 },
+        ],
+      },
+    ]
   }
 ];

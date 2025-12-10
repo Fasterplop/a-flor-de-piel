@@ -1,5 +1,10 @@
 import React from 'react';
 
+/**
+ * @param {Object} props
+ * @param {Array<any>} [props.events]
+ */
+
 // Ahora recibe "events" como propiedad (Props)
 export default function Timeline({ events = [] }) {
   

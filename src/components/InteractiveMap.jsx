@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+/**
+ * @param {Object} props
+ * @param {Array<any>} [props.locations] - Definimos que es un array de cualquier cosa
+ * @param {string|Object} [props.mapImage]
+ */
+
 // Ahora recibe "locations" y "mapImage" como propiedades (Props)
 export default function InteractiveMap({ locations = [], mapImage = "/images/mapa-bosque.jpg" }) {
   const [selectedLocation, setSelectedLocation] = useState(null);
