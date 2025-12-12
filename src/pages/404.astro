@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import bgImage from '../assets/images/forest-bg.jpg';
 ---
 
 <Layout title="404: Territorio No Explorado | Paulina Lopez" description="Parece que te has perdido en el bosque. Esta página no existe.">
@@ -8,7 +9,10 @@ import Layout from '../layouts/Layout.astro';
     
     {/* FONDO AMBIENTADO */}
     <div class="absolute inset-0 bg-midnight z-0"></div>
-    <div class="absolute inset-0 bg-[url('/images/forest-bg.jpg')] opacity-10 mix-blend-overlay bg-cover bg-center z-0"></div>
+    <div 
+        class="absolute inset-0 opacity-10 mix-blend-overlay bg-cover bg-center z-0"
+        style={{ backgroundImage: `url(${bgImage.src})` }}
+    ></div>
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-transparent via-midnight to-midnight z-0"></div>
 
     {/* Agregué 'relative' para asegurar el contexto, pero el z-index es clave */}

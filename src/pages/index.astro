@@ -163,7 +163,9 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
 
     {otherBooks.length > 0 && (
         <section class="py-12 bg-midnight relative border-t border-white/5 overflow-hidden parallax-section">
-            <div class="absolute inset-0 bg-[url('/images/forest-bg.jpg')] bg-cover bg-center opacity-10 mix-blend-overlay parallax-bg scale-125"></div>
+            <div class="absolute inset-0 bg-cover bg-center opacity-10 mix-blend-overlay parallax-bg scale-125" 
+         style={{ backgroundImage: `url(${bgImage.src})` }}>
+    </div>
             
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-12">
