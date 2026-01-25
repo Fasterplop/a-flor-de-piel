@@ -146,7 +146,7 @@ export const books = [
     subtitle: "Desarrollo personal",
     cover: portada2,
     description: "Construye la Mujer de Alto Valor de tus sueños.",
-    amazonLink: "#", // Recuerda poner el link real si lo tienes
+    amazonLink: "https://www.amazon.com/dp/B0GJQMQCX4", // Recuerda poner el link real si lo tienes
     status: "DISPONIBLE",
     category: "independiente",
     
