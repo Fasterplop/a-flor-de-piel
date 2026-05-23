@@ -1,0 +1,151 @@
+---
+// Importamos tu Layout base
+import Layout from '../layouts/Layout.astro';
+// Importamos tu base de datos de libros
+import { books } from '../data/books.js';
+
+import Header from '../components/Header.astro';
+
+// Lógica para automatizar la sección de Quizzes:
+const booksWithQuizzes = books.filter(book => book.hasQuiz);
+---
+
+<Layout 
+    title="Recursos Exclusivos | Paulina Lopez" 
+    description="Descubre capítulos extras, fondos de pantalla y tests interactivos de la saga A Flor de Piel y otros libros."
+>
+<Header /> <div class="fixed inset-0 bg-midnight z-[-1]"></div>
+    <div class="fixed inset-0 bg-midnight z-[-1]"></div>
+    
+    <div id="fireflies-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <main class="container pt-40 mx-auto px-4 py-16 max-w-6xl font-body relative z-10">
+        
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-gothic font-bold text-blood mb-4 drop-shadow-md">Recursos Exclusivos</h1>
+            <p class="text-gray-300 text-lg max-w-2xl mx-auto drop-shadow-sm font-body">Explora el universo más allá de las páginas. Aquí encontrarás contenido adicional, material descargable y dinámicas interactivas iluminadas por la magia del bosque.</p>
+        </header>
+
+        <section class="mb-20 backdrop-blur-sm bg-midnight/60 p-8 rounded-2xl border border-gray-800 shadow-2xl">
+            <h2 class="text-3xl font-gothic text-paper mb-8 border-b border-gray-800 pb-3">Capítulos Extras y Relatos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-midnight p-6 rounded-xl border border-gray-800 hover:border-blood transition-colors duration-300 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blood/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <h3 class="text-xl font-bold mb-2 text-paper relative z-10 font-body">El Origen del Castillo</h3>
+                    <p class="text-gray-400 mb-6 text-sm relative z-10 font-body">Un relato corto sobre los primeros días antes de la llegada de Nina.</p>
+                    <a href="/downloads/relato-extra.pdf" download class="text-blood font-bold hover:text-red-500 transition-colors inline-flex items-center gap-2 relative z-10">
+                        <span>Descargar PDF</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <h2 class="text-3xl font-gothic text-paper mb-8 border-b border-gray-800 pb-3 backdrop-blur-sm inline-block">Fondos de Pantalla</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="group relative aspect-[9/16] bg-gray-900 rounded-xl overflow-hidden border border-gray-800 shadow-xl">
+                    <img src="/images/wallpapers/wp-1.jpg" alt="Fondo A Flor de Piel" class="object-cover w-full h-full opacity-70 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" loading="lazy" />
+                    <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                        <a href="/images/wallpapers/wp-1.jpg" download class="bg-blood text-paper px-5 py-2 rounded-lg font-bold font-body text-sm tracking-wide shadow-lg hover:bg-red-800 transition-colors border-none">Descargar</a>
+                    </div>
+                </div>
+                 <div class="group relative aspect-video md:col-span-2 bg-gray-900 rounded-xl overflow-hidden border border-gray-800 shadow-xl">
+                    <img src="/images/wallpapers/wp-desktop.jpg" alt="Fondo Desktop" class="object-cover w-full h-full opacity-70 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" loading="lazy" />
+                    <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                        <a href="/images/wallpapers/wp-desktop.jpg" download class="bg-blood text-paper px-5 py-2 rounded-lg font-bold font-body text-sm tracking-wide shadow-lg hover:bg-red-800 transition-colors border-none">Descargar Desktop</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="mb-10 relative">
+            <h2 class="text-3xl font-gothic text-paper mb-8 border-b border-gray-800 pb-3 backdrop-blur-sm inline-block">Tests Interactivos</h2>
+            <p class="text-gray-300 font-body mb-8 max-w-3xl drop-shadow-sm">Descubre tu rol en el Castillo Hayashi o tu nivel de magnetismo. Selecciona el test que deseas realizar:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                {booksWithQuizzes.map((book) => (
+                    <div class="bg-gradient-to-br from-gray-900/90 to-midnight/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 flex flex-col h-full shadow-2xl hover:border-gold/50 hover:shadow-gold/10 transition-all duration-300 group">
+                        <div class="mb-4">
+                            <span class="text-xs font-bold tracking-widest text-blood uppercase font-body">{book.title}</span>
+                            <h3 class="text-2xl font-bold font-gothic text-paper mt-1 group-hover:text-gold transition-colors">
+                                {book.quizTitle ? book.quizTitle : `Test de ${book.title}`}
+                            </h3>
+                        </div>
+                        
+                        <p class="text-gray-400 font-body mb-8 flex-grow">
+                            {book.quizDescription ? book.quizDescription : 'Responde las preguntas y descubre tu resultado.'}
+                        </p>
+                        
+                        <a 
+                            href={`/libros/${book.slug}/#quiz`} 
+                            class="block w-full text-center bg-blood hover:bg-red-800 text-paper font-bold font-body py-3 px-6 rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(168,0,0,0.4)] hover:shadow-[0_0_25px_rgba(168,0,0,0.6)]"
+                        >
+                            Ir al Quiz
+                        </a>
+                    </div>
+                ))}
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style is:global>
+    /* Estilos mágicos para las luciérnagas ahora usando tu color dorado */
+    .firefly {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background-color: #C5A059; /* text-gold */
+        border-radius: 50%;
+        /* Resplandor multicapa ajustado a gold */
+        box-shadow: 0 0 6px 1px #C5A059, 0 0 12px 3px rgba(197, 160, 89, 0.8);
+        opacity: 0;
+    }
+
+    @keyframes float {
+        0% { transform: translate(0, 0); }
+        25% { transform: translate(20px, -30px); }
+        50% { transform: translate(-15px, -60px); }
+        75% { transform: translate(10px, -20px); }
+        100% { transform: translate(0, 0); }
+    }
+
+    @keyframes blink {
+        0%, 100% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    .text-shadow-glow {
+        text-shadow: 0 0 10px rgba(197, 160, 89, 0.6); /* Sombra gold */
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('fireflies-container');
+        if (!container) return;
+        
+        const firefliesCount = 40; 
+        
+        for (let i = 0; i < firefliesCount; i++) {
+            const firefly = document.createElement('div');
+            firefly.classList.add('firefly');
+            
+            firefly.style.left = `${Math.random() * 100}%`;
+            firefly.style.top = `${Math.random() * 100}%`;
+            
+            const floatDuration = 15 + Math.random() * 20;
+            const blinkDuration = 3 + Math.random() * 5;  
+            const delay = Math.random() * 10;             
+            
+            firefly.style.animation = `
+                float ${floatDuration}s infinite ease-in-out ${delay}s,
+                blink ${blinkDuration}s infinite ease-in-out ${delay}s
+            `;
+            
+            container.appendChild(firefly);
+        }
+    });
+</script>

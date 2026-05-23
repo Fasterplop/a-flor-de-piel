@@ -1,0 +1,236 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+
+// Generamos los 10 capítulos ficticios con títulos temáticos sobre reinados
+const chapters = Array.from({ length: 10 }, (_, i) => {
+    const thematicTitles = [
+        "El Peso de la Corona", 
+        "Sonrisas de Plástico", 
+        "Tacones Rotos y Cinta Adhesiva", 
+        "Reflejos Culpables", 
+        "Secretos de Camerino", 
+        "Dietas de Aire", 
+        "La Favorita del Jurado", 
+        "Cinta de Seda Roja", 
+        "Lágrimas Negras (Rímel y Sudor)", 
+        "La Noche de Gala"
+    ];
+    
+    return {
+        id: i + 1,
+        title: `Capítulo ${i + 1}`,
+        subtitle: thematicTitles[i],
+        // Generamos varios párrafos de Lorem Ipsum para simular lectura real
+        content: `
+            <p class="drop-cap mb-6 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. El resplandor de los focos cegaba más que la propia ambición, pero ninguna iba a cerrar los ojos ahora. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            
+            <p class="mb-6 leading-relaxed">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.</p>
+            
+            <p class="mb-6 leading-relaxed">Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Las lentejuelas rasparon su piel, dejando una marca roja que el maquillaje tendría que ocultar mañana.</p>
+            
+            <p class="leading-relaxed">Nullam eros mi, mollis in, sollicitudin non, tincidunt sed, elit. Aliquam quis nibh. Nulla pretium, tortor hendrerit malesuada eleifend, magna nibh molestie odio, et lobortis arcu elit at diam. Praesent non elit. Suspendisse eu odio. Maecenas tristique.</p>
+        `
+    };
+});
+---
+
+<Layout 
+    title="Nuevo Lanzamiento | Señorita Costasol" 
+    description="Lee los primeros 10 capítulos gratis de Señorita Costasol. Descubre el oscuro precio de la belleza y la corona."
+>
+<Header /> <div class="fixed inset-0 bg-midnight z-[-1]"></div>
+    <div class="fixed inset-0 bg-midnight z-[-1]"></div>
+    
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold via-transparent to-transparent pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 left-0 w-[600px] h-[400px] opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blood via-transparent to-transparent pointer-events-none z-0"></div>
+
+    <main class="container mx-auto px-4 pt-28 py-12 max-w-7xl font-body relative z-10 flex flex-col h-screen max-h-[1000px] min-h-[800px]">
+        
+        <header class="text-center mb-10 flex-shrink-0 animate-fade-in-up">
+            <div class="flex justify-center mb-4 text-gold">
+                <svg class="w-12 h-12 drop-shadow-[0_0_10px_rgba(197,160,89,0.5)]" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M5 16L3 5L8.5 10L12 2L15.5 10L21 5L19 16H5ZM19 19C19 19.5523 18.5523 20 18 20H6C5.44772 20 5 19.5523 5 19V18H19V19Z"></path>
+                </svg>
+            </div>
+            <span class="inline-block py-1 px-4 rounded-full bg-gold/10 border border-gold/30 text-gold font-bold tracking-[0.2em] uppercase text-xs mb-4 shadow-[0_0_10px_rgba(197,160,89,0.2)]">
+                Lanzamiento Exclusivo
+            </span>
+            <h1 class="text-4xl md:text-6xl font-gothic font-bold text-paper mb-2 tracking-wide">Señorita Costasol</h1>
+            <p class="text-gray-400 text-lg font-body max-w-2xl mx-auto italic">
+                "El brillo cegador de la corona siempre proyecta la sombra más oscura."
+            </p>
+        </header>
+
+        <div class="flex flex-col md:flex-row gap-6 flex-grow overflow-hidden animate-fade-in-up" style="animation-delay: 0.2s;">
+            
+            <aside class="md:w-1/3 lg:w-1/4 bg-[#0a0a0a]/90 backdrop-blur-md border border-gold/20 rounded-2xl flex flex-col overflow-hidden shadow-2xl">
+                <div class="p-5 border-b border-gold/20 bg-gradient-to-b from-gold/5 to-transparent">
+                    <h3 class="font-gothic text-gold text-xl font-bold">Índice Gratuito</h3>
+                    <p class="text-xs text-gray-400 font-body mt-1">10 capítulos disponibles</p>
+                </div>
+                
+                <div class="overflow-y-auto flex-grow custom-scrollbar p-3 space-y-1">
+                    {chapters.map((chapter, index) => (
+                        <button 
+                            class="chapter-btn w-full text-left p-3 rounded-lg border border-transparent transition-all duration-300 group flex flex-col"
+                            data-index={index}
+                        >
+                            <span class="text-xs font-bold tracking-widest uppercase text-gray-500 group-hover:text-blood transition-colors chapter-label">
+                                {chapter.title}
+                            </span>
+                            <span class="font-body font-bold text-gray-300 group-hover:text-paper transition-colors chapter-name">
+                                {chapter.subtitle}
+                            </span>
+                        </button>
+                    ))}
+                </div>
+            </aside>
+
+            <article class="md:w-2/3 lg:w-3/4 bg-[#0a0a0a]/90 backdrop-blur-md border border-gray-800 rounded-2xl flex flex-col overflow-hidden shadow-2xl relative">
+                
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blood/20 to-transparent opacity-50 pointer-events-none"></div>
+
+                <div class="p-8 pb-4 border-b border-gray-800/50 text-center relative z-10">
+                    <h2 id="reader-title" class="text-sm font-bold tracking-[0.3em] uppercase text-blood mb-2">Cargando...</h2>
+                    <h3 id="reader-subtitle" class="text-3xl font-gothic font-bold text-gold"></h3>
+                </div>
+
+                <div class="overflow-y-auto flex-grow custom-scrollbar p-8 md:p-12 relative z-10">
+                    <div id="reader-content" class="text-paper text-lg font-body max-w-3xl mx-auto transition-opacity duration-500">
+                        </div>
+                </div>
+
+                <div class="p-6 border-t border-gray-800/50 bg-[#050505]/50 flex justify-end relative z-10">
+                    <button id="next-chapter-btn" class="bg-transparent border border-gold text-gold hover:bg-gold hover:text-midnight font-bold font-body py-2 px-6 rounded-lg transition-all duration-300 flex items-center gap-2 group cursor-pointer">
+                        Siguiente Capítulo
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
+                </div>
+            </article>
+
+        </div>
+    </main>
+</Layout>
+
+<style is:global>
+    /* Animación fluida */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up {
+        animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Scrollbar personalizada para el área de lectura */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(10, 10, 10, 0.5);
+        border-radius: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #374151; /* gray-700 */
+        border-radius: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #C5A059; /* gold */
+    }
+
+    /* Letra capital (Drop Cap) temática para el inicio de cada capítulo */
+    .drop-cap::first-letter {
+        font-family: 'Cinzel Decorative', serif; /* font-gothic */
+        color: #C5A059; /* gold */
+        float: left;
+        font-size: 4.5rem;
+        line-height: 0.8;
+        margin-right: 0.75rem;
+        margin-top: 0.2rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Estilos dinámicos para el botón activo en la barra lateral */
+    .chapter-active {
+        background-color: rgba(168, 0, 0, 0.1); /* blood con opacidad */
+        border-color: rgba(168, 0, 0, 0.5);
+    }
+    .chapter-active .chapter-label {
+        color: #A80000 !important; /* blood */
+    }
+    .chapter-active .chapter-name {
+        color: #E0D6C8 !important; /* paper */
+    }
+</style>
+
+<script define:vars={{ chapters }}>
+    document.addEventListener('DOMContentLoaded', () => {
+        let currentChapterIndex = 0;
+        
+        const buttons = document.querySelectorAll('.chapter-btn');
+        const readerTitle = document.getElementById('reader-title');
+        const readerSubtitle = document.getElementById('reader-subtitle');
+        const readerContent = document.getElementById('reader-content');
+        const nextBtn = document.getElementById('next-chapter-btn');
+
+        // Función para renderizar el capítulo
+        function loadChapter(index) {
+            // Animación de desvanecimiento
+            readerContent.style.opacity = '0';
+            
+            setTimeout(() => {
+                const chapter = chapters[index];
+                
+                // Actualizar Textos
+                readerTitle.textContent = chapter.title;
+                readerSubtitle.textContent = chapter.subtitle;
+                readerContent.innerHTML = chapter.content;
+                
+                // Actualizar estilos de los botones en la barra lateral
+                buttons.forEach((btn, i) => {
+                    if (i === index) {
+                        btn.classList.add('chapter-active');
+                    } else {
+                        btn.classList.remove('chapter-active');
+                    }
+                });
+
+                // Controlar estado del botón "Siguiente"
+                if (index === chapters.length - 1) {
+                    nextBtn.innerHTML = 'Adquirir Libro Completo <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>';
+                    nextBtn.classList.remove('text-gold', 'border-gold', 'hover:bg-gold', 'hover:text-midnight');
+                    nextBtn.classList.add('bg-blood', 'text-paper', 'border-blood', 'hover:bg-red-800');
+                    nextBtn.onclick = () => window.location.href = '#'; // Cambiar por el link de compra
+                } else {
+                    nextBtn.innerHTML = 'Siguiente Capítulo <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>';
+                    nextBtn.classList.remove('bg-blood', 'text-paper', 'border-blood', 'hover:bg-red-800');
+                    nextBtn.classList.add('text-gold', 'border-gold', 'hover:bg-gold', 'hover:text-midnight');
+                    nextBtn.onclick = () => loadChapter(index + 1);
+                }
+
+                // Hacer scroll al top del área de lectura
+                readerContent.parentElement.scrollTop = 0;
+                
+                // Mostrar con animación
+                readerContent.style.opacity = '1';
+                currentChapterIndex = index;
+            }, 300); // 300ms debe coincidir con la transición en CSS
+        }
+
+        // Asignar eventos a los botones de la barra lateral
+        buttons.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                const index = parseInt(e.currentTarget.getAttribute('data-index'));
+                if (index !== currentChapterIndex) {
+                    loadChapter(index);
+                }
+            });
+        });
+
+        // Cargar el primer capítulo al iniciar
+        if (chapters.length > 0) {
+            loadChapter(0);
+        }
+    });
+</script>

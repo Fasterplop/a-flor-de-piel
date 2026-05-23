@@ -51,34 +51,64 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
       </div>
     
       <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 ease-in-out py-8 border-b border-transparent">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center relative z-50">
           
-          <a href="#" id="nav-logo" class="w-32 md:w-40 opacity-90 hover:opacity-100 transition-all duration-500 cursor-pointer origin-left block">
+          <a href="/" id="nav-logo" class="w-32 md:w-40 opacity-90 hover:opacity-100 transition-all duration-500 cursor-pointer origin-left block">
             <Image 
-  src={logoImage} 
-  alt="Paulina Lopez Escritora - Inicio" 
-  class="filter drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] object-contain invert brightness-0" 
-  style="filter: brightness(0) invert(1);"
-/>
+              src={logoImage} 
+              alt="Paulina Lopez Escritora - Inicio" 
+              class="filter drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] object-contain invert brightness-0" 
+              style="filter: brightness(0) invert(1);"
+            />
           </a>
     
-          <div class="hidden md:flex gap-10 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">
-            <a href="#" class="nav-link relative group hover:text-[#D4AF37] transition-all duration-300">
+          <button id="mobile-menu-btn" class="md:hidden text-white hover:text-[#D4AF37] focus:outline-none transition-colors relative z-50" aria-label="Abrir menú">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+
+          <div class="hidden md:flex gap-4 lg:gap-8 text-[10px] lg:text-xs font-bold uppercase tracking-[0.2em] text-gray-400 items-center">
+            <a href="/" class="nav-link relative group hover:text-[#D4AF37] transition-all duration-300">
               Inicio
               <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
             </a>
-            <a href="#libros" class="nav-link relative group hover:text-[#D4AF37] transition-all duration-300">
+            <a href="/#libros" class="nav-link relative group hover:text-[#D4AF37] transition-all duration-300">
               Libros
               <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
             </a>
-            <a href="#autora" class="nav-link relative group hover:text-[#D4AF37] transition-all duration-300">
+            <a href="/#autora" class="nav-link relative group hover:text-[#D4AF37] transition-all duration-300">
               Sobre Mí
               <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
             </a>
-            <a href={amazonLink} target="_blank" class="text-white border-b border-[#D4AF37] pb-1 hover:text-[#D4AF37] transition-colors">Comprar</a>
+            
+            <a href="/recursos" class="nav-link relative group hover:text-[#D4AF37] transition-all duration-300">
+              Recursos
+              <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="/lectores-beta" class="nav-link relative group hover:text-[#D4AF37] transition-all duration-300">
+              Lectores Beta
+              <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="/nuevo-lanzamiento" class="nav-link relative group hover:text-[#D4AF37] transition-all duration-300">
+              Nuevo Lanzamiento
+              <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
+            </a>
+            
+            <a href={amazonLink} target="_blank" class="text-white border-b border-[#D4AF37] pb-1 hover:text-[#D4AF37] transition-colors ml-2">Comprar</a>
           </div>
         </div>
       </nav>
+
+      <div id="mobile-menu" class="fixed inset-0 bg-[#08090B]/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center gap-8 text-sm font-bold uppercase tracking-[0.2em] text-gray-400">
+          <a href="/" class="mobile-nav-link hover:text-[#D4AF37] transition-colors">Inicio</a>
+          <a href="/#libros" class="mobile-nav-link hover:text-[#D4AF37] transition-colors">Libros</a>
+          <a href="/#autora" class="mobile-nav-link hover:text-[#D4AF37] transition-colors">Sobre Mí</a>
+          <a href="/recursos" class="mobile-nav-link hover:text-[#D4AF37] transition-colors">Recursos</a>
+          <a href="/lectores-beta" class="mobile-nav-link hover:text-[#D4AF37] transition-colors">Lectores Beta</a>
+          <a href="/nuevo-lanzamiento" class="mobile-nav-link hover:text-[#D4AF37] transition-colors">Nuevo Lanzamiento</a>
+          <a href={amazonLink} target="_blank" class="mobile-nav-link text-white border border-[#D4AF37] px-6 py-2 mt-4 hover:bg-[#D4AF37] hover:text-[#08090B] transition-all">Comprar</a>
+      </div>
     
       <main class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center min-h-screen pt-36 md:pt-20">
         
@@ -427,6 +457,45 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
       }
     }
   });
+
+  // SCRIPT MENÚ MÓVIL (Hamburguesa)
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+  if (mobileMenuBtn && mobileMenu) {
+    // Iconos SVG para abrir y cerrar
+    const iconOpen = `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
+    const iconClose = `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+    const toggleMenu = () => {
+      const isClosed = mobileMenu.classList.contains('translate-x-full');
+      if (isClosed) {
+        mobileMenu.classList.remove('translate-x-full');
+        mobileMenu.classList.add('translate-x-0');
+        mobileMenuBtn.innerHTML = iconClose;
+        document.body.style.overflow = 'hidden'; // Evita el scroll del fondo
+      } else {
+        mobileMenu.classList.add('translate-x-full');
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenuBtn.innerHTML = iconOpen;
+        document.body.style.overflow = ''; // Restaura el scroll
+      }
+    };
+
+    // Click en botón de hamburguesa
+    mobileMenuBtn.addEventListener('click', toggleMenu);
+
+    // Cerrar menú al hacer click en cualquier enlace en móviles
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('translate-x-full');
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenuBtn.innerHTML = iconOpen;
+        document.body.style.overflow = '';
+      });
+    });
+  }
 
   // Generate Particles
   const particleContainer = document.getElementById('particle-container');
