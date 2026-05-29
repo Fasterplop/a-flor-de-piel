@@ -95,22 +95,69 @@ export const books = [
     title: "A Pulso Lento",
     subtitle: "Libro 2 - Comienzan los DAMA´S",
     cover: portada3, 
-    description: "Las consecuencias del primer libro se sienten. La calma antes de la tormenta se rompe. ¿Tienes lo que se necesita para sobrevivir en el bosque Sin Fin?.",
+    description: "Las pruebas internas han comenzado. Entre el sudor del ring, escaleras a punto de colapsar y un pacto sellado con vendas, los secretos amenazan con destruir al grupo antes que los propios desafíos. ¿De qué lado estás cuando la lealtad se pone a prueba?",
     amazonLink: "#",
-    status: "PRÓXIMAMENTE",
+    status: "DISPONIBLE",
     category: "saga",
+    
+    // ACTIVADORES DE SECCIONES
     hasMap: false,
-    hasQuiz: false,
+    hasQuiz: true,
     hasTimeline: false,
+    
     leadMagnet: null,
     themeColor: "green-600",
     mauticSegmentId: 998,
     mauticTag: "origen-a-pulso-lento",
     leadMagnetText: "Leer Capítulo 1 APL",
-    quizTitle: "",
-    quizDescription: "",
-    quizCtaText: "",
-    quizQuestions: [ /* ... tus preguntas ... */ ],
+    
+    quizTitle: "Test de Supervivencia: Las Pruebas Internas",
+    quizDescription: "Ante la presión y los desafíos inminentes, ¿qué rol asumirás para proteger a los tuyos?",
+    quizCtaText: "DESCUBRIR TU DESTINO",
+    
+    // --- DATOS DEL MAPA ---
+    mapImage: mapaBosque,
+    mapLocations: [
+      { id: 1, name: "Ring de Boxeo", x: 30, y: 40, desc: "Lugar oscuro y húmedo. Escenario de secretos y promesas.", type: "training" },
+      { id: 2, name: "Comedor Secundario", x: 45, y: 35, desc: "Punto de reunión antes de los desafíos.", type: "base" },
+      { id: 3, name: "Escalera Corroída", x: 32, y: 45, desc: "Una trampa mortal disfrazada de atajo hacia la superficie.", type: "danger" }
+    ],
+
+    // --- DATOS DE LA LÍNEA DE TIEMPO ---
+    timelineEvents: [
+      { title: "El Entrenamiendo", desc: "Prácticas exhaustivas en el ring bajo el aire reciclado.", time: "Días previos" },
+      { title: "El Descubrimiento", desc: "Eric descubre la verdad sobre las lesiones en el ring.", time: "Horas antes" },
+      { title: "El Pacto", desc: "Las vendas se convierten en la promesa de no caer solos.", time: "Momentos antes" },
+      { title: "Las Pruebas Internas", desc: "Llamado a los jóvenes de 16 a 18 años. Inicio oficial de los desafíos.", time: "Presente" }
+    ],
+
+    // --- DATOS DEL QUIZ ---
+    quizQuestions: [
+      {
+        text: "Tu amigo está herido justo antes de una prueba crucial y alguien amenaza con delatarlos. ¿Qué haces?",
+        options: [
+          { text: "Ideo un plan urgente para manipular la situación a nuestro favor.", type: "telepath" },
+          { text: "Asumo toda la responsabilidad. No dejaré que caiga.", type: "fighter" },
+          { text: "Me mantengo en silencio y trato de que el problema no se haga más grande.", type: "survivor" },
+        ],
+      },
+      {
+        text: "Te enfrentas a un camino corto pero peligroso (como una escalera a punto de romperse).",
+        options: [
+          { text: "Calculo el riesgo y me aferro a las zonas seguras al bajar.", type: "telepath" },
+          { text: "Lo tomo sin dudarlo, el riesgo vale la pena por ganar tiempo.", type: "fighter" },
+          { text: "El riesgo es innecesario. Busco una ruta alternativa más segura.", type: "survivor" },
+        ],
+      },
+      {
+        text: "¿Qué significa el compañerismo para ti en un ambiente hostil?",
+        options: [
+          { text: "Ser el estratega que evita que los demás cometan errores impulsivos.", type: "telepath" },
+          { text: "Caer juntos si es necesario. Nadie se queda atrás.", type: "fighter" },
+          { text: "Sobrevivir. Si alguien se equivoca gravemente, no puedo hundirme con él.", type: "survivor" },
+        ],
+      },
+    ]
   },
 
   // --- LIBRO 3 (SAGA) ---
@@ -120,22 +167,69 @@ export const books = [
     title: "A Corazón Abierto",
     subtitle: "Libro 3 - Nuevos personajes. Mismo infierno.",
     cover: portada4,
-    description: "Nina, Dario, Akami y Eric tomarán caminos diferentes, explorando la torre, el reformatorio y algo más al norte.",
+    description: "Con Nina atrapada en la Tierra de Nadie y Ellen dispuesta a convertirse en fugitiva para enfrentar lo imposible, los cimientos del castillo se desmoronan. Los Hayashers del oeste son como tulipanes, de vida efímera.",
     amazonLink: "#",
-    status: "PLANIFICADO",
+    status: "DISPONIBLE",
     category: "saga",
+    
+    // ACTIVADORES DE SECCIONES
     hasMap: false,
-    hasQuiz: false,
+    hasQuiz: true,
     hasTimeline: false,
+    
     leadMagnet: null,
     themeColor: "orange-600",
     mauticSegmentId: 999,
     mauticTag: "origen-a-corazon-abierto",
     leadMagnetText: "Leer Capítulo 1 ACB",
-    quizTitle: "",
-    quizDescription: "",
-    quizCtaText: "",
-    quizQuestions: [ /* ... tus preguntas ... */ ],
+    
+    quizTitle: "Test del Limbo: Tierra de Nadie",
+    quizDescription: "Entre la vida y la muerte, y alianzas que se rompen, las decisiones más difíciles aguardan. ¿Qué camino elegirás?",
+    quizCtaText: "ENFRENTAR LA VERDAD",
+
+    // --- DATOS DEL MAPA ---
+    mapImage: mapaBosque,
+    mapLocations: [
+      { id: 1, name: "Tierra de Nadie", x: 50, y: 50, desc: "El limbo. Territorio neutral sin dueño en medio de dos fuerzas enemigas.", type: "danger" },
+      { id: 2, name: "El Castillo (Oeste)", x: 20, y: 30, desc: "Hogar de los Hayashers del oeste. Tierra de tulipanes efímeros.", type: "base" },
+      { id: 3, name: "Puerta Lateral", x: 25, y: 35, desc: "Ruta de escape para evitar la mirada de la directora.", type: "path" }
+    ],
+
+    // --- DATOS DE LA LÍNEA DE TIEMPO ---
+    timelineEvents: [
+      { title: "El Despertar", desc: "Nina despierta en la 'Tierra de Nadie', con su centro de energía parpadeante.", time: "Día 0" },
+      { title: "El Reencuentro", desc: "Una conversación reveladora con Cherry en el más allá.", time: "Día 0" },
+      { title: "La Despedida", desc: "Ellen se despide de Nina, decidida a seguir el camino erróneo.", time: "Día 1" },
+      { title: "La Fuga", desc: "Comienza el escape de Ellen por la puerta lateral. El inicio de la cacería.", time: "Día 1" }
+    ],
+
+    // --- DATOS DEL QUIZ ---
+    quizQuestions: [
+      {
+        text: "Si te encontraras en un limbo (Tierra de nadie), ¿cuál sería tu primer instinto?",
+        options: [
+          { text: "Analizar el entorno de inmediato e interrogar a quien esté conmigo.", type: "telepath" },
+          { text: "Luchar con todas mis fuerzas por regresar a la vida, sin importar el dolor.", type: "fighter" },
+          { text: "Aceptar la calma del momento y buscar respuestas en silencio.", type: "survivor" },
+        ],
+      },
+      {
+        text: "Un aliado invencible decide ir a una misión solitaria por venganza, destinada al fracaso. ¿Cómo reaccionas?",
+        options: [
+          { text: "Uso la lógica para hacer que cancelen su búsqueda y protegerlo desde lejos.", type: "telepath" },
+          { text: "Me uno a la pelea, no dejaré que caiga sin ayuda.", type: "fighter" },
+          { text: "Dejo que se estrelle. La única forma de que entienda su error es que falle.", type: "survivor" },
+        ],
+      },
+      {
+        text: "Si tuvieras que huir y convertirte en fugitivo, ¿cuál sería tu estrategia principal?",
+        options: [
+          { text: "Manipular la situación desde las sombras para que nadie me encuentre.", type: "telepath" },
+          { text: "Prepararme físicamente para derrotar a quien intente detenerme.", type: "fighter" },
+          { text: "No despedirme de nadie, usar rutas laterales y desaparecer por completo.", type: "survivor" },
+        ],
+      },
+    ]
   },
 
   // --- LIBRO INDEPENDIENTE (Ejemplo) ---

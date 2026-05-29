@@ -282,8 +282,8 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
     <input type="hidden" name="mauticform[formId]" value="1" />
     <input type="hidden" name="mauticform[return]" value="" />
 
-    <div class="absolute opacity-0 -z-10 w-0 h-0 overflow-hidden">
-        <input type="text" name="bot_check" id="bot_check" autocomplete="off" tabindex="-1">
+    <div style="position: absolute; left: -9999px;" aria-hidden="true">
+    <input type="text" name="phone_number_validate" id="bot_check" autocomplete="off" tabindex="-1" value="">
     </div>
 
                     <div class="w-full md:w-2/3 relative group">
@@ -416,45 +416,54 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
   const layers = document.querySelectorAll('.parallax-layer');
   const nav = document.getElementById('navbar');
   const logo = document.getElementById('nav-logo');
+  
+  let isMouseTicking = false;
 
   document.addEventListener('mousemove', (e) => {
     if (window.innerWidth < 768) return;
 
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    if (!isMouseTicking) {
+      window.requestAnimationFrame(() => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 20;
+        const y = (e.clientY / window.innerHeight - 0.5) * 20;
 
-    layers.forEach(layer => {
-      // Evitamos conflicto con animaciones CSS
-      if (!layer.classList.contains('animate-orbit-float') && !layer.classList.contains('animate-orbit-float-reverse-delayed')) {
-         (layer as HTMLElement).style.transform = `translate(${x * -1}px, ${y * -1}px)`;
-      }
-    });
+        layers.forEach(layer => {
+          if (!layer.classList.contains('animate-orbit-float') && !layer.classList.contains('animate-orbit-float-reverse-delayed')) {
+             // translate3d fuerza la aceleración GPU
+             (layer as HTMLElement).style.transform = `translate3d(${x * -1}px, ${y * -1}px, 0)`;
+          }
+        });
+        isMouseTicking = false;
+      });
+      isMouseTicking = true;
+    }
   });
 
   // Scroll Logic Navbar
+  let isScrollTicking = false;
   window.addEventListener('scroll', () => {
     if (!nav) return;
     
-    if (window.scrollY > 50) {
-      // Navbar compacta
-      nav.classList.add('bg-[#08090B]/95', 'backdrop-blur-xl', 'py-2', 'border-b', 'border-white/10', 'shadow-2xl');
-      nav.classList.remove('py-8');
-      
-      // Logo pequeño
-      if (logo) {
-        logo.classList.remove('w-32', 'md:w-40');
-        logo.classList.add('w-20', 'md:w-24');
-      }
-    } else {
-      // Navbar expandida
-      nav.classList.remove('bg-[#08090B]/95', 'backdrop-blur-xl', 'py-2', 'border-b', 'border-white/10', 'shadow-2xl');
-      nav.classList.add('py-8');
-      
-      // Logo grande
-      if (logo) {
-        logo.classList.add('w-32', 'md:w-40');
-        logo.classList.remove('w-20', 'md:w-24');
-      }
+    if (!isScrollTicking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 50) {
+          nav.classList.add('bg-[#08090B]/95', 'backdrop-blur-xl', 'py-2', 'border-b', 'border-white/10', 'shadow-2xl');
+          nav.classList.remove('py-8');
+          if (logo) {
+            logo.classList.remove('w-32', 'md:w-40');
+            logo.classList.add('w-20', 'md:w-24');
+          }
+        } else {
+          nav.classList.remove('bg-[#08090B]/95', 'backdrop-blur-xl', 'py-2', 'border-b', 'border-white/10', 'shadow-2xl');
+          nav.classList.add('py-8');
+          if (logo) {
+            logo.classList.add('w-32', 'md:w-40');
+            logo.classList.remove('w-20', 'md:w-24');
+          }
+        }
+        isScrollTicking = false;
+      });
+      isScrollTicking = true;
     }
   });
 

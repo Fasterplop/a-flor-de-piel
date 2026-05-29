@@ -1,73 +1,830 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+import HeaderNuevo from '../components/HeaderNuevo.astro';
+import { Image } from 'astro:assets';
 
-// Generamos los 10 capítulos ficticios con títulos temáticos sobre reinados
-const chapters = Array.from({ length: 10 }, (_, i) => {
-    const thematicTitles = [
-        "El Peso de la Corona", 
-        "Sonrisas de Plástico", 
-        "Tacones Rotos y Cinta Adhesiva", 
-        "Reflejos Culpables", 
-        "Secretos de Camerino", 
-        "Dietas de Aire", 
-        "La Favorita del Jurado", 
-        "Cinta de Seda Roja", 
-        "Lágrimas Negras (Rímel y Sudor)", 
-        "La Noche de Gala"
-    ];
-    
-    return {
-        id: i + 1,
-        title: `Capítulo ${i + 1}`,
-        subtitle: thematicTitles[i],
-        // Generamos varios párrafos de Lorem Ipsum para simular lectura real
+// Importamos ambas imágenes desde tus assets
+import backgroundImage from '../assets/images/background-nuevo.png';
+import illustration from '../assets/images/Illustration.png';
+
+// Capítulos reales estructurados con su contenido correspondiente
+const chapters = [
+    {
+        id: 1,
+        title: "Capítulo 1",
+        subtitle: "La traición viene de quien menos lo esperas",
         content: `
-            <p class="drop-cap mb-6 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. El resplandor de los focos cegaba más que la propia ambición, pero ninguna iba a cerrar los ojos ahora. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            
-            <p class="mb-6 leading-relaxed">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.</p>
-            
-            <p class="mb-6 leading-relaxed">Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Las lentejuelas rasparon su piel, dejando una marca roja que el maquillaje tendría que ocultar mañana.</p>
-            
-            <p class="leading-relaxed">Nullam eros mi, mollis in, sollicitudin non, tincidunt sed, elit. Aliquam quis nibh. Nulla pretium, tortor hendrerit malesuada eleifend, magna nibh molestie odio, et lobortis arcu elit at diam. Praesent non elit. Suspendisse eu odio. Maecenas tristique.</p>
+            <p class="drop-cap mb-6 leading-relaxed">El 18 de marzo sería el día que me cambiaría la vida. Las luces me apuntarían a la cara y de mí saldría el fulgor que guardaba adentro y que veía reflejado en el espejo manchado del baño cada vez que entraba a lavarme la cara luego de un regaño magistral.</p>
+
+            <p class="mb-6 leading-relaxed">Ansiaba que la semana pasara volando y encontrarme como por arte de magia en la capital, frente a la rectora que sería mi nueva madre.</p>
+
+            <p class="mb-6 leading-relaxed">Pasaría de vivir en un rancho que apenas se sostenía, a disfrutar de la casa donde formaban a las mises más aclamadas del mundo. Algo sacaría de ahí, aunque no ganara la corona. Muchas terminaban como modelos, presentadoras, locutoras, mentoras, actrices o incluso diseñadoras de moda. Nadie salía de la Pecera con las manos vacías. Aquel nombre me pareció horrible al escucharlo por primera vez, hasta que un día lo googleé en el ciber de la esquina y vi que el establecimiento estaba cubierto de cristal.</p>
+
+            <p class="mb-6 leading-relaxed">De ahí el nombre.</p>
+
+            <p class="mb-6 leading-relaxed">Soñaba con esa vida de reina en preparación, donde me maquillarían, peinarían y asegurarían mi bienestar.</p>
+
+            <p class="mb-6 leading-relaxed">Me costaba bajar a tierra apenas visualizaba la banda de Señorita Costasol sobre mi pecho.</p>
+
+            <p class="mb-6 leading-relaxed">Pero hoy me tocó caer de golpe, con la verborrea de la mujer sentada frente a la sopa diciendo una cantidad de insultos disfrazados de elegancia, que no entendía.</p>
+
+            <p class="mb-6 leading-relaxed">Su vocabulario afilado se sintió como cuchillos entre las costillas. En este lugar podía soportar cualquier cosa.</p>
+
+            <p class="mb-6 leading-relaxed">Me había pasado antes: viejos gritones de manos largas, borrachos que me guiñaban los ojos y otros atrevidos que habían conseguido sobarme el culo.</p>
+
+            <p class="mb-6 leading-relaxed">No me molestaba, si con eso alimentaba a mi hermana y mi madre por una semana entera, de hecho, era muchísimo más que el miserable sueldo honrado que me ganaba como mesera, cajera y personal de limpieza, ocho horas al día, seis días a la semana.</p>
+
+            <p class="mb-6 leading-relaxed">Sabía sobrellevar la explotación laboral, pero no la hipocresía, y la mujer de labios inyectados con el superior deforme, había logrado lo que nadie nunca había conseguido de mí: sacarme de las casillas.</p>
+
+            <p class="mb-6 leading-relaxed">No supe cuándo la había puesto en su lugar ni cuándo le había lanzado el bolígrafo sobre el caldo para que ella misma anotara la orden.</p>
+
+            <p class="mb-6 leading-relaxed">Solo recordaba a la perfección cuando pidió la sopa sin mariscos por su alergia, exigiéndome no confundir su plato con el de sus acompañantes.</p>
+
+            <p class="mb-6 leading-relaxed">El error pudo ser del cocinero o del que lo sirvió; no importaba en absoluto.</p>
+
+            <p class="mb-6 leading-relaxed">El problema no era la comida, sino que la mayor humillación de mi vida hubiese venido de alguien igual a mí.</p>
+
+            <p class="mb-6 leading-relaxed">De una mujer.</p>
+
+            <p class="mb-6 leading-relaxed">—Renuncio a este maldito lugar.</p>
+
+            <p class="mb-6 leading-relaxed">No me costó quitarme el uniforme y dejar ese trabajo de mierda. Seis meses sobreexplotada fue demasiado.</p>
+
+            <p class="mb-6 leading-relaxed">Bueno, ¿quién me mandaba a tomarme un año sabático antes de elegir qué carrera estudiar?</p>
+
+            <p class="mb-6 leading-relaxed">Dios santo..., cada vez que recordaba que debía tomar una elección que definiría el resto de mi vida, me daban náuseas.</p>
+
+            <p class="mb-6 leading-relaxed">Si hubiese carreras dignas en la universidad pública, me habría decantado por cualquiera.</p>
+
+            <p class="mb-6 leading-relaxed">Ese no era el caso en este país. Costasol destacaba en todo, menos en sus programas educativos.</p>
+
+            <p class="mb-6 leading-relaxed">Si fuese representante de este país, me aseguraría de eliminar los programas actuales, tanto de bachillerato como de la educación superior, e implementar los extranjeros.</p>
+
+            <p class="mb-6 leading-relaxed">Países como Ríocristal, Montenegro o incluso Lagoverde ya habían aprobado una fulana ley para que todo estudiante saliera dominando el inglés, con profesores que de verdad supieran lo que estaban enseñando.</p>
+
+            <p class="mb-6 leading-relaxed">Nada a comparación de las aulas de Costasol, donde el idioma era opacado por cosas absurdas como las matemáticas. Bien.</p>
+
+            <p class="mb-6 leading-relaxed">Yo quise tomarme un tiempo para pensarlo, mientras trabajaba con Valeria, mi amiga del bachillerato, cuyo restaurante era de un exesposo de su mamá.</p>
+
+            <p class="mb-6 leading-relaxed">Valeria y yo no éramos tan unidas, pero nos llevábamos lo suficientemente bien como para convivir en este infierno.</p>
+
+            <p class="mb-6 leading-relaxed">Su mamá la había metido de mesera porque quería mantenerla ocupada antes de que se escapara con el novio y desconociera en qué casa andaba metida.</p>
+
+            <p class="mb-6 leading-relaxed">Valeria se deshizo en disculpas con la vieja plástica hinchada, en mi nombre; seguro les regaló el almuerzo o quién sabe qué carajos hizo para calmarlos.</p>
+
+            <p class="mb-6 leading-relaxed">Lo importante para mí era que, dentro de cuatro días, estaría tomando un autobús a la capital para presentarme en el certamen por la corona de Señorita Costasol.</p>
+
+            <p class="mb-6 leading-relaxed">—No puedes irte así —dijo Valeria, antes de detenerme por el brazo—. Te estoy hablando, maleducada.</p>
+
+            <p class="mb-6 leading-relaxed">—Ya no tengo nada que hacer aquí. Este no es mi lugar.</p>
+
+            <p class="mb-6 leading-relaxed">—El mío tampoco, pero no puedes llegar a casa, decirle a la señora Liliana que renunciaste, así como así, ¿acaso no te das cuenta de que es quincena? Tú mamá está esperando ese dinero.</p>
+
+            <p class="mb-6 leading-relaxed">—Pues comeremos pan con agua. —Me puse el bolso sobre el hombro.</p>
+
+            <p class="mb-6 leading-relaxed">—No puedes decirle eso a tu mamá, no seas tan ingrata. Emily también necesita un par de zapatos nuevos, ¿lo olvidas? La semana pasada se les rompieron por debajo. Ha estado lloviendo demasiado estos días.</p>
+
+            <p class="mb-6 leading-relaxed">Me encogí de hombros, sin respuesta.</p>
+
+            <p class="mb-6 leading-relaxed">—Hice lo mejor que pude, pero todos tenemos un límite. Esa... vieja plástica me colmó la paciencia.</p>
+
+            <p class="mb-6 leading-relaxed">Valeria se esculcó los bolsillos del pantalón, metiendo el puño hasta el fondo.</p>
+
+            <p class="mb-6 leading-relaxed">—Llévatelo. —Me había puesto sobre la mano cincuenta dólares, con lo que alcanzaría para tres semanas de comida, estirándolo muy bien, e incluso los zapatos de Emily—. Lo necesitas más que yo. Además, tu mamá no puede quedarse sin las pastillas de este mes, ¿lo recuerdas?</p>
+
+            <p class="mb-6 leading-relaxed">—No puedo aceptarte esto.</p>
+
+            <p class="mb-6 leading-relaxed">—Ya me lo devolverás cuando te hagas famosa.</p>
+
+            <p class="mb-6 leading-relaxed">—Es que te debo quinientos dólares, como mínimo.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Lo has estado contando! ¡Grosera! Eso te lo doy con todo mi cariño.</p>
+
+            <p class="mb-6 leading-relaxed">—Desearía no deberte nada. ¿Has revisado la página de la Organización?</p>
+
+            <p class="mb-6 leading-relaxed">—Relájate, ¿quieres? Cuando seas preseleccionada me llegará ese correo. Estoy segura de que quedarás. Tienes una carita muy bella, ¡y ni hablar de ese culote!</p>
+
+            <p class="mb-6 leading-relaxed">—Llámame en cuanto te enteres, por favor, pero al número de la casa. Me cortaron la renta otra vez, y ni se te ocurra decirme que recargue con lo que me diste; eso es para comprar comida. Sin mí, mamá tendrá que arreglárselas con la miseria de pensión que recibe. Al menos se han sostenido con los negocios de Emily. Imagínate que el otro día citaron a mi mamá al colegio porque Emily se queda con todo el dinero de sus compañeros. ¿Qué culpa tiene ella de vender más barato que la cantina? Además, son esos pastelitos de masa de paquete; los está ayudando, no intoxicando.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Caray! ¿Vende dibujos, vasitos de chocolate y ahora pastelitos?</p>
+
+            <p class="mb-6 leading-relaxed">—El dinero es su mejor amigo.</p>
+
+            <p class="mb-6 leading-relaxed">Mamá se alegró cuando le dije que había renunciado. Estaba convencida de que llevarles platos a los demás no era mi puesto, y menos aguantar faltas de respetos. Me tenía en un pedestal porque creía que mi atención al cliente era excelente, y de ahí justificaba los dólares que aparecían mágicamente en su taza de la cocina, dónde guardaba los vueltos. En parte era cierto. Consideraba que mi servicio era muy bueno, pero la verdad era que ese dinero venía de un trabajo más fácil que servir mesas: contacto visual, sonreír y caminar erguida.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Lidia! —gritó Emily desde su cuarto, mientras yo desempolvaba los viejos tacones que mamá usaba para ir al trabajo hacía más de cinco años.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Qué quieres?</p>
+
+            <p class="mb-6 leading-relaxed">—¡Hazme la cena!</p>
+
+            <p class="mb-6 leading-relaxed">—¡Ve y hazlo tú!</p>
+
+            <p class="mb-6 leading-relaxed">Apareció de la nada detrás de mí.</p>
+
+            <p class="mb-6 leading-relaxed">—Tuve clases media hora extra, hice diez dólares en el receso, ayudé a mamá a hacer los quehaceres porque no puede caminar más de dos metros sin cansarse, ¿y aún debo hacer la cena?</p>
+
+            <p class="mb-6 leading-relaxed">—Ya, ya… Vete al cuarto. Te llamo cuando esté lista.</p>
+
+            <p class="mb-6 leading-relaxed">Apenas giré la llave para lavar la montaña de platos del desayuno y de la tubería salió un crujido, igual al de mi estómago cuando se me pasaba la hora del almuerzo. Carajo. Sin agua. Fui al patio, donde guardábamos las reservas. El nivel del agua estaba tan bajo que ya se confundía con el sedimento del fondo. Una parte de mí se alegraba de desgracias como estas porque así tenía el pretexto ideal para terminar comprando algo en la calle. Llamé a Valeria del teléfono de la casa luego de cenar.</p>
+
+            <p class="mb-6 leading-relaxed">Dijo que aún no había recibido ningún correo para mí. Le insistí en recargar la página de nuevo. Los resultados los darían en media hora, según el cronograma que había descargado en el celular, hacía varios meses. Pasó el resto del día, el siguiente, y otro más, y nunca recibí su llamada.</p>
+
+            <p class="mb-6 leading-relaxed">Se me ocurrió ir al ciber para sacarle unas copias a Emily y aprovechar para ingresar en la plataforma de la Organización. Revisé la lista de las candidatas preseleccionadas. Se me bajó el azúcar al ver el nombre ahí.</p>
+
+            <p class="mb-6 leading-relaxed">No el mío, sino el de la mismísima Valeria. ¿Por qué no contarme que se había inscrito? ¿Por qué ella, sin esforzarse demasiado, lo conseguía todo? Esto no podía ser un error. Mis respuestas fueron mejores, mis fotos salieron espectaculares y yo misma... Mierda.</p>
+
+            <p class="mb-6 leading-relaxed">Había hecho el proceso desde la laptop de Valeria para ahorrarme la media hora en el ciber y completar lo del desayuno de Emily.</p>
+
+            <p class="mb-6 leading-relaxed">Lo que nadie sabía era que a Lidia Medrano nadie le decía que no. Seguí mis planes tal como los había trazado desde hacía tres meses, sin mover ni una sola ficha. Conocía la capital, la Pecera e incluso intuía quiénes del jurado estarían presentes.</p>
+
+            <p class="mb-6 leading-relaxed">De algo tenía que haberme servido mirar las tres temporadas de Camino a Señorita Costasol.</p>
+
+            <p class="mb-6 leading-relaxed">En cuanto anocheció, crucé la casa con la maleta y me despedí de Emily. Mi mayor apoyo vino de ella, cuya capacidad de entendimiento sobrepasaba la mía y la de cualquiera de su edad.</p>
+
+            <p class="mb-6 leading-relaxed">—Mamá —Toqué la puerta de su cuarto antes de entrar—, ya me voy.</p>
+
+            <p class="mb-6 leading-relaxed">—Estás loca, Lidia. ¿Qué vas a buscar tú a la capital, eh?</p>
+
+            <p class="mb-6 leading-relaxed">—¿No crees que pueda conseguirlo?</p>
+
+            <p class="mb-6 leading-relaxed">—Hija, tienes una belleza que sin duda heredaste de tu padre. Su altura, su gracia... Todo es de él. Tú puedes comerte el mundo si te da la gana, pero ese lugar no es como lo ves en la televisión, Lidia. Allá tienen regímenes alimenticios, las muchachas se desmayan, las tratan mal... ¿Crees que pasar un año sin ver a tu madre y a tu hermana será fácil?</p>
+
+            <p class="mb-6 leading-relaxed">—Para nada, pero tampoco soporto seguir viviendo así. Quiero lo mejor para ustedes: una casa digna, comida de verdad... Quiero irme algún día a Campoclaro, lo sabes.</p>
+
+            <p class="mb-6 leading-relaxed">—No fuiste seleccionada —dijo para retenerme.</p>
+
+            <p class="mb-6 leading-relaxed">—Valeria no me inscribió. Ella, que era una de las menos agraciadas en bachillerato, fue preseleccionada. Es imposible que yo no haya quedado. Esto no se va a quedar así.</p>
+
+            <p class="mb-6 leading-relaxed">—Prométeme que, si te rechazan, regresarás. Aún puedes hacerte de una vida, estudiar en la universidad…</p>
+
+            <p class="mb-6 leading-relaxed">—¿En ese asqueroso lugar donde no enseñan nada? Lo siento, mamá, pero prefiero pagarme un curso de cocina y convertirme en panadera. Le sacaría más beneficio.</p>
+
+            <p class="mb-6 leading-relaxed">—Lidia...</p>
+
+            <p class="mb-6 leading-relaxed">—Te prometo que no voy a fallar. Quédate tranquila. Cuando Emily me extrañe, dile que la próxima vez que me vea será en la televisión.</p>
+
+            <p class="mb-6 leading-relaxed">El autobús me esperaba con las puertas abiertas, y en cuanto tomé el asiento, un sentimiento de profunda tristeza me atravesó tal como lo hacían las agujas de mamá cuando se disponía a agarrarle el ruedo a los pantalones de Emily. Cada puntada me tentaba a pedir parada en la siguiente esquina. Estaba a tiempo de renunciar. ¿Pero de qué me serviría? Me había quedado sin trabajo, la pobre Emily hacía demasiado para la edad que tenía, y mamá necesitaba alimentarse mejor. Comer bien un día sí, y tres no, terminaría de desgastarla. Yo tenía que sacar esta pequeña familia adelante. Las ocho horas de trayecto hasta la capital, los ejercicios intensos los fines de semana y el hecho de quitarme el pan de la boca para prolongar el ayuno, valdrían la pena en cuanto tuviese la corona sobre la cabeza.</p>
+
+            <p class="mb-6 leading-relaxed">Desconocía el monto total del premio, pero lo único que me interesaba era ese sueldo de dos mil dólares mensuales. Necesitaba cambiar de vida a como diera lugar.</p>
+
+            <p class="mb-6 leading-relaxed">El encendido de las luces del autobús me avisó que ya estábamos en la capital. Bajé y el muchacho encargado me hizo una seña para que buscara mi maleta de inmediato.</p>
+
+            <p class="mb-6 leading-relaxed">—Oh, solo traigo esta. Muchas gracias.</p>
+
+            <p class="mb-6 leading-relaxed">Antes de llegar a la Pecera, el caos de vehículos a su alrededor me dio la primera pista: aquello iba para largo. Una fila interminable de chicas serpenteaba hasta darle la vuelta completa al establecimiento.</p>
+
+            <p class="mb-6 leading-relaxed">—Disculpa —le toqué el hombro a la última de la cola—, ¿esta fila es para las preseleccionadas?</p>
+
+            <p class="mb-6 leading-relaxed">—Sí. También debes tener tu planilla impresa. Te pedirán tus datos en la entrada.</p>
+
+            <p class="mb-6 leading-relaxed">Perfecto. Me salí de la cola y di la vuelta hasta llegar al estacionamiento.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Y usted quién es? —preguntó el hombre de seguridad.</p>
+
+            <p class="mb-6 leading-relaxed">—Soy Lidia, asistente de Anastasia Lombardo. Ella me llamó hace veinte minutos porque necesitaba una mano con las candidatas. Me están esperando para la prueba de fotografía.</p>
+
+            <p class="mb-6 leading-relaxed">—Un momento, señorita, usted no puede ingresar. Déjeme ver que trae ahí. —Señaló la maleta.</p>
+
+            <p class="mb-6 leading-relaxed">Bingo. Ahí estaba el kit de maquillaje que mamá me había regalado al cumplir los quince. Era un maletín enorme, con un juego de brochas, sombras en tonos tierra y un arsenal de labiales intactos. Escondidos al fondo, bajo el peso de todo lo demás, estaban los tacones; pero ¿qué importaba? El trabajo del guardia era impedir que ingresara cualquier loco armado, no una chica con un set de maquillaje profesional.</p>
+
+            <p class="mb-6 leading-relaxed">—Bien. Pase.</p>
+
+            <p class="mb-6 leading-relaxed">Las instalaciones eran idénticas a las imágenes de Google y a los cientos de programas donde entrevistaban a las ganadoras para narrar su estilo de vida tras obtener la banda en representación de sus estados. Pasillos amplios, alfombras rojas y la icónica escalera donde todas se retrataban como prueba fehaciente de que, en verdad, estaban viviendo allí. Llegué al baño como si se tratara de mi propia casa, me cambié y maquillé. Había practicado con Emily un montón de veces la misma difuminación, dominándola en el quinto intento. Dejé la maleta encima del inodoro y tranqué la puertita de aluminio. Me escabullí por debajo, convencida de que, al regresar, sería para llevar mis cosas a una habitación propia.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Melanie Quintero, siguiente! —escuché desde la sala principal.</p>
+
+            <p class="mb-6 leading-relaxed">La tal Melanie estaba demasiado distraída hablando con las de atrás. Era el momento de colarme en su lugar; para el segundo llamado ya sería tarde. Me erguí como nunca y aparecí ante el jurado con mis mejores armas. El pelo lacio, la mirada abierta y una sonrisa atrapante.</p>
+
+            <p class="mb-6 leading-relaxed">—Tú no eres Melanie —dijo la exreina de belleza, Erica Maldonado, que había visto centenares de veces en la televisión. En persona tenía rostro arisco y la vejez se le notaba en el cuello. Si se lo cubría, nadie creería que pasaba de los sesenta.</p>
+
+            <p class="mb-6 leading-relaxed">—No. Mi nombre es Lidia Medrano. Tengo dieciocho años y vengo de oriente; específicamente de La Estrella, donde el sol sale primero y se pescan las maravillas del mar.</p>
+
+            <p class="mb-6 leading-relaxed">—Bien... Lidia de los peces, o como sea. Te voy a pedir que abandones la sala —dijo Erica—. Si no hiciste la inscripción vía online, no puedes participar. ¡Mela...!</p>
+
+            <p class="mb-6 leading-relaxed">—Erica, ¡pero qué genio traes hoy! —dijo David, uno de los actores más famosos de ese momento. Aparecía en todas las telenovelas nacionales, y se caracterizaba por dar entrevistas que incomodaban hasta a los camarógrafos—. Dale una oportunidad. Estoy seguro de que Lidia Medrano tendrá una explicación a su oportunismo. ¿No es así?</p>
+
+            <p class="mb-6 leading-relaxed">—Yo lucho por lo que quiero, y ahora mismo no deseo nada más que pertenecer al certamen más importante de la nación. Ya quisieran otros países tener un espía aquí dentro para copiarles, aunque fuera, la forma de caminar de sus candidatas. Estoy aquí, frente a ustedes, porque se me arrebató la oportunidad de inscribirme formalmente. Fui traicionada por una compañera, quizá por envidia; no me consta, pero tampoco me detiene. Tengan la certeza de que haré lo que sea necesario para estar en este concurso y ser la primera costasolense, en más de veinticinco años, en traer la cuarta corona del Miss Universo.</p>
+
+            <p class="mb-6 leading-relaxed">—Sáquenla de aquí —había dicho Máximo, el otro miembro del jurado, que hasta entonces se había limitado a mirar.</p>
+
+            <p class="mb-6 leading-relaxed">—Por favor, denme una oportunidad. Tengo todo lo que buscan. Una mujer con cerebro, bonita y...</p>
+
+            <p class="mb-6 leading-relaxed">—¿Bonita? —saltó Erica—. Tienes poco busco, los dientes de abajo torcidos y el pelo grasiento. Debería darte vergüenza presentarte ante nosotros con semejante aspecto.</p>
+
+            <p class="mb-6 leading-relaxed">—Y le falta mejorar el léxico —dijo Máximo.</p>
+
+            <p class="mb-6 leading-relaxed">—Puedo aprender. Estoy aquí para eso. Oigan, vengo desde muy lejos, tengo una madre enferma y una hermana que necesita de mí. Quiero cambiar mi vida y la de otras mujeres, si me lo permiten. Quisiera que entre nosotras, las mujeres, dejáramos de sabotearnos para convertirnos en aliadas. Déjenme darle mi mensaje al mundo, por favor.</p>
+
+            <p class="mb-6 leading-relaxed">—El único mensaje para ti es este —dijo Erica—: sin siquiera haberte inscrito, estás descalificada. Que pase Melanie Quintero de una vez por todas.</p>
         `
-    };
-});
+    },
+    {
+        id: 2,
+        title: "Capítulo 2",
+        subtitle: "El deseo de Naia",
+        content: `
+            <p class="drop-cap mb-6 leading-relaxed">Abandoné la sala de presentaciones. La prensa se acumulaba en la puerta principal entrevistando a las preseleccionadas. Desde los cristales se veían a los camarógrafos cortejando los rostros jóvenes en búsqueda de la próxima reina. Me hice invisible al ojo público, regresando al baño. ¿Acaso el espejo del restaurante me había mentido?</p>
+
+            <p class="mb-6 leading-relaxed">En él siempre me vi perfecta a pesar de la mancha que lo arruinaba. Aquí, frente un cristal entero de esquina a esquina, las palabras de Erica cobraron sentido. Unos dientes torcidos y amarillentos surgieron de mi boca, un cabello aplanado y de puntas abiertas me colgaba de la cabeza y, aunque intentara abrir la mirada, los ojos afilados delataban mis orígenes.</p>
+
+            <p class="mb-6 leading-relaxed">En los últimos años se estilaba preferir a concursantes de teces claras y rostros más simétricos, como las de Lagoverde, país cuyas reinas de belleza habían destacado por la finura de sus pieles naturales. Nosotros en La Estrella teníamos rostros más tostados y, como todo el mundo, una pierna más larga que la otra. El espejo me mostró unos dientes frontales sobresalientes. Mi sonrisa ante el jurado tuvo que verse espeluznante.</p>
+
+            <p class="mb-6 leading-relaxed">La primera lágrima cayó en el lavabo y se la tragó el agua limpia que salía de la llave. Cuando me enjuagué las manos, el color bronceado se me cayó de la piel. Este lugar era sagrado. Mágico. Esto lo había sabido desde que tenía uso de razón, desde que era niña, y me acostaba con mi mamá a ver los certámenes en la cama. El aire de este baño me purificaba. Su luz, un simple bombillo blanco, se transformaba en el flash apuntando directamente a mi corona.</p>
+
+            <p class="mb-6 leading-relaxed">Últimas dos concursantes. Un rostro borroso delante de mí. Yo la tomaba a ella de las manos, pero las mías estaban sobre las suyas, porque la ganadora siempre las tenía en esa posición. Decían que se trataba de un mito estúpido, pero cuando miré los videos recopilatorios de los concursos más importantes, cada una de ellas tenía el dominio sobre la otra. Así era la vida.</p>
+
+            <p class="mb-6 leading-relaxed">La luz blanca me bañaba de divinidad absoluta. El calor me cubría de un aura especial, como la de una madre consintiendo a su hija. Yo me sentía ganadora. La corona valorada en casi medio millón de dólares me pesaba en la cabeza y me empujaba el cuello hacia delante. Pero jamás perdí la postura. Saludé al público, que me lanzaban rosas rojas al igual que mi vestido de gala. Ya estaba hecho.</p>
+
+            <p class="mb-6 leading-relaxed">Este no era mi fin; era un ajuste de cuentas sobre quién decidía el destino de quién. Erica Maldonado no tenía autoridad para impedirme concursar. Estaba en sus últimos años en la Organización y todos lo sabían: solo querían exprimir su imagen para que se marchara como la exreina legendaria, esa cuya mirada nunca fallaba al señalar a la próxima ganadora. La televisión vendía el mito de que, de cada top cinco, cuatro habían sido elegidas por su dedo infalible en la noche final. Y si no llegaban al top, al menos salían con las bandas especiales, la mayoría de ellas impuestas por el peso de su criterio, como una bendición.</p>
+
+            <p class="mb-6 leading-relaxed">La puerta se abrió de golpe. Una joven de cabello hasta las rodillas entró sosteniendo un bolsito. Se retocó el maquillaje como pudo, porque las manos le temblaban como si hubiese sufrido un atraco.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Te sientes bien? —pregunté.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Oh! ¡Sí, sí! No te preocupes. Son los nervios.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Quedaste?</p>
+
+            <p class="mb-6 leading-relaxed">—Sí, acabo de salir. Erica fue un amor de persona. El que no me gustó mucho fue Máximo. No sé si te diste cuenta, pero mira así como... No quiero que suene mal, ¿eh? Quizá tuve una mala impresión...</p>
+
+            <p class="mb-6 leading-relaxed">—¿Como si te juzgara? —me apuré en decir.</p>
+
+            <p class="mb-6 leading-relaxed">—No. Como desnudándome.</p>
+
+            <p class="mb-6 leading-relaxed">Le di la espalda al espejo.</p>
+
+            <p class="mb-6 leading-relaxed">—Ese es su trabajo, quiero decir, ellos necesitan ver nuestro potencial. En realidad, solo te examinaba.</p>
+
+            <p class="mb-6 leading-relaxed">—Supongo. —La muchacha cerró el bolsito—. ¿Tú quedaste?</p>
+
+            <p class="mb-6 leading-relaxed">Asentí, más convencida de ello que nunca.</p>
+
+            <p class="mb-6 leading-relaxed">—Fue muy rápido. En cuanto me vieron, hicieron un par de preguntas y... sí.</p>
+
+            <p class="mb-6 leading-relaxed">—Qué felicidad. En un momento viene la directriz, cómo se llamaba...</p>
+
+            <p class="mb-6 leading-relaxed">—Zara. La llaman «La Madre». Ella se encargará de que tomemos buenas decisiones —dije, queriendo aliviar la tensión de la mentira—. ¿Nunca la has visto en la televisión? Sale todo el tiempo.</p>
+
+            <p class="mb-6 leading-relaxed">—La... madre... —Se ensimismó un segundo. Agarró la bolsita que le colgaba del hombro y le enterró los dedos.</p>
+
+            <p class="mb-6 leading-relaxed">—Te noto muy pálida. ¿Estás segura de que no tienes nada? Puedes ir a enfermería si quieres.</p>
+
+            <p class="mb-6 leading-relaxed">A la muchacha empezó a inflársele el pecho, y creí que se desmayaría. Respiraba demasiado rápido. El aire le salía por la boca, y también el aliento mañanero de no haber desayunado. Se sujetó de mis brazos, apoyando el corazón sobre el mío.</p>
+
+            <p class="mb-6 leading-relaxed">—Discúlpame. Es que necesito hacer algo, y no sé cómo. —Las lágrimas le fluyeron una tras otra.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Quieres vomitar, es eso?</p>
+
+            <p class="mb-6 leading-relaxed">—Tengo que tomarme una pastilla, pero tengo miedo.</p>
+
+            <p class="mb-6 leading-relaxed">—A ver. —Le eché aire con las manos—. ¿Una pastilla de qué? ¿La tienes ahí?</p>
+
+            <p class="mb-6 leading-relaxed">Hurgó la bolsa y sacó un blíster de una sola pastilla. Cuando le di la vuelta y vi lo que era, pensé que esto sería demasiado serio para tomarlo a la ligera. Ni siquiera yo, que lo había intentado un par de veces, me atreví a hacerlo. La vi a los ojos y conseguí una mirada asustadiza.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Cuándo fue? —pregunté.</p>
+
+            <p class="mb-6 leading-relaxed">—Hace dos meses. —Las manos delgadas hicieron parecer sus uñas muy grandes para sus dedos.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Tienes dos meses de retraso?</p>
+
+            <p class="mb-6 leading-relaxed">—Sí, sí. Sé que me descuidé, pero no quería pensar en ello. Este proceso también me consumió. No quise darle cabeza. Tengo miedo de que sea verdad. —Se sacó de la bolsita una caja—. ¿Me ayudas a hacerlo? Aún no sé si lo estoy de verdad.</p>
+
+            <p class="mb-6 leading-relaxed">En su interior lo sabía. Nadie compraba una pastilla abortiva sin al menos haberlo confirmado de alguna manera.</p>
+
+            <p class="mb-6 leading-relaxed">—Solo tienes que orinarle encima. Puedo esperarte aquí afuera.</p>
+
+            <p class="mb-6 leading-relaxed">—Acompáñame. No quiero cargar con este peso yo sola.</p>
+
+            <p class="mb-6 leading-relaxed">Entramos al cubículo. Se bajó las pantaletas e intentó parada. Le dije que se sentara, que las posibilidades de una infección no estaban en los baños de un certamen de belleza. Estuvo ahí un buen rato. Parecía que se hubiese estado aguantando las ganas de orinar, porque aquel chorro duró lo suficiente para hacerse un café instantáneo. Cuando me entregó la prueba, la imagen fugaz de su piel lampiña se me quedó grabada.</p>
+
+            <p class="mb-6 leading-relaxed">Esperamos dentro del cubículo. Preguntó un par de veces si ya estaba listo. No se marcaba nada. Yo, en su lugar, no hubiese esperado tanto para confirmarlo. La pastilla del día después resolvía esos problemas. ¿Qué edad podría tener ella? Bueno, para que la hubiesen aceptado en el concurso, habría tenido dieciocho, mínimo. Una sombra se empezó a dibujar en la ventana de la prueba.</p>
+
+            <p class="mb-6 leading-relaxed">—Mierda... Qué mierda —dijo.</p>
+
+            <p class="mb-6 leading-relaxed">Las dos líneas se mostraron sin duda a errores.</p>
+
+            <p class="mb-6 leading-relaxed">—Bien. Ya está confirmado —le dije—. La decisión ahora es tuya. Puedes tomártela y acabarás con todo esto. O puedes echar esa pastilla a la basura y hacerte de una vida allá afuera.</p>
+
+            <p class="mb-6 leading-relaxed">—¡No! ¡Para nada! Quiero estar aquí. Quiero esa corona. No sabes cuánto he soñado esto. Un bebé lo arruinaría todo. Podría seguir con esto... a ver hasta dónde llega.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Estás loca? Ya hiciste eso y no funcionó. Se te notará en algún momento. Será peor para ti y para esa criatura.</p>
+
+            <p class="mb-6 leading-relaxed">—No la llames así. Eso no es nada. No es una criatura. Es algo que está ahí.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Con quién lo hiciste? ¿Tienes contacto con él?</p>
+
+            <p class="mb-6 leading-relaxed">—Ese es el problema. Fue con un amigo. Se supone que no iba a pasar nada porque estaba en mis días no fértiles...</p>
+
+            <p class="mb-6 leading-relaxed">Los dieciocho años que se cargaba eran quince, definitivamente.</p>
+
+            <p class="mb-6 leading-relaxed">—Tómatela entonces. Si quieres pertenecer a esta vida eso es lo que tienes que hacer. Debes apartar todo lo que te impida crecer, incluyendo a ese amigo tuyo. ¿Qué has ganado con él? Un error como este, eso es. Pero estás a tiempo, ¿sabes? Solo tómate la pastilla.</p>
+
+            <p class="mb-6 leading-relaxed">—¿No me va a pasar nada?</p>
+
+            <p class="mb-6 leading-relaxed">—Nada puede ser peor que estar embarazada en pleno concurso. Hazme caso.</p>
+
+            <p class="mb-6 leading-relaxed">Fue muy rápido. Cuando se la tragó, me miró como si automáticamente sus problemas hubiesen desaparecido. Le volvió el color a la cara y se repitió en voz alta que lo peor ya había pasado, mientras se echaba el pelo hacia atrás. Echó a la basura la prueba de embarazo.</p>
+
+            <p class="mb-6 leading-relaxed">Salió del cubículo y se lavó la cara. Ella tenía todo para ganar, y su cabeza estaba hecha para que la corona le encajara como a nadie. Me vine abajo con su altivez triunfadora.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Nos vamos? —me preguntó, dándose la vuelta.</p>
+
+            <p class="mb-6 leading-relaxed">Salí de la oscuridad del cubículo. No había forma de seguir ocultándolo. Ella me había confiado una situación delicada, dándome la oportunidad de influir en su decisión, y más que eso, acompañarla.</p>
+
+            <p class="mb-6 leading-relaxed">—No creo que debamos...</p>
+
+            <p class="mb-6 leading-relaxed">—¡Ay, no! Ya somos amigas, ¿sí? Deberíamos formar una alianza para llegar al top diez. Tú te ves más experimentada que yo. ¿Desde cuándo tomas clases? Hace un año me estoy formando en esto. Tú debes tener más tiempo.</p>
+
+            <p class="mb-6 leading-relaxed">—Ahí es donde te equivocas. Sucede es que no me aceptaron. No fui elegida por ninguno del jurado porque no hice la inscripción, es decir, sí la hice, pero no les llegó. Ahora tengo que hacer algo... presentarme de nuevo, no sé. No pienso aceptar un «no» como respuesta.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Has optado por conseguir un patrocinador? Varias de las preseleccionadas ni siquiera tendrán que presentar la prueba integral porque vienen directamente de las agencias.</p>
+
+            <p class="mb-6 leading-relaxed">—No tengo dinero para costear eso. Es un milagro que esté aquí en este baño.</p>
+
+            <p class="mb-6 leading-relaxed">—Bueno, no eres la primera que no se puede pagar ni las pantaletas que usará la noche final, ¿sabes? Antonella Rodríguez quedó de primera finalista hace tres años. Seguro conoces ese caso. Era muy pobre, pero supo arreglárselas. La vi hace poco en la novela de las ocho.</p>
+
+            <p class="mb-6 leading-relaxed">—Es mi actriz favorita. Yo también la veo —dije.</p>
+
+            <p class="mb-6 leading-relaxed">—En las agencias ofrecen contratos donde tu trabajas para ellos y luego ellos se quedan con un porcentaje de tu dinero. Creo que por un año. Puedes ingresar al concurso a través de ellos porque están asociados con la Organización. Trabajan con las marcas que los patrocinan.</p>
+
+            <p class="mb-6 leading-relaxed">Jamás se me ocurrió aquello. Estuve tanto tiempo enfocada en el certamen, que ni había considerado tocar las puertas de una agencia de modelos. Yo quería la corona, no caminar en pasarelas con cara de pocos amigos.</p>
+
+            <p class="mb-6 leading-relaxed">—Por favor, dime dónde queda. —Apreté las manos contra mi pecho.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Uff! En la otra punta de la ciudad. Pero es fácil llegar.</p>
+
+            <p class="mb-6 leading-relaxed">Me colé bajo la división del cubículo tras la maleta. En un movimiento rápido, destrabé el cerrojo. Cuando la puerta se abrió, el rostro de la chica se desencajó por completo.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Qué acabas...?</p>
+
+            <p class="mb-6 leading-relaxed">—Esta maleta está prácticamente vacía. Vengo desde La Estrella. No tengo donde quedarme. Le prometí a mi mamá que lograría entrar en el concurso, pero, aunque no sea así, no pienso volver a ese pueblo. Lo odio. No tiene nada bueno para mí ni para nadie.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Dios mío! Hagamos algo: yo te doy la cola hasta MAGENTA y si quieres, te paso buscando de regreso. Me da cosa que andes por ahí. Cuando estés allá pregunta por Julián o Casimiro. Son los que captan a las chicas.</p>
+
+            <p class="mb-6 leading-relaxed">—Te lo agradecería, no sabes cuánto. Este sueño es todo lo que tengo. Por cierto, ¿cuál es tu nombre?</p>
+
+            <p class="mb-6 leading-relaxed">—Naia De La Fuente.</p>
+
+            <p class="mb-6 leading-relaxed">Cuando bajé del auto de su padre —que me había parecido un hombre demasiado mayor para serlo—, le dije a Naia que le escribiría en cuanto terminara. Su padre había trabajado como chofer para la hija de Casimiro, que ahora estudiaba en España, y nos contó que este era un sujeto ejemplar, dedicado por completo a administrar los negocios de sus modelos más influyentes. Había dejado de reclutar chicas en la calle hacía poco más de dos años por problemas de hipertensión y el agobiante calor de la ciudad. Por la descripción, imaginé a un anciano, pero no: apenas rondaba los cuarenta y tantos. Julián era hijo de Casimiro.</p>
+
+            <p class="mb-6 leading-relaxed">Le pregunté al padre de Naia qué edad podría tener Julián entonces, y respondió que había alcanzado los veinte el mes pasado. Lo conocían por ser enamoradizo como una quinceañera, de ahí su olfato para reclutar a las jóvenes y convertirlas en modelos profesionales. La única advertencia del padre de Naia fue: «si Casimiro te rechaza, no les insistas. Prueba suerte con Julián. Tiene mejor genio».</p>
+
+            <p class="mb-6 leading-relaxed">Total Access Models Agency se levantó frente a mí. Lo único que destacaba de la fachada era el logo de metal reluciendo a un costado. El resto estaba cubierto de papel ahumado. Si se miraba con frialdad, parecía un lugar muerto; una caja de cristal hermética que no dejaba escapar ni un solo sonido hacia la calle. La recepcionista me recibió con la sonrisa más gentil que había visto nunca.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Cómo puedo ayudarte, preciosa? ¿Vienes por la apertura de los cursos?</p>
+
+            <p class="mb-6 leading-relaxed">—Oh, no. Más bien quería saber dónde queda la oficina de Julián.</p>
+
+            <p class="mb-6 leading-relaxed">—Julián está almorzando, querida. Tardará una hora en volver. El que sí está es Casimiro. ¿Tienes cita previa? —Levantó el teléfono.</p>
+
+            <p class="mb-6 leading-relaxed">Se me escapaba de las manos. Alargar el golpe solo me haría perder el tiempo, y mas bien Naia y su padre estaban haciendo demasiado por mí. Tenía que terminar con esto rápido. Despertar interés. Que la palabra «no» fuese lo último que se ocurriera contestar a Casimiro cuando la recepcionista le mencionara el nombre de una desconocida.</p>
+
+            <p class="mb-6 leading-relaxed">—Sí. Dígale que le traigo un recado de España.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Su nombre es?</p>
+
+            <p class="mb-6 leading-relaxed">—Lidia Medrano.</p>
+
+            <p class="mb-6 leading-relaxed">Asintió un par de veces, mientras se enrollaba el cable del dedo. Colgó el teléfono.</p>
+
+            <p class="mb-6 leading-relaxed">—Arriba a la derecha, tercera puerta.</p>
+
+            <p class="mb-6 leading-relaxed">Toqué la puerta y me anuncié. El hombre que me recibió estaba sentado en su escritorio, concentrado en algo más importante que cualquier cosa.</p>
+
+            <p class="mb-6 leading-relaxed">—Pasa...</p>
+
+            <p class="mb-6 leading-relaxed">—Buenas tardes, señor Casimiro. —Cerré la puerta detrás de mí—. Vengo de parte de un conocido de usted. Del señor José Carlos. Trabajó para usted hace un tiempo.</p>
+
+            <p class="mb-6 leading-relaxed">—Sí, el chofer de mi hija. ¿Qué hay con eso?</p>
+
+            <p class="mb-6 leading-relaxed">—Él me recomendó venir hasta acá. Soy de La Estrella. Quise participar en el concurso Señorita Costasol, pero no me dieron la oportunidad. Hubo un inconveniente con la inscripción vía online y no...</p>
+
+            <p class="mb-6 leading-relaxed">—¿Y qué tengo que ver yo con todo eso? —dijo, con la mirada en la pantalla.</p>
+
+            <p class="mb-6 leading-relaxed">Hasta ahora, ni me había mirado.</p>
+
+            <p class="mb-6 leading-relaxed">—Naia, la hija de José Carlos, me comentó que usted es un hombre capaz de convertir a una pordiosera a una estrella de verdad. Allá afuera, en las calles, todas lo ven como un señor de respeto, ¿sabe? Admiran lo que saben hacer sus manos, y yo soy una de ellas.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Ah, sí? ¿Y qué quieres tú? —Me vio de abajo hacia arriba.</p>
+
+            <p class="mb-6 leading-relaxed">Su mirada se había detenido en el área del abdomen y luego en el busto. El escaneo fue fugaz, sin embargo, cuando se topó con mi rostro, regresó la atención a la pantalla—.</p>
+
+            <p class="mb-6 leading-relaxed">¿Por qué estás parada aquí?</p>
+
+            <p class="mb-6 leading-relaxed">—Quiero entrar al concurso Señorita Costasol, pero desde su agencia.</p>
+
+            <p class="mb-6 leading-relaxed">—A ver, a ver... las inscripciones para reclutar modelos no se abrirán hasta septiembre, y vaya, decir que quieres estar en mi agencia solo para concursar es... muy directo —dijo, atraído.</p>
+
+            <p class="mb-6 leading-relaxed">—Señor Casimiro, soy de La Estrella. Vine con nada en esta maleta y estoy dispuesta a hacer lo que usted quiera, con tal de estar aquí. Odiaría tener que volver a ese pueblo infernal donde nadie tiene deseos de crecer. Las muchachas ya no quieren estudiar, los esposos quieren sirvientas de esposas, las personas mayores se alimentan de chismes a toda hora... Ese no es mi lugar.</p>
+
+            <p class="mb-6 leading-relaxed">—Vaya que es así. —Conseguí que se levantara—. Estuve un tiempo allá y solo traje conmigo pescado y un horrible acento que se me pegó. Tú no lo tienes.</p>
+
+            <p class="mb-6 leading-relaxed">—Cuido mi vocabulario, señor. Estoy convencida que una mujer culta y abierta de mente debe copiar las cosas positivas de las demás personas, no las negativas.</p>
+
+            <p class="mb-6 leading-relaxed">Casimiro se sentó sobre el escritorio. La forma de sus ojos me atrapó. Eran cazadores. El bigote se le movía con cada respiración, sobre todo cuando entreabría los labios.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Tienes novio?</p>
+
+            <p class="mb-6 leading-relaxed">—¿Disculpa?</p>
+
+            <p class="mb-6 leading-relaxed">—Que si tienes novio, Lidia.</p>
+
+            <p class="mb-6 leading-relaxed">—No, qué va. No estoy enfocada en eso.</p>
+
+            <p class="mb-6 leading-relaxed">—Pero sí has tenido alguna vez.</p>
+
+            <p class="mb-6 leading-relaxed">—Como todo, señor. ¿Por qué me lo pregunta?</p>
+
+            <p class="mb-6 leading-relaxed">—Se les exige a las reinas de belleza no tener pareja, hijos o estar casadas. Pareces muy linda como para no tener ninguna de las tres. ¿Tienes diecinueve, cierto?</p>
+
+            <p class="mb-6 leading-relaxed">—Usted tiene un ojo biónico.</p>
+
+            <p class="mb-6 leading-relaxed">—Bueno, muchacha, déjame decirte que fuiste bendecida con tu genética. Tienes una belleza distinta. Tu mezcla indígena, pero sin llegar a serlo en su totalidad es cautivadora. Tienes dientes sanos, el pelo bueno y me gusta tu nariz. Tienes pocos senos, pero eso no es un problema. Tus caderas lo compensan. Si hubo alguien que te rechazó, es porque no te vieron bien. Las Organizaciones hoy en día quieren mujeres diferentes. Las rubias pasaron de moda.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Usted puede ayudarme a estar en el concurso?</p>
+
+            <p class="mb-6 leading-relaxed">—Para nada. No soy Dios. Pero me gustaría llegar a un acuerdo contigo para que trabajes en MAGENTA, claro, si te gustaría.</p>
+
+            <p class="mb-6 leading-relaxed">Quise contener la sonrisa para que no notara los dientes torcidos. Cualquier trabajo que consiguiera sería mejor que atender mesas. Esto no estaba del todo alineado con mi deseo de participar por la corona, pero no importaba en absoluto. Había maneras, y esta era una de ellas para comenzar.</p>
+
+            <p class="mb-6 leading-relaxed">—Claro..., sí. ¿De qué se trata?</p>
+
+            <p class="mb-6 leading-relaxed">—La revista Kode hizo una alianza con Zebra, la marca de maquillaje, ¿la conoces?</p>
+
+            <p class="mb-6 leading-relaxed">—Viviría debajo de una piedra si no.</p>
+
+            <p class="mb-6 leading-relaxed">—Están buscando una modelo natural, específicamente para una colección de paletas de sombras. Creo que puedes gustarles. Quieren un reto difícil, y tus ojos rasgados lo son. Hagamos algo. No irás con ellos. Te quedarás aquí. Pediremos una comisión para nosotros, tú te quedas con tu parte, así te ayudas, pero seguirás trabajando para mí. ¿Te parece bien eso? ¿O es poco? Serás una de nuestras modelos nova.</p>
+
+            <p class="mb-6 leading-relaxed">—Qué... No, señor. Es perfecto. Quiero estar aquí, a su lado. Aprender todo lo que pueda. Le prometo que no lo defraudaré.</p>
+
+            <p class="mb-6 leading-relaxed">—No lo hagas. Lo que estoy haciendo es darte una beca.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Sobre el concurso...? —me apresuré en preguntar.</p>
+
+            <p class="mb-6 leading-relaxed">—Tienes que hacer algo que llame la atención del jurado. O poner a dos de ellos a tu favor. Usa lo que tienes. Usa tu voz. Hablas muy bien. Transmites cercanía. Quiero que explotes tus atributos y les sepas sacar provecho. Cuando te dije que tenías poco pecho me refería para estar en el concurso. Aquí en MAGENTA entre menos tetas y culo tengas, mejor. Insisto: no te preocupes por eso. Las clases de una modelo son distintas a las de una reina de belleza, pero empezar por aquí no te caería nada mal.</p>
+
+            <p class="mb-6 leading-relaxed">—Señor, las inscripciones del certamen cerrarán en una semana.</p>
+
+            <p class="mb-6 leading-relaxed">—Entonces estás perdiendo tiempo hablándome. Mira, te haremos un intensivo. Si quedas seleccionada en el concurso, o no, igualmente seguirás perteneciendo a MAGENTA. Estarás prácticamente internada aquí, Lidia. Una semana, de ocho de la mañana a ocho de la noche. Luego pasarás a tu horario normal.</p>
+
+            <p class="mb-6 leading-relaxed">—Señor Casimiro, déjeme abrazarlo, por favor. Usted está haciendo mis sueños realidad.</p>
+
+            <p class="mb-6 leading-relaxed">—No, muchacha. Tú tienes con qué. Te mandaré el horario, las clases, y lo que necesitas a tu correo. Anota mi número. —Cuando saqué el celular, largó la risa—. ¿Qué es eso? ¿Un dinosaurio? Ay, muchacha... Te haré el favor de regalarte uno nuevo. Será usado, pero mil veces mejor que esa cosa.</p>
+
+            <p class="mb-6 leading-relaxed">—Muchas gracias. Aunque el único regalo que necesito ahora una llamada. —Había olvidado que no tenía renta—. Naia vendrá por mí.</p>
+
+            <p class="mb-6 leading-relaxed">La esperé a las afueras de la agencia. No me había detenido a mirar la capital desde que había llegado. La Perla, de rascacielos donde se reflejaban aviones cuando pasaban, era tal cual como la mostraban en el noticiero. A veces empañando su belleza con tragedias que nunca faltaban, otras donde la destacaban por el sinnúmero de actividades económicas que alimentaba al resto del país. De las catorce ciudades que tenía Costasol, mis favoritas eran La Perla, Mares y Viento Dulce. Cada una destacaba, bien sea por la imponencia de las edificaciones o por las fiestas en las discotecas más sonadas. Cualquier lugar era mejor que La Estrella, aunque los grandes empresarios la preferían para relajarse en vacaciones y comercializar la sal y los peces.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Qué te dijo el viejo Casimiro? —preguntó Naia en cuanto cerré la puerta del carro.</p>
+
+            <p class="mb-6 leading-relaxed">—Funcionó. Me dio la oportunidad de pertenecer a la agencia. Claro, llegamos a un acuerdo donde estaré trabajando para ellos, se quedarán con las ganancias, pero me darán una parte. —Miré al señor José Carlos por el retrovisor a gusto con la noticia.</p>
+
+            <p class="mb-6 leading-relaxed">—Te dije que esa sería la oportunidad de tu vida —reafirmó Naia.</p>
+
+            <p class="mb-6 leading-relaxed">—Dijo que me daría un teléfono.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Lo enamoraste? Dime la verdad.</p>
+
+            <p class="mb-6 leading-relaxed">—Creo que yo me enamoré de él, mas bien. Me está dando más de lo que le pedí. Naia, pero tengo un problema ahora.</p>
+
+            <p class="mb-6 leading-relaxed">—No me lo digas. Te quedarás conmigo. La casa es demasiado grande. Podemos ayudarnos entre las dos. Además, ya vas a empezar a trabajar. Te prestaré mi ropa. No se diga más.</p>
+
+            <p class="mb-6 leading-relaxed">—Jamás tendré dinero suficiente para pagarte esto. —En ese momento recordé que estas mismas palabras ya las había repetido en el pasado.</p>
+
+            <p class="mb-6 leading-relaxed">—No quiero tu dinero. Con que me ayudes a ganar la corona, será suficiente.</p>
+
+            <p class="mb-6 leading-relaxed">Le presté atención a su casa con el mismo interés de una niña en una juguetería. La mujer de limpieza quiso recibirme la maleta, pero me negué. Subimos a la habitación de Naia, que fácilmente podría tratarse de toda mi casa en La Estrella.</p>
+
+            <p class="mb-6 leading-relaxed">—¿No te aburres aquí sola?</p>
+
+            <p class="mb-6 leading-relaxed">—Cuando tu novio se mete por la ventana, no.</p>
+
+            <p class="mb-6 leading-relaxed">Puse la maleta en un rincón del cuarto porque arruinaba el ambiente tan pulcro.</p>
+
+            <p class="mb-6 leading-relaxed">—Ven. Voy a preparar la tina.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Tienes una tina? Dios mío, siempre quise una.</p>
+
+            <p class="mb-6 leading-relaxed">—Te va a encantar.</p>
+
+            <p class="mb-6 leading-relaxed">Naia se desabrochó la camisa. Me hice a un lado, igual que a la maleta. Quedó como vino al mundo, y esta vez solo me quedó mirarme en su espejo, cuya energía me recordó a la del baño de La Pecera.</p>
+
+            <p class="mb-6 leading-relaxed">—Ven —dijo.</p>
+
+            <p class="mb-6 leading-relaxed">—¿A dónde?</p>
+
+            <p class="mb-6 leading-relaxed">—A bañarte conmigo.</p>
+
+            <p class="mb-6 leading-relaxed">—Estás desnuda, Naia.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Qué tiene? Tenemos lo mismo, ¿no? La tina se llena rápido. Date prisa.</p>
+
+            <p class="mb-6 leading-relaxed">—Dame una toalla, por favor.</p>
+
+            <p class="mb-6 leading-relaxed">—Está en el armario. Toma una.</p>
+
+            <p class="mb-6 leading-relaxed">Se adelantó a preparar una mezcla en la tina. La vi echándole esencias raras al agua y menearla con la mano, mientras su retaguardia formaba un corazón perfecto. Esta muchacha estaba loca. ¿Cómo se desnudaba frente a una extraña? ¿Dónde estaba su madre? ¿Para qué participar en el Señorita Costasol, si no le faltaba nada en casa? Seguro hasta tenía cocinero profesional. Parecía genuina, desinhibida, pero no me acostumbraba a ello. Incluso entre Emily y yo existía una distancia sana cuando se trataba de cambiarnos frente a la otra.</p>
+
+            <p class="mb-6 leading-relaxed">La vi metida en la tina, con la cabeza echada hacia atrás.</p>
+
+            <p class="mb-6 leading-relaxed">—Métete.</p>
+
+            <p class="mb-6 leading-relaxed">Aquello me incomodaba. Hice el esfuerzo de cubrirme, pero en cuanto me fui sentando tuve que retirar la toalla. El agua era una maravilla. Tibia. La espuma soltaba aroma a canela.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Cómo te sientes? —le pregunté, trayendo el recuerdo de la mañana.</p>
+
+            <p class="mb-6 leading-relaxed">—Estupenda.</p>
+
+            <p class="mb-6 leading-relaxed">—Tal vez sangres más tarde, o mañana.</p>
+
+            <p class="mb-6 leading-relaxed">—Ya veremos. —Me observó fijo, y comenzó a reírse—. ¡Tu pelo no es liso natural!</p>
+
+            <p class="mb-6 leading-relaxed">—No. Tiene ondas muy feas. Aquí en la frente sobre todo.</p>
+
+            <p class="mb-6 leading-relaxed">—Todas tenemos algo que cambiar de nuestros cuerpos —dijo.</p>
+
+            <p class="mb-6 leading-relaxed">Nadé hacia ella, robándole las burbujas.</p>
+
+            <p class="mb-6 leading-relaxed">—Eso no es cierto. Tu eres bonita. ¿Tuviste brackers?</p>
+
+            <p class="mb-6 leading-relaxed">—Cuatro largos años. Los detesté como nunca.</p>
+
+            <p class="mb-6 leading-relaxed">Me hundí hasta que el agua sobrepasó mi nariz, pero no los ojos. Naia quizá se preguntaba si se trataba de iniciar una competencia bajo el agua. Pero no. Quería cautivarla y oír lo que me susurraba su cuerpo en contacto con el mío. La punta de sus dedos me alcanzó un muslo. Fue más adentro. La aparté, hundiéndome en su totalidad. Ahí abajo, entre sus piernas lampiñas, la curiosidad la llamó. Le gustaba el calor que emitía mi cuerpo cuando me acercaba. Lo hacía cada momento.</p>
+
+            <p class="mb-6 leading-relaxed">Salí a flote, convencida que esta ducha con ella me había pegado su suerte.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Qué tienes, que llamas tanto la atención? —me preguntó.</p>
+
+            <p class="mb-6 leading-relaxed">—Seguridad en mí misma.</p>
+        `
+    },
+    {
+        id: 3,
+        title: "Capítulo 3",
+        subtitle: "Contrato de sangre",
+        content: `
+            <p class="drop-cap mb-6 leading-relaxed">La colchoneta de Naia me había resultado más cómoda que la cama de mi casa. No extrañaba para nada el hueco en el que caía a penas me sentaba ni el olor a talco rancio de la última vez que Emily se orinó, hacía más de cuatro años.</p>
+
+            <p class="mb-6 leading-relaxed">Esperé que Naia estuviese completamente dormida. Me levanté cuando sus ronquidos garantizaron que estaría en cualquier lado, menos consciente. Le abrí la laptop y volví a leer el correo del señor Casimiro. Teníamos que discutir ese fulano contrato de exclusividad. Los primeros párrafos del archivo sonaban convincentes, pero luego las oraciones se tornaban ambiguas, y las ideas no parecían cerrar.</p>
+
+            <p class="mb-6 leading-relaxed">El pago por adelantado, los productos de cuidado de la piel y el maquillaje me caerían como anillo al dedo al momento de participar en el concurso. Un año entero de beneficios. Perfecto. La colaboración con Soomka también incluía de regalo una plancha para el cabello, así terminaba de remplazar de una vez por todas mi modelito de la era Picapiedra, que calentaba solo cuando le daba golpecitos a la pantalla.</p>
+
+            <p class="mb-6 leading-relaxed">Pero las cláusulas del contrato que me predispusieron a indagar en internet fueron las de acceso exclusivo a Soomka. Esto no me convenía. Les pertenecería indefinidamente, y lo peor, sin la posibilidad de asociarme con otras marcas a futuro. Esto me quitaba terreno. La otra cláusula trataba de la imagen. De nuevo sin fechas establecidas. Otra más de... ¿renovación automática tácita? ¡Qué carajos! Mañana el señor Casimiro tendría que darme una explicación a todo esto.</p>
+
+            <p class="mb-6 leading-relaxed">En cuanto al certamen, Naia sería mi pieza ganadora. La muy inocente, sin siquiera darse cuenta, me estaba ayudando más de lo que yo lo haría alguna vez con ella.</p>
+
+            <p class="mb-6 leading-relaxed">Al día siguiente me encontré en la oficina del señor Casimiro a la hora exacta que indicaba el correo. Él no había llegado. Me paseé por su oficina, viendo las fotos de sus hijos en los portarretratos, los reconocimientos por su larga trayectoria en MAGENTA y los lápices mordisqueados en el portalápices artesanal, que seguro le había regalado su hija.</p>
+
+            <p class="mb-6 leading-relaxed">Qué sujeto... La fotografía junto a su hijo tenía algo especial. No por el hecho de que ambos fuesen idénticos, sino porque el aura que los rodeaba gritaba «poder». Relojes de oro. Dientes con carillas. Trajes de corbata. En cambio, la foto con su hija era más amena. Una niña sentada a sus pies mostrándole a la cámara un peluche sin estrenar, envuelto.</p>
+
+            <p class="mb-6 leading-relaxed">El señor Casimiro la miraba, y pude trasladarme a ese día. La esposa había sacado la cámara porque pensó que el día y las montañas del fondo eran el escenario perfecto para una foto. Se había enfocado en el Señor Casimiro, porque tenía una sonrisa deliciosa. Entre más se carcajeaba, más pequeños se le ponían los ojos. Luego en su hija, que era el vivo retrato de ella. En un par de segundos vi en esa foto lo mismo que había visto su difunta esposa, al enamorarse de él.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Te traigo buenas noticias! —dijo Casimiro, entrando con un maletín en la mano—. El contrato es casi un hecho. Tenemos que preparar tus fotografías para enviarlas a Soomka y que te den el visto bueno. Por eso llegué tarde, ¿eh? No creas que soy un irresponsable. Quieren verte. Les hablé de ti. Dijeron que, con un par de retoques, ortodoncia y bla bla bla, estarías perfecta. ¡Pero no! ¡Me opuse! Tu belleza se trata de naturalidad. Además, posarás para una marca de sombras, no para pintalabios. Están dispuestos a pagar por adelantado, como te dije anoche. —Se dispuso a sacar su agenda del escritorio y hojear hasta conseguir un número—. Llamaré al fotógrafo. Necesitamos enviar esas polas hoy.</p>
+
+            <p class="mb-6 leading-relaxed">—Casimiro, tengo dudas sobre el contrato.</p>
+
+            <p class="mb-6 leading-relaxed">Dejó el teléfono en su lugar y se tomó de las manos.</p>
+
+            <p class="mb-6 leading-relaxed">—Es la primera vez que me tuteas. ¿Tan pronto se te fue el respeto?</p>
+
+            <p class="mb-6 leading-relaxed">—Para nada. —Me acerqué a su asiento—. Te respeto por el hombre que eres. Admiro tu trabajo y lo que has hecho con tus modelos. Solo quisiera asegurar unos puntos —dije, devolviéndome al asiento.</p>
+
+            <p class="mb-6 leading-relaxed">Tomé la carpeta y el contrato impreso que Naia me había hecho el favor de imprimir.</p>
+
+            <p class="mb-6 leading-relaxed">—No me lo digas. ¿Es por la parte de la indefinición del contrato? Lo coloqué en blanco para que tuvieras la oportunidad de elegir cuánto tiempo querías estar en la agencia. Sé que tu deseo es irte al certamen. Pero desde ya te digo que lo mínimo es un año, ¿eh?</p>
+
+            <p class="mb-6 leading-relaxed">—Esa parte no. Hay algo aquí —Le señalé con el dedo— que habla sobre concesión de derechos de uso. ¿Qué es eso? ¿Para qué usarán mi imagen?</p>
+
+            <p class="mb-6 leading-relaxed">—Bueno, Lidia, para las vallas, revistas, la televisión. Saldrás en un folleto, ¿sabías? En Soomka te pondrán como la imagen de la colección de otoño, y yo tengo que cuidar tus derechos y tu bolsillo. Mi propuesta es esta: 70% para la agencia, 30% para ti, descontando los impuestos.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Eso es un abuso! Deberíamos ir mitad y mitad.</p>
+
+            <p class="mb-6 leading-relaxed">—Querida, ¿acaso no estás viendo más allá de tus propios ojos? Te di la oportunidad de estar con nosotros, te conseguí un trabajito que paga bien, estarás formándote y rodeándote de gente privilegiada... y dices que es abuso. Te falta humildad, Lidia. Evalúa eso.</p>
+
+            <p class="mb-6 leading-relaxed">—Conozco lo que me toca, Casimiro. Quiero un 80%.</p>
+
+            <p class="mb-6 leading-relaxed">—Estás soñado.</p>
+
+            <p class="mb-6 leading-relaxed">—Hablo en serio.</p>
+
+            <p class="mb-6 leading-relaxed">Casimiro se levantó como un perro a punto de atacar. Rodeó su escritorio y cerró las persianas, asegurando que nadie nos estuviese viendo.</p>
+
+            <p class="mb-6 leading-relaxed">—Escúchame —Los labios se movieron muy rápido—, si me da la gana te expulso de la agencia. Puedo hacer que tu vida sea maravillosa o hacerte desaparecer. Nadie conocerá tu nombre. ¿Quieres eso?</p>
+
+            <p class="mb-6 leading-relaxed">—¿Me chantajeas?</p>
+
+            <p class="mb-6 leading-relaxed">—No seas boba, Lidia. ¿Qué puedo querer yo de ti? Tengo modelos de élite. Todas preciosas. Todas con un sueldo que les daría para alimentar a tres generaciones. Hazme el favor de comportarte. Suenas igual que los gritones de La Estrella. No saben hablar. Vamos, acepta la oferta. Discutiremos los demás puntos y llamo al fotógrafo, ¿sí?</p>
+
+            <p class="mb-6 leading-relaxed">—Dame el 50%</p>
+
+            <p class="mb-6 leading-relaxed">—40%, y no lo vamos a discutir más. No te conozco, pero en tu rostro veo la vida miserable de ese pueblo al cual no quieres regresar. Ahora, acordemos los otros puntos, firmas y hablaré con Julián para que te lleve al área de los estilistas. Hay que arreglarte el pelo y la piel antes de las fotos.</p>
+
+            <p class="mb-6 leading-relaxed">El contrato final seguía beneficiando a la agencia de todos modos, pero opté por el tiempo mínimo. Un año. Todas las ganancias me las administraría el señor Casimiro, no la agencia, para ayudarme a tomar decisiones con respecto a los temas financieros. Me costearían vestuario y calzado y, a pesar de que el 40% fuese una miseria a comparación de la paga de otras modelos, para mí era suficiente.</p>
+
+            <p class="mb-6 leading-relaxed">En cuanto mi firma redonda estuvo sobre el papel Casimiro me adelantó parte del pago. Cien dólares, con lo que me alcanzaría para una semana de comida. Bien, al menos vivía con Naia y me ahorraba el tema del transporte. Esto lo guardaría como oro dentro de la maleta. Debía ir buscando alquiler. Mamá y Emily tendrán que esperar.</p>
+
+            <p class="mb-6 leading-relaxed">Casimiro regala tlfff</p>
+
+            <p class="mb-6 leading-relaxed">Julián no estuvo cuando fue la hora de iniciar el protocolo. No hizo falta. Ubiqué muy rápido dónde quedaba cada cuarto, pero Casimiro insistió en que alguien debía ir conmigo, por eso asignó a una jovencita que se encargaría de abogar por mí cuando me preguntaran:</p>
+
+            <p class="mb-6 leading-relaxed">—¿Que tú vienes a qué?</p>
+
+            <p class="mb-6 leading-relaxed">—Casimiro la becó —dijo la joven.</p>
+
+            <p class="mb-6 leading-relaxed">—Pero las postulaciones se abren hasta septiembre.</p>
+
+            <p class="mb-6 leading-relaxed">—Sí, claro, sucede que la quieren como la nueva imagen de Soomka.</p>
+
+            <p class="mb-6 leading-relaxed">El resto de modelos en preparación me dirigieron miradas en silencio. En toda la mañana ninguna cruzó palabra conmigo. Todas estaban enfocadas en lo suyo, bastante ocupadas para prestarle atención a la recién llegada.</p>
+
+            <p class="mb-6 leading-relaxed">El proceso fue fastidioso. Me lavaron el cabello como nunca. Escuchaba a la mujer golpear las tapas de los frascos de champú cuando los cerraba. La porcelana de la bañera me lastimaba la nuca. Después de eso arreglaron las uñas de las manos y los pies, mientras otra chica me hacía un tratamiento en el rostro, que duró horas. Una vez que terminaron y me vi al espejo, no vi cambio alguno, pero Casimiro comentó que ya estaba teniendo verdadero porte de mujer.</p>
+
+            <p class="mb-6 leading-relaxed">Cuando estuve frente al fotógrafo, me invadió un enorme sentimiento de nervios, que reflejaba como risas descontroladas.</p>
+
+            <p class="mb-6 leading-relaxed">—Perdóname —dije—. No sé hacer esto. Estoy muy nerviosa. —Le mostré las manos al fotógrafo, comprobando que temblaban como un pedazo de gelatina—. Nunca he hecho esto.</p>
+
+            <p class="mb-6 leading-relaxed">—Mira, es más sencillo de lo que piensas. Olvídate de las poses o de parecer perfecta. Quiero que te muestres natural.</p>
+
+            <p class="mb-6 leading-relaxed">—Es decir, ¿solo sonrío?</p>
+
+            <p class="mb-6 leading-relaxed">—Sí. Ponte de perfil, por favor. —Escuché el obturador—. De espalda... —Otro sonido—. Perfil otra vez... Y... de frente.</p>
+
+            <p class="mb-6 leading-relaxed">Cuando miré la cámara la sonrisa desapareció. No me apetecía parecer amigable o simpática. Quería que la cámara captara lo que había detrás de mi rostro. Que lo oculto saliera a la luz y lo falso se derribara. El flash no se disparó. A través del lente sentí esa misma energía con la que conectaba mirándome al espejo. El fotógrafo estaba viendo algo. Ajustó la cámara. Esperó. Cuando la luz me envolvió, la cámara terminó de captar aquello que por voluntad propia le había mostrado al lente.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Cómo dijiste que te llamas? Disculpa —preguntó.</p>
+
+            <p class="mb-6 leading-relaxed">—Lidia Medrano. Tú eres Héctor.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Cómo lo sabes?</p>
+
+            <p class="mb-6 leading-relaxed">—Casimiro lo dijo. —Me acerqué a él—. ¿Quedaron bien?</p>
+
+            <p class="mb-6 leading-relaxed">—Compruébalo tú misma.</p>
+
+            <p class="mb-6 leading-relaxed">Jamás había visto semejante calidad de foto. Creía que si le hacía zoom descubriría los pelos que me salían en las mejillas. La foto de frente captó lo que le mostré. Una Lidia atrevida de mirada lobuna.</p>
+
+            <p class="mb-6 leading-relaxed">—Tengo que hacerte un par de fotos más con el pelo recogido. Oye, a Casimiro no le gusta que haga esto, pero —Sacó de su maleta una tarjeta blanca— si necesitas trabajo extra puedes llamarme. Trabajo en Bijou, la revista semanal.</p>
+
+            <p class="mb-6 leading-relaxed">—No te creo. A mi hermana le encantaría conocerte. Ama esas revistas. Bueno, apenas tiene dos ediciones, pero se la pasa recortando las fotos y diciendo que será como esas modelos cuando sea grande.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Qué se lo impide? Si es como tú, no le costará nada.</p>
+
+            <p class="mb-6 leading-relaxed">Le di la espalda al asunto.</p>
+
+            <p class="mb-6 leading-relaxed">—Terminemos, ¿se puede?</p>
+
+            <p class="mb-6 leading-relaxed">—Disculpa, Lidia. ¿Dije algo inapropiado?</p>
+
+            <p class="mb-6 leading-relaxed">—No, es que mi hermana está en La Estrella con mi mamá. Necesito concretar esto pronto para enviarles dinero. No es fácil para mí estar aquí. La ciudad es... estresante.</p>
+
+            <p class="mb-6 leading-relaxed">—Cuando necesites trabajo puedes buscarme, de verdad. Hago sesiones de fotos que se venden en internet. La paga no es una maravilla, pero te salva de un aprieto.</p>
+
+            <p class="mb-6 leading-relaxed">—Gracias, Héctor.</p>
+
+            <p class="mb-6 leading-relaxed">Recibí una llamada de Naia.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Cómo te está yendo en la preparación? —pregunté.</p>
+
+            <p class="mb-6 leading-relaxed">—Lidia —jadeó—, ven a buscarme, por favor.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Qué tienes? Llama a tu papá. Seguro llega más rápido.</p>
+
+            <p class="mb-6 leading-relaxed">—Me siento mal, Lidia. Quiero vomitar, me duele el vientre. —La oí tener arcadas—. Estoy en el baño encerrada. Están tocando la puerta. Hay mucha sangre aquí...</p>
+
+            <p class="mb-6 leading-relaxed">—Dios mío. Tranquila... Estoy tomando un taxi. No cortes.</p>
+
+            <p class="mb-6 leading-relaxed">Casimiro me hizo señas con la mano.</p>
+
+            <p class="mb-6 leading-relaxed">—¿A dónde vas? Tienes tu primera clase de pasarela en cinco minutos. No puedes llegar tarde.</p>
+
+            <p class="mb-6 leading-relaxed">—Tengo una emergencia médica, Casimiro. Te prometo que mañana vengo temprano.</p>
+
+            <p class="mb-6 leading-relaxed">—Lidia, esto es serio. La profesora te va a penalizar.</p>
+
+            <p class="mb-6 leading-relaxed">—Mi amiga está enferma. Puede morirse.</p>
+
+            <p class="mb-6 leading-relaxed">Me lancé a la carretera, intentando parar un taxi. Las bocinas rebotaron en los edificios, y el semáforo en verde ocasionó un estallido de insultos por las ventanas.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Párese! ¡Párese!</p>
+
+            <p class="mb-6 leading-relaxed">Cuando abrí la puerta, me metí y el carro arrancó, el flujo volvió a la normalidad. Entré corriendo a la Pecera. No supe con cuántas personas me había cruzado al ser mediodía, pero nada de eso importó cuando vi la línea roja expandirse bajo la puerta del baño.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Naia, ábreme! ¡Naia! —Toqué la puerta con la mano abierta.</p>
+
+            <p class="mb-6 leading-relaxed">Afiné el oído. Ni una respiración. Se había desmayado.</p>
+
+            <p class="mb-6 leading-relaxed">—¡Auxilio! ¡Traigan la llave del baño, por favor!</p>
+
+            <p class="mb-6 leading-relaxed">A Naia la atendieron de emergencia. Después de esto le mandarían reposo quién sabe por cuanto tiempo, lo que significaba que no podría asistir a las clases, y eventualmente ser descalificada. Mierda. Esto lo había perjudicado todo.</p>
+
+            <p class="mb-6 leading-relaxed">Salí a dar una vuelta, encontrando a un periodista en la puerta de la clínica.</p>
+
+            <p class="mb-6 leading-relaxed">—Señorita, ¿qué nos puede decir sobre la salud de su compañera? ¿Esto es por culpa de una negligencia médica, quizá? Se especula que las muchachas son atendidas por médicos de Montenegro, que carecen de los permisos sanitarios para realizar cirugías estéticas.</p>
+
+            <p class="mb-6 leading-relaxed">El lente de la cámara, como un gran ojo, me abarcó el rostro.</p>
+
+            <p class="mb-6 leading-relaxed">—Yo no sé nada. Quiero salir. Permiso.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Es cierto que la exreina de belleza Erica Maldonado les está exigiendo a las candidatas someterse a regímenes alimenticios extremos?</p>
+
+            <p class="mb-6 leading-relaxed">—Ya le dije que no sé.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Entonces confirma que la situación de su compañera fue autolesión por depresión?</p>
+
+            <p class="mb-6 leading-relaxed">Si la imagen de Naia se dañaba con esto, no tendría oportunidad de regresar al concurso más nunca. Estos escándalos ponían al certamen en el ojo público, al jurado, el presidente, a todo el mundo, y si Naia no clasificaba, mis oportunidades de ingresar se iban a la mierda.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Le parece que una muchacha de diecinueve años, con toda una vida por delante tiene ganas de quitarse la vida por un rechazo del jurado? Usted está enfermo si cree eso. Naia está en esta clínica porque tiene un problema de salud. Tiene que ser operada de un mioma. Y si no sabe qué es porque solo le interesa crear chismes alrededor de la Organización, le recomiendo que lo investigue. ¡Estamos hartas de patanes como ustedes, que andan con ese micrófono y esa cámara a todas partes acosando a las candidatas del Miss Costasol! ¡Le voy a pedir que se retire, tenga respeto por el dolor ajeno!</p>
+
+            <p class="mb-6 leading-relaxed">Crucé la calle y me metí en la panadería del frente. Me tumbé frente al mostrador, drenada. Eso tuvo que haber sido más que suficiente para salvarle el pellejo a Naia y asegurarle la banda en el concurso.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Qué va a querer, señorita? —preguntó el joven.</p>
+
+            <p class="mb-6 leading-relaxed">Nada más que la prensa dejara de arruinar todo lo que tocaba. Si Naia entraba a ese concurso, yo también lo haría. Tenía poco tiempo antes de que las inscripciones cerraran, pero este paso me había visibilizado. ¿Pelear a favor del Certamen? Nadie había hecho eso nunca. Educaban a las participantes para hablar con palabras rebuscadas, con el tono de voz agraciado y sin ánimos de ofender. Yo hice lo contrario. Desconocía si al certamen le convenía tener a los periodistas todos los días en la puerta, pero cualquier error que cometiera cualquiera, aunque se tratara de una simple caía de pelo, lo tomarían para desprestigiar al concurso o para elevarlo, según su conveniencia.</p>
+
+            <p class="mb-6 leading-relaxed">—Un café marrón, por favor.</p>
+
+            <p class="mb-6 leading-relaxed">Regresé a los treinta minutos del escándalo. El papá de Naia estaba en la sala de espera. Dijo que Naia había despertado y que aún no sabía qué pudo haberle ocasionado el sangrado. La fui a ver.</p>
+
+            <p class="mb-6 leading-relaxed">Parecía una momia de lo pálida que estaba.</p>
+
+            <p class="mb-6 leading-relaxed">—Lidia, pasa, y cierra la puerta. Se están asomando mucho por la ventanilla.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Cómo te sientes?</p>
+
+            <p class="mb-6 leading-relaxed">—Mejor, ya no me duele nada. Creo que esa cosa ya salió.</p>
+
+            <p class="mb-6 leading-relaxed">—Sangraste mucho. Te encontramos desmayada cuando la señora de limpieza dio con la llave. Hicimos lo posible para que nadie se enterara, pero ya sabes cómo es todo. Naia, le dije a la prensa que tenías un mioma y te operaron de eso.</p>
+
+            <p class="mb-6 leading-relaxed">—¿Qué te pasa? ¿Estás loca? ¿Cómo vas a mentirles sobre algo así?</p>
+
+            <p class="mb-6 leading-relaxed">—Deberías darme las gracias. ¿Sabes lo que pensarían de ti si supieran lo que hiciste? ¿Sabes que esto puede costarte la banda en el certamen?</p>
+
+            <p class="mb-6 leading-relaxed">El mundo se le desvaneció con esa última pregunta. La carita chupada le marcó los pómulos y los ojos se le hicieron más grandes.</p>
+
+            <p class="mb-6 leading-relaxed">—Sí, tienes razón.</p>
+
+            <p class="mb-6 leading-relaxed">—Tu papá vino hace un momento. ¿Qué le dijiste, porque no sabe nada?</p>
+
+            <p class="mb-6 leading-relaxed">—Le dije que no sabía nada, que los doctores me dirían luego. Por supuesto le dije al médico que no dijera nada. Sabe qué es. Pero dijo que ya estaba bien. Solo necesito reposar un poco. Mañana volveré como si nada. No pienso quedarme tirada en la cama viendo como las demás se preparan más que yo. Y sobre mi papá, n te preocupes.</p>
+
+            <p class="mb-6 leading-relaxed">Lo primer que hizo Naia cuando regresamos a su casa fue darse una ducha. Ese era el mejor momento para comentarle sobre mis diligencias de la tarde.</p>
+
+            <p class="mb-6 leading-relaxed">—Conseguí un cuarto cerca de la agencia. Me mudaré cuando reciba el pago completo por el trabajo que haré.</p>
+
+            <p class="mb-6 leading-relaxed">—No me digas eso, Lidia. Ya te dije que puedes quedarte.</p>
+
+            <p class="mb-6 leading-relaxed">—Lo que menos deseo es molestar. Quizá tu papá se incomode conmigo aquí.</p>
+
+            <p class="mb-6 leading-relaxed">—¿De qué hablas? Los tres pasamos la mayor parte del día afuera. Además, con ese trabajito como modelo no llegarás a fin de mes, ¿eh? Mira, yo nunca me he ido de la casa, pero tengo amigas que sí, y me han contado lo solitario que es vivir en la capital cuando no tienes a nadie por las noches. Aquí no está tu madre ni tu hermana. ¡Y ellas necesitan dinero! Quédate, por favor.</p>
+
+            <p class="mb-6 leading-relaxed">Funcionó más pronto de lo previsto. En algún momento Naia se convertiría en mi enemiga. Dos futuras reinas de belleza compitiendo por la misma corona no traería nada bueno, pero mientras tanto, las noches no se sentirían como una tortura.</p>
+
+            <p class="mb-6 leading-relaxed">—Me quedaré solo porque tienes razón. Acepté un contrato de un año donde parece que me van a sobreexplotar, aunque Casimiro dice que protegerá mis ingresos.</p>
+
+            <p class="mb-6 leading-relaxed">—Lo hará. Ese es su trabajo. Ahora, quítate la ropa y ven. Hoy no dormirás en el suelo.</p>
+        `
+    }
+];
 ---
 
 <Layout 
     title="Nuevo Lanzamiento | Señorita Costasol" 
-    description="Lee los primeros 10 capítulos gratis de Señorita Costasol. Descubre el oscuro precio de la belleza y la corona."
+    description="Lee los capítulos gratuitos de Señorita Costasol. Descubre el oscuro precio de la belleza y la corona."
 >
-<Header /> <div class="fixed inset-0 bg-midnight z-[-1]"></div>
-    <div class="fixed inset-0 bg-midnight z-[-1]"></div>
+    <HeaderNuevo /> 
     
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold via-transparent to-transparent pointer-events-none z-0"></div>
-    <div class="fixed bottom-0 left-0 w-[600px] h-[400px] opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blood via-transparent to-transparent pointer-events-none z-0"></div>
+    <div class="fixed inset-0 z-[-1] bg-[#1a0505]">
+        <Image src={backgroundImage} alt="Fondo Señorita Costasol" class="absolute inset-0 w-full h-full object-cover opacity-55" />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#1a0505]/40 via-[#050505]/70 to-[#000000]/95 pointer-events-none"></div>
+    </div>
+    
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#D4AF37] via-transparent to-transparent pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 left-0 w-[600px] h-[400px] opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-900 via-transparent to-transparent pointer-events-none z-0"></div>
 
-    <main class="container mx-auto px-4 pt-28 py-12 max-w-7xl font-body relative z-10 flex flex-col h-screen max-h-[1000px] min-h-[800px]">
+    <main class="container mx-auto px-4 pt-32 pb-12 max-w-[1600px] font-body relative z-10 flex flex-col min-h-screen">
         
         <header class="text-center mb-10 flex-shrink-0 animate-fade-in-up">
-            <div class="flex justify-center mb-4 text-gold">
-                <svg class="w-12 h-12 drop-shadow-[0_0_10px_rgba(197,160,89,0.5)]" viewBox="0 0 24 24" fill="currentColor">
+            <div class="flex justify-center mb-4 text-[#D4AF37]">
+                <svg class="w-12 h-12 drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M5 16L3 5L8.5 10L12 2L15.5 10L21 5L19 16H5ZM19 19C19 19.5523 18.5523 20 18 20H6C5.44772 20 5 19.5523 5 19V18H19V19Z"></path>
                 </svg>
             </div>
-            <span class="inline-block py-1 px-4 rounded-full bg-gold/10 border border-gold/30 text-gold font-bold tracking-[0.2em] uppercase text-xs mb-4 shadow-[0_0_10px_rgba(197,160,89,0.2)]">
+            <span class="inline-block py-1 px-4 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] font-bold tracking-[0.2em] uppercase text-xs mb-4 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
                 Lanzamiento Exclusivo
             </span>
-            <h1 class="text-4xl md:text-6xl font-gothic font-bold text-paper mb-2 tracking-wide">Señorita Costasol</h1>
-            <p class="text-gray-400 text-lg font-body max-w-2xl mx-auto italic">
+            <h1 class="text-4xl md:text-6xl font-gothic font-bold text-white mb-2 tracking-wide drop-shadow-lg">Señorita Costasol</h1>
+            <p class="text-gray-400 text-lg font-body max-w-2xl mx-auto italic drop-shadow-md">
                 "El brillo cegador de la corona siempre proyecta la sombra más oscura."
             </p>
         </header>
 
-        <div class="flex flex-col md:flex-row gap-6 flex-grow overflow-hidden animate-fade-in-up" style="animation-delay: 0.2s;">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-grow lg:h-[820px] animate-fade-in-up" style="animation-delay: 0.2s;">
             
-            <aside class="md:w-1/3 lg:w-1/4 bg-[#0a0a0a]/90 backdrop-blur-md border border-gold/20 rounded-2xl flex flex-col overflow-hidden shadow-2xl">
-                <div class="p-5 border-b border-gold/20 bg-gradient-to-b from-gold/5 to-transparent">
-                    <h3 class="font-gothic text-gold text-xl font-bold">Índice Gratuito</h3>
-                    <p class="text-xs text-gray-400 font-body mt-1">10 capítulos disponibles</p>
+            <aside class="w-full lg:col-span-2 bg-[#0a0a0a]/95 border border-[#D4AF37]/20 rounded-2xl flex flex-col overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.8)] h-[350px] lg:h-full transform-gpu">
+                <div class="p-5 border-b border-[#D4AF37]/20 bg-gradient-to-b from-[#D4AF37]/10 to-transparent flex-shrink-0">
+                    <h3 class="font-gothic text-[#D4AF37] text-lg font-bold">Índice</h3>
+                    <p class="text-xs text-gray-400 font-body mt-1">Capítulos disponibles</p>
                 </div>
                 
                 <div class="overflow-y-auto flex-grow custom-scrollbar p-3 space-y-1">
@@ -76,10 +833,10 @@ const chapters = Array.from({ length: 10 }, (_, i) => {
                             class="chapter-btn w-full text-left p-3 rounded-lg border border-transparent transition-all duration-300 group flex flex-col"
                             data-index={index}
                         >
-                            <span class="text-xs font-bold tracking-widest uppercase text-gray-500 group-hover:text-blood transition-colors chapter-label">
+                            <span class="text-[10px] font-bold tracking-widest uppercase text-gray-500 group-hover:text-red-700 transition-colors chapter-label">
                                 {chapter.title}
                             </span>
-                            <span class="font-body font-bold text-gray-300 group-hover:text-paper transition-colors chapter-name">
+                            <span class="font-body text-xs font-bold text-gray-300 group-hover:text-white transition-colors chapter-name line-clamp-1">
                                 {chapter.subtitle}
                             </span>
                         </button>
@@ -87,34 +844,42 @@ const chapters = Array.from({ length: 10 }, (_, i) => {
                 </div>
             </aside>
 
-            <article class="md:w-2/3 lg:w-3/4 bg-[#0a0a0a]/90 backdrop-blur-md border border-gray-800 rounded-2xl flex flex-col overflow-hidden shadow-2xl relative">
+            <article class="w-full lg:col-span-6 bg-[#0a0a0a]/95 border border-gray-800 rounded-2xl flex flex-col overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.9)] relative h-[650px] lg:h-full transform-gpu">
                 
-                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blood/20 to-transparent opacity-50 pointer-events-none"></div>
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-red-900/30 to-transparent opacity-50 pointer-events-none"></div>
 
-                <div class="p-8 pb-4 border-b border-gray-800/50 text-center relative z-10">
-                    <h2 id="reader-title" class="text-sm font-bold tracking-[0.3em] uppercase text-blood mb-2">Cargando...</h2>
-                    <h3 id="reader-subtitle" class="text-3xl font-gothic font-bold text-gold"></h3>
+                <div class="p-8 pb-4 border-b border-gray-800/50 text-center relative z-10 flex-shrink-0">
+                    <h2 id="reader-title" class="text-sm font-bold tracking-[0.3em] uppercase text-red-800 mb-2">Cargando...</h2>
+                    <h3 id="reader-subtitle" class="text-2xl md:text-3xl font-gothic font-bold text-[#D4AF37]"></h3>
                 </div>
 
-                <div class="overflow-y-auto flex-grow custom-scrollbar p-8 md:p-12 relative z-10">
-                    <div id="reader-content" class="text-paper text-lg font-body max-w-3xl mx-auto transition-opacity duration-500">
-                        </div>
+                <div class="overflow-y-auto flex-grow custom-scrollbar p-6 md:p-10 relative z-10">
+                    <div id="reader-content" class="text-gray-200 text-xl font-body max-w-none mx-auto transition-opacity duration-500 px-2">
+                    </div>
                 </div>
 
-                <div class="p-6 border-t border-gray-800/50 bg-[#050505]/50 flex justify-end relative z-10">
-                    <button id="next-chapter-btn" class="bg-transparent border border-gold text-gold hover:bg-gold hover:text-midnight font-bold font-body py-2 px-6 rounded-lg transition-all duration-300 flex items-center gap-2 group cursor-pointer">
+                <div class="p-6 border-t border-gray-800/50 bg-[#050505]/80 flex justify-end relative z-10 flex-shrink-0">
+                    <button id="next-chapter-btn" class="bg-transparent border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black font-bold font-body py-3 px-8 rounded-lg transition-all duration-300 flex items-center gap-2 group cursor-pointer text-sm tracking-wide uppercase">
                         Siguiente Capítulo
                         <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </button>
                 </div>
             </article>
 
+            <div class="hidden lg:block lg:col-span-4 h-full rounded-2xl overflow-hidden relative group p-0 m-0">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 pointer-events-none"></div>
+                <Image 
+                    src={illustration} 
+                    alt="Ilustración Señorita Costasol" 
+                    class="w-full h-full object-cover object-center opacity-90 group-hover:opacity-100 group-hover:scale-102 transition-transform duration-700 drop-shadow-[0_0_35px_rgba(212,175,55,0.25)]" 
+                />
+            </div>
+
         </div>
     </main>
 </Layout>
 
 <style is:global>
-    /* Animación fluida */
     @keyframes fadeInUp {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
@@ -123,44 +888,39 @@ const chapters = Array.from({ length: 10 }, (_, i) => {
         animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Scrollbar personalizada para el área de lectura */
-    .custom-scrollbar::-webkit-scrollbar {
-        width: 6px;
-    }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
     .custom-scrollbar::-webkit-scrollbar-track {
         background: rgba(10, 10, 10, 0.5);
         border-radius: 8px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #374151; /* gray-700 */
+        background: #374151;
         border-radius: 8px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #C5A059; /* gold */
+        background: #D4AF37; 
     }
 
-    /* Letra capital (Drop Cap) temática para el inicio de cada capítulo */
     .drop-cap::first-letter {
-        font-family: 'Cinzel Decorative', serif; /* font-gothic */
-        color: #C5A059; /* gold */
+        font-family: 'Cinzel', serif; 
+        color: #D4AF37; 
         float: left;
-        font-size: 4.5rem;
+        font-size: 5rem;
         line-height: 0.8;
-        margin-right: 0.75rem;
+        margin-right: 0.85rem;
         margin-top: 0.2rem;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
 
-    /* Estilos dinámicos para el botón activo en la barra lateral */
     .chapter-active {
-        background-color: rgba(168, 0, 0, 0.1); /* blood con opacidad */
-        border-color: rgba(168, 0, 0, 0.5);
+        background-color: rgba(153, 27, 27, 0.15); 
+        border-color: rgba(153, 27, 27, 0.5);
     }
     .chapter-active .chapter-label {
-        color: #A80000 !important; /* blood */
+        color: #b91c1c !important; 
     }
     .chapter-active .chapter-name {
-        color: #E0D6C8 !important; /* paper */
+        color: #ffffff !important; 
     }
 </style>
 
@@ -174,20 +934,19 @@ const chapters = Array.from({ length: 10 }, (_, i) => {
         const readerContent = document.getElementById('reader-content');
         const nextBtn = document.getElementById('next-chapter-btn');
 
-        // Función para renderizar el capítulo
         function loadChapter(index) {
-            // Animación de desvanecimiento
+            if (!readerContent || !readerTitle || !readerSubtitle || !nextBtn) return;
+
             readerContent.style.opacity = '0';
             
             setTimeout(() => {
                 const chapter = chapters[index];
+                if(!chapter) return;
                 
-                // Actualizar Textos
                 readerTitle.textContent = chapter.title;
                 readerSubtitle.textContent = chapter.subtitle;
                 readerContent.innerHTML = chapter.content;
                 
-                // Actualizar estilos de los botones en la barra lateral
                 buttons.forEach((btn, i) => {
                     if (i === index) {
                         btn.classList.add('chapter-active');
@@ -196,40 +955,43 @@ const chapters = Array.from({ length: 10 }, (_, i) => {
                     }
                 });
 
-                // Controlar estado del botón "Siguiente"
                 if (index === chapters.length - 1) {
                     nextBtn.innerHTML = 'Adquirir Libro Completo <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>';
-                    nextBtn.classList.remove('text-gold', 'border-gold', 'hover:bg-gold', 'hover:text-midnight');
-                    nextBtn.classList.add('bg-blood', 'text-paper', 'border-blood', 'hover:bg-red-800');
-                    nextBtn.onclick = () => window.location.href = '#'; // Cambiar por el link de compra
+                    nextBtn.classList.remove('text-[#D4AF37]', 'border-[#D4AF37]', 'hover:bg-[#D4AF37]', 'hover:text-black');
+                    nextBtn.classList.add('bg-red-800', 'text-white', 'border-red-800', 'hover:bg-red-900');
+                    nextBtn.onclick = () => window.location.href = '#'; 
                 } else {
                     nextBtn.innerHTML = 'Siguiente Capítulo <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>';
-                    nextBtn.classList.remove('bg-blood', 'text-paper', 'border-blood', 'hover:bg-red-800');
-                    nextBtn.classList.add('text-gold', 'border-gold', 'hover:bg-gold', 'hover:text-midnight');
+                    nextBtn.classList.remove('bg-red-800', 'text-white', 'border-red-800', 'hover:bg-red-900');
+                    nextBtn.classList.add('text-[#D4AF37]', 'border-[#D4AF37]', 'hover:bg-[#D4AF37]', 'hover:text-black');
                     nextBtn.onclick = () => loadChapter(index + 1);
                 }
 
-                // Hacer scroll al top del área de lectura
-                readerContent.parentElement.scrollTop = 0;
+                if (readerContent.parentElement) {
+                    readerContent.parentElement.scrollTop = 0;
+                }
                 
-                // Mostrar con animación
                 readerContent.style.opacity = '1';
                 currentChapterIndex = index;
-            }, 300); // 300ms debe coincidir con la transición en CSS
+            }, 300);
         }
 
-        // Asignar eventos a los botones de la barra lateral
         buttons.forEach((btn) => {
             btn.addEventListener('click', (e) => {
-                const index = parseInt(e.currentTarget.getAttribute('data-index'));
-                if (index !== currentChapterIndex) {
-                    loadChapter(index);
+                const target = e.currentTarget;
+                if(target) {
+                    const indexAttr = target.getAttribute('data-index');
+                    if (indexAttr !== null) {
+                        const index = parseInt(indexAttr);
+                        if (index !== currentChapterIndex) {
+                            loadChapter(index);
+                        }
+                    }
                 }
             });
         });
 
-        // Cargar el primer capítulo al iniciar
-        if (chapters.length > 0) {
+        if (chapters && chapters.length > 0) {
             loadChapter(0);
         }
     });
