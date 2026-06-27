@@ -14,6 +14,7 @@ export const books = [
     cover: portada1,
     description: "Nina Cole buscaba libertad, pero encontró un portal entre árboles y una luz azulosa que la escupió en una guerra que no comprende. Bienvenido al Castillo Hayashi. ¿Listo para usar tu kunai?",
     amazonLink: "https://www.amazon.com/-/es/FLOR-PIEL-Spanish-Paulina-Lopez/dp/B0FNNJKR36/",
+    payhipLink: "https://payhip.com/b/yTVYp", // Pago directo (PayPal). Añade este campo a otros libros cuando tengas su link.
     status: "DISPONIBLE",
     category: "saga", // Categoría importante
     leadMagnet: "/downloads/primer-capitulo-afp.pdf",
