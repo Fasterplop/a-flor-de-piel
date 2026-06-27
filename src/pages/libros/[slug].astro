@@ -68,30 +68,31 @@ const independentBooks = books.filter(b => b.category === 'independiente' && b.i
                     {book.description}
                 </p>
 
-                <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start items-center">
+                <div class="flex flex-col md:flex-row md:flex-wrap gap-3 justify-center md:justify-start items-center">
                     {book.leadMagnet && (
-                        <LeadMagnet 
-                            client:load 
+                        <LeadMagnet
+                            client:load
                             pdfUrl={book.leadMagnet}
-                            segmentId={book.mauticSegmentId} 
-                            tag={book.mauticTag}     
-                            btnText={book.leadMagnetText}        
+                            segmentId={book.mauticSegmentId}
+                            tag={book.mauticTag}
+                            btnText={book.leadMagnetText}
+                            btnClass="w-full md:w-auto text-center px-6 py-3 text-sm border border-gold/50 text-gold font-bold tracking-widest uppercase rounded-full hover:bg-gold/10 hover:border-gold transition-all duration-300"
                         />
                     )}
-                    
+
                     {book.status === 'DISPONIBLE' ? (
-                        <a href={book.amazonLink} target="_blank" class="px-8 py-4 bg-blood text-white font-bold rounded-full hover:bg-red-700 transition shadow-[0_0_20px_rgba(168,0,0,0.4)]">
+                        <a href={book.amazonLink} target="_blank" class="w-full md:w-auto text-center px-6 py-3 text-sm bg-blood text-white font-bold rounded-full hover:bg-red-700 transition shadow-[0_0_20px_rgba(168,0,0,0.4)]">
                             ADQUIRIR EN AMAZON
                         </a>
                     ) : (
-                        <span class="px-8 py-4 border border-white/20 text-gray-500 rounded-full cursor-not-allowed">
+                        <span class="w-full md:w-auto text-center px-6 py-3 text-sm border border-white/20 text-gray-500 rounded-full cursor-not-allowed">
                             PRÓXIMAMENTE
                         </span>
                     )}
 
                     {book.payhipLink && (
                         <a href={book.payhipLink} target="_blank" rel="noopener"
-                           class="px-8 py-4 bg-gold text-midnight font-bold rounded-full hover:brightness-110 transition shadow-[0_0_20px_rgba(212,175,55,0.35)]"
+                           class="w-full md:w-auto text-center px-6 py-3 text-sm bg-gold text-midnight font-bold rounded-full hover:brightness-110 transition shadow-[0_0_20px_rgba(212,175,55,0.35)]"
                            onclick="if(window.fbq)fbq('track','InitiateCheckout');">
                             COMPRAR DIRECTO (PAYPAL)
                         </a>

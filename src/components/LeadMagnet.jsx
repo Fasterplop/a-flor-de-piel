@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom'; 
 
-export default function LeadMagnet({ pdfUrl, segmentId, tag, btnText }) {
+export default function LeadMagnet({ pdfUrl, segmentId, tag, btnText, btnClass }) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(''); 
   const [email, setEmail] = useState('');
@@ -157,9 +157,9 @@ export default function LeadMagnet({ pdfUrl, segmentId, tag, btnText }) {
 
   return (
     <>
-      <button 
+      <button
         onClick={() => setIsOpen(true)}
-        className="w-full md:w-auto text-center px-8 py-4 border border-gold/50 text-gold font-bold tracking-widest rounded-full hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase"
+        className={btnClass || "w-full md:w-auto text-center px-8 py-4 border border-gold/50 text-gold font-bold tracking-widest rounded-full hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase"}
       >
         {/* CORRECCIÓN 2: Aquí es donde va el texto dinámico */}
         {btnText || "Leer Fragmento"}
