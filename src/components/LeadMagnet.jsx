@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom'; 
+import { createPortal } from 'react-dom';
+import { subscribeToKit, looksLikeBot } from '../lib/kit.js';
 
-export default function LeadMagnet({ pdfUrl, segmentId, tag, btnText, btnClass }) {
+export default function LeadMagnet({ pdfUrl, formId, btnText, btnClass }) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(''); 
   const [email, setEmail] = useState('');
@@ -16,27 +17,16 @@ export default function LeadMagnet({ pdfUrl, segmentId, tag, btnText, btnClass }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (honey) { setIsOpen(false); return; }
+    if (looksLikeBot(honey)) { setIsOpen(false); return; }
     setIsSubmitting(true);
     setSubmitStatus(null);
 
     try {
-        const response = await fetch('https://api.paulinalopezescritora.com/api/subscribe', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                source: 'Landing Page A Flor de Piel',
-                honey: honey, 
-                segmentId: segmentId || 1, 
-                tag: tag || 'landing-general' 
-            }),
-        });
-
-        if (!response.ok) throw new Error('Error al suscribir');
+        // Kit envía el correo de confirmación con el PDF adjunto (configurado en el formulario de Kit)
+        const formData = new FormData();
+        formData.append('email_address', email);
+        formData.append('fields[first_name]', name);
+        await subscribeToKit(formId, formData);
 
         setSubmitStatus('success');
         
@@ -83,10 +73,10 @@ export default function LeadMagnet({ pdfUrl, segmentId, tag, btnText, btnClass }
 
         {submitStatus === 'success' ? (
             <div className="text-center py-8 text-green-400 animate-pulse">
-                <p className="text-xl mb-2 font-bold font-gothic">¡Enviado con Éxito!</p>
+                <p className="text-xl mb-2 font-bold font-gothic">¡Ya casi!</p>
                 <p className="text-sm text-gray-300 leading-relaxed">
-                    Tu invitación ha sido enviada a tu bandeja de entrada. 🐦‍⬛<br/>
-                    <span className="text-xs text-gray-500">(Revisa Spam si no llega en 1 minuto)</span>
+                    Revisa tu correo y confirma tu suscripción para recibir el material. 🐦‍⬛<br/>
+                    <span className="text-xs text-gray-500">(Revisa Spam o Promociones si no llega en 1 minuto)</span>
                 </p>
             </div>
         ) : (
@@ -149,7 +139,8 @@ export default function LeadMagnet({ pdfUrl, segmentId, tag, btnText, btnClass }
         )}
 
         <p className="text-center text-xs text-gray-600 mt-4">
-          Tu correo está protegido por el sello del castillo.
+          Tu correo está protegido por el sello del castillo. Puedes darte de baja cuando quieras.{' '}
+          <a href="/politica-de-privacidad" target="_blank" className="underline hover:text-gold">Política de Privacidad</a>
         </p>
       </div>
     </div>

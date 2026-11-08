@@ -19,7 +19,7 @@ import { books } from '../data/books.js';
 const sagaBooks = books.filter(book => book.category === 'saga');
 const otherBooks = books.filter(book => book.category === 'independiente');
 
-// 👇 AGREGA ESTO: Buscamos el libro "A Flor de Piel" (ID 1) para obtener su dato de Mautic
+// Buscamos el libro "A Flor de Piel" (ID 1) para obtener su formulario de Kit
 const mainBook = books.find(b => b.id === 1);
 
 // Variables estáticas
@@ -126,7 +126,9 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
           </div>
     
           <div class="flex flex-col gap-5 w-full max-w-sm">
-            <LeadMagnet client:load pdfUrl={pdfLink} segmentId={mainBook?.mauticSegmentId} tag={mainBook?.mauticTag} btnText={mainBook?.leadMagnetText}/>
+            {mainBook?.kitFormId && (
+              <LeadMagnet client:load pdfUrl={pdfLink} formId={mainBook.kitFormId} btnText={mainBook.leadMagnetText}/>
+            )}
             <a href={amazonLink} target="_blank" class="group w-full py-5 border border-white/20 text-white font-bold tracking-widest uppercase text-xs hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
@@ -277,10 +279,7 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
                     Suscríbete para recibir cartas personales, adelantos exclusivos y noticias de todos mis lanzamientos.
                 </p>
 
-                <form id="mautic-form" action="https://marketing.paulinalopezescritora.com/form/submit?formId=1" method="post" class="flex flex-col md:flex-row gap-5 justify-center items-stretch relative">
-    
-    <input type="hidden" name="mauticform[formId]" value="1" />
-    <input type="hidden" name="mauticform[return]" value="" />
+                <form id="newsletter-form" method="post" class="flex flex-col md:flex-row gap-5 justify-center items-stretch relative">
 
     <div style="position: absolute; left: -9999px;" aria-hidden="true">
     <input type="text" name="phone_number_validate" id="bot_check" autocomplete="off" tabindex="-1" value="">
@@ -288,9 +287,9 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
 
                     <div class="w-full md:w-2/3 relative group">
                         <input 
-                            type="email" 
-                            name="mauticform[email]" 
-                            placeholder="Tu correo electrónico..." 
+                            type="email"
+                            name="email_address"
+                            placeholder="Tu correo electrónico..."
                             required
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                             class="w-full h-full bg-white/5 border border-[#D4AF37]/30 text-[#D4AF37] px-6 py-4 rounded-sm focus:outline-none focus:border-[#D4AF37] focus:bg-white/10 focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all duration-300 placeholder-gray-600 font-serif italic text-lg"
@@ -317,6 +316,9 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
                 <p class="text-[10px] text-gray-600 mt-6 tracking-widest uppercase opacity-60">
                     Respeto tu bandeja de entrada. Solo magia, cero spam.
                 </p>
+                <p class="text-[10px] text-gray-600 mt-2 opacity-60">
+                    Puedes darte de baja cuando quieras desde cualquier correo. <a href="/politica-de-privacidad" class="underline hover:text-[#D4AF37]">Política de Privacidad</a>
+                </p>
             </div>
 
             <div id="newsletter-success" class="hidden opacity-0 transform translate-y-4 transition-all duration-700 ease-out">
@@ -329,15 +331,15 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
                 </div>
                 
                 <h2 class="font-cinzel text-3xl md:text-5xl mb-4 text-[#D4AF37] drop-shadow-md">
-                    ¡Suscripción Confirmada!
+                    ¡Ya casi!
                 </h2>
-                
+
                 <p class="text-gray-300 font-serif italic text-xl">
-                    Pronto recibirás noticias mías.
+                    Solo falta confirmar tu correo.
                 </p>
-                
+
                 <p class="text-gray-500 font-sans text-sm mt-4 max-w-lg mx-auto">
-                    He enviado un correo de confirmación a tu bandeja de entrada. <br>
+                    Te envié un correo para confirmar tu suscripción: haz clic en el botón y listo. <br>
                     (Si no lo ves, revisa la carpeta de spam o promociones).
                 </p>
             </div>
@@ -525,7 +527,8 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
   // 2. SCRIPT STORYTELLING (GSAP ScrollTrigger)
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  
+  import { KIT_FORMS, subscribeToKit, looksLikeBot } from "../lib/kit.js";
+
   gsap.registerPlugin(ScrollTrigger);
 
   // A. Efecto Parallax de Fondo
@@ -562,7 +565,7 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
   });
 
   // 3. LOGICA FORMULARIO AJAX + SEGURIDAD
-  const form = document.getElementById('mautic-form');
+  const form = document.getElementById('newsletter-form');
   const formContainer = document.getElementById('newsletter-form-container');
   const successContainer = document.getElementById('newsletter-success');
   const submitBtn = document.getElementById('submit-btn');
@@ -575,10 +578,10 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
           e.preventDefault(); 
 
           // --- SEGURIDAD ANTIBOTS ---
-          // Si el campo invisible tiene algo escrito, es un bot.
-          if (botCheck && (botCheck as HTMLInputElement).value) {
+          // Campo invisible lleno o envío instantáneo = bot.
+          if (looksLikeBot((botCheck as HTMLInputElement | null)?.value)) {
               console.log("Bot detectado. Envío cancelado.");
-              return; 
+              return;
           }
 
           // UI de Carga
@@ -587,17 +590,10 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
           btnLoader.classList.remove('hidden');
 
           const formData = new FormData(form as HTMLFormElement);
-          const action = form.getAttribute('action');
-
-          if (!action) return;
+          formData.delete('phone_number_validate'); // el honeypot no se envía a Kit
 
           try {
-              // Enviar a Mautic
-              await fetch(action, {
-                  method: 'POST',
-                  body: formData,
-                  mode: 'no-cors' 
-              });
+              await subscribeToKit(KIT_FORMS.newsletter, formData);
 
               // Éxito: Animación
               formContainer.style.opacity = '0';
@@ -617,7 +613,7 @@ const pdfLink = "/downloads/primer-capitulo-afp.pdf";
               submitBtn.classList.remove('cursor-not-allowed', 'opacity-80');
               btnText.classList.remove('opacity-0');
               btnLoader.classList.add('hidden');
-              alert('Hubo un error al conectar con el servidor. Por favor intenta de nuevo.');
+              alert('No pudimos completar tu suscripción. Revisa tu correo e intenta de nuevo.');
           }
       });
   }

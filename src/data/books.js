@@ -20,8 +20,7 @@ export const books = [
     leadMagnet: "/downloads/primer-capitulo-afp.pdf",
     themeColor: "blood",
     isSagaMain: true,
-    mauticSegmentId: 1,
-    mauticTag: "origen-a-flor-de-piel",
+    kitFormId: "10096726", // Formulario de Kit "Capítulo 1 – A Flor de Piel"
     leadMagnetText: "Leer Capítulo 1 AFP",
     quizTitle: "Prueba de Aptitud",
     quizDescription: "¿Tienes lo necesario para sobrevivir en este mundo? Descubre tu rol en el Castillo Hayashi.",
@@ -108,8 +107,7 @@ export const books = [
     
     leadMagnet: null,
     themeColor: "green-600",
-    mauticSegmentId: 998,
-    mauticTag: "origen-a-pulso-lento",
+    kitFormId: null, // Cuando tenga capítulo gratis: crear su formulario en Kit y poner el ID aquí
     leadMagnetText: "Leer Capítulo 1 APL",
     
     quizTitle: "Test de Supervivencia: Las Pruebas Internas",
@@ -180,8 +178,7 @@ export const books = [
     
     leadMagnet: null,
     themeColor: "orange-600",
-    mauticSegmentId: 999,
-    mauticTag: "origen-a-corazon-abierto",
+    kitFormId: null, // Cuando tenga capítulo gratis: crear su formulario en Kit y poner el ID aquí
     leadMagnetText: "Leer Capítulo 1 ACB",
     
     quizTitle: "Test del Limbo: Tierra de Nadie",
@@ -252,8 +249,7 @@ export const books = [
     
     leadMagnet: "/downloads/primer-capitulo-afp.pdf",
     themeColor: "blue-500",
-    mauticSegmentId: 3,
-    mauticTag: "origen-primero-yo-segundo-yo-tercero-yo",
+    kitFormId: "10096767", // Formulario de Kit "Regalo – Primero Yo"
     leadMagnetText: "Obtén un regalo",
     quizTitle: "NIVEL DE MAGNETISMO DE ALTO VALOR",
     quizDescription: "¿Estás lista para cambiar tu vida?",

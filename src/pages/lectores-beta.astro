@@ -29,18 +29,14 @@ const availableBooks = books;
                 </p>
             </div>
 
-            <form id="beta-form" class="space-y-6 transition-all duration-500 font-lato" action="https://marketing.paulinalopezescritora.com/form/submit?formId=2" method="POST">
-                
-                <input type="hidden" name="mauticform[formId]" value="2" />
-                <input type="hidden" name="mauticform[return]" value="" />
-                <input type="hidden" name="mauticform[formName]" value="lectoresbeta" />
+            <form id="beta-form" class="space-y-6 transition-all duration-500 font-lato" method="POST">
 
                 <div class="group flex flex-col gap-2 relative">
                     <label class="block text-sm font-bold text-gray-300 transition-colors ml-1" id="label-libro">
                         ¿Qué historia deseas leer primero?
                     </label>
                     
-                    <input type="hidden" id="real_libro_preferido" name="mauticform[libro_preferido]" required />
+                    <input type="hidden" id="real_libro_preferido" name="fields[libro_preferido]" required />
 
                     <button 
                         type="button" 
@@ -87,8 +83,8 @@ const availableBooks = books;
                         
                         <input 
                             type="email" 
-                            id="email" 
-                            name="mauticform[email]" 
+                            id="email"
+                            name="email_address"
                             required
                             placeholder="lectora@magica.com"
                             class="w-full h-14 bg-gray-900 border border-gray-700 text-white font-lato text-base rounded-xl pl-12 pr-4 outline-none focus:border-[#A80000] focus:ring-1 focus:ring-[#A80000] hover:bg-gray-800 transition-all shadow-inner placeholder-gray-500"
@@ -105,6 +101,16 @@ const availableBooks = books;
                     <svg id="btn-icon" class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     <svg id="btn-spinner" class="hidden w-5 h-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                 </button>
+
+                <p class="text-xs text-gray-500 text-center">
+                    Te enviaré un correo para confirmar. Puedes darte de baja cuando quieras.
+                    <a href="/politica-de-privacidad" class="underline hover:text-white">Política de Privacidad</a>
+                </p>
+
+                <!-- Trampa anti-bots: invisible para personas -->
+                <div style="position: absolute; left: -9999px;" aria-hidden="true">
+                    <input type="text" name="website_check" id="bot_check" autocomplete="off" tabindex="-1" value="">
+                </div>
             </form>
 
             <div id="success-state" class="hidden flex-col items-center justify-center text-center py-6 animate-fade-in-up">
@@ -113,7 +119,7 @@ const availableBooks = books;
                 </div>
                 <h2 class="text-3xl font-cinzel font-bold text-white mb-3">¡Solicitud Recibida!</h2>
                 <p class="text-gray-400 text-lg font-lato">
-                    Has sido añadida a la lista de espera oficial. Mantente atenta a tu bandeja de entrada.
+                    Revisa tu correo y confirma tu suscripción para entrar a la lista oficial. (Si no lo ves, revisa Spam o Promociones).
                 </p>
                 <button onclick="window.location.reload()" class="mt-8 text-sm font-lato text-gray-500 hover:text-white transition-colors underline decoration-gray-600 underline-offset-4">
                     Volver a enviar
@@ -149,6 +155,8 @@ const availableBooks = books;
 </style>
 
 <script>
+    import { KIT_FORMS, subscribeToKit, looksLikeBot } from '../lib/kit.js';
+
     document.addEventListener('DOMContentLoaded', () => {
         // --- LÓGICA DEL CUSTOM DROPDOWN ---
         const dropdownBtn = document.getElementById('custom-dropdown-btn') as HTMLButtonElement;
@@ -221,15 +229,22 @@ const availableBooks = books;
         }
 
 
-        // --- LÓGICA DE ENVÍO A MAUTIC ---
+        // --- LÓGICA DE ENVÍO A KIT ---
         const form = document.getElementById('beta-form') as HTMLFormElement | null;
         const formHeader = document.getElementById('form-header');
         const successState = document.getElementById('success-state');
-        
+        const botCheck = document.getElementById('bot_check') as HTMLInputElement | null;
+
         if(form) {
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                
+
+                // Campo invisible lleno o envío instantáneo = bot.
+                if (looksLikeBot(botCheck?.value)) {
+                    console.log("Bot detectado. Envío cancelado.");
+                    return;
+                }
+
                 // Validación extra para asegurar que se seleccionó un libro
                 if (!realInput.value) {
                     alert("Por favor, selecciona qué historia deseas leer primero.");
@@ -240,12 +255,7 @@ const availableBooks = books;
                 }
                 
                 const formData = new FormData(form);
-                const actionUrl = form.getAttribute('action');
-
-                if (!actionUrl || actionUrl.includes('[TU_URL_DE_MAUTIC]')) {
-                    alert("Aún no has configurado la URL de Mautic en el action del formulario.");
-                    return;
-                }
+                formData.delete('website_check'); // el honeypot no se envía a Kit
 
                 const btn = document.getElementById('submit-btn') as HTMLButtonElement | null;
                 const btnText = document.getElementById('btn-text');
@@ -261,11 +271,7 @@ const availableBooks = books;
                         btn.classList.add('opacity-80', 'cursor-not-allowed');
                     }
 
-                    await fetch(actionUrl, {
-                        method: 'POST',
-                        body: formData,
-                        mode: 'no-cors' 
-                    });
+                    await subscribeToKit(KIT_FORMS.lectorasBeta, formData);
 
                     if (formHeader) formHeader.style.opacity = '0';
                     form.style.opacity = '0';
@@ -281,7 +287,7 @@ const availableBooks = books;
 
                 } catch (error) {
                     console.error('Error al enviar:', error);
-                    alert('Hubo un problema de red. Por favor, revisa tu conexión e inténtalo de nuevo.');
+                    alert('No pudimos completar tu solicitud. Revisa tu correo e inténtalo de nuevo.');
                     
                     if (btn && btnText && btnIcon && btnSpinner) {
                         btnText.textContent = 'Solicitar Acceso';

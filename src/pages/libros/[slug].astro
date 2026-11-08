@@ -69,12 +69,11 @@ const independentBooks = books.filter(b => b.category === 'independiente' && b.i
                 </p>
 
                 <div class="flex flex-col md:flex-row md:flex-wrap gap-3 justify-center md:justify-start items-center">
-                    {book.leadMagnet && (
+                    {book.leadMagnet && book.kitFormId && (
                         <LeadMagnet
                             client:load
                             pdfUrl={book.leadMagnet}
-                            segmentId={book.mauticSegmentId}
-                            tag={book.mauticTag}
+                            formId={book.kitFormId}
                             btnText={book.leadMagnetText}
                             btnClass="w-full md:w-auto text-center px-6 py-3 text-sm border border-gold/50 text-gold font-bold tracking-widest uppercase rounded-full hover:bg-gold/10 hover:border-gold transition-all duration-300"
                         />
